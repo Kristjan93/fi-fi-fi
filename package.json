@@ -1,0 +1,18 @@
+{
+  "name": "fi-website",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5",
+    "vite": "^8.0.2"
+  },
+  "dependencies": {
+    "gsap": "^3.14.2"
+  }
+}

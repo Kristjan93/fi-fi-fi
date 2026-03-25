@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fi</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/map/map.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <h1 class="hero-title">fi</h1>
+        <p class="hero-subtitle">fancy things, incoming</p>
+      </section>
+
+      <!-- Map zoom PoC — uses Kettmeir assets for prototyping.
+           Replace image src and location data for production. -->
+      <section class="map" id="map">
+
+        <!-- Layer 1: Map image — ONLY layer that transforms -->
+        <div class="map__image">
+          <img
+            src="/images/map.webp"
+            alt="Map of Alto Adige wine region"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- Layer 2: Markers — positioned at scale(1), hidden when zoomed -->
+        <div class="map__markers">
+          <div class="marker" data-location="pochi" style="left: 68%; top: 54%">
+            <span class="marker__dot"></span>
+            <span class="marker__label">Pochi di Salorno</span>
+          </div>
+          <div class="marker" data-location="caldaro" style="left: 55%; top: 35%">
+            <span class="marker__dot"></span>
+            <span class="marker__label">Castelvecchio</span>
+          </div>
+          <div class="marker" data-location="soprabolzano" style="left: 60%; top: 25%">
+            <span class="marker__dot"></span>
+            <span class="marker__label">Soprabolzano</span>
+          </div>
+        </div>
+
+        <!-- Layer 3: Detail panels — one per location, toggled via .active -->
+        <div class="map__details">
+          <div class="map__detail" data-location="pochi">
+            <span class="map__detail-label">Bassa Atesina</span>
+            <h3 class="map__detail-name">Pochi di Salorno</h3>
+            <p class="map__detail-info">The southernmost point of South Tyrol, where warm Mediterranean winds meet Alpine air.</p>
+          </div>
+          <div class="map__detail" data-location="caldaro">
+            <span class="map__detail-label">Lago di Caldaro</span>
+            <h3 class="map__detail-name">Castelvecchio</h3>
+            <p class="map__detail-info">Perched above Lake Caldaro, the oldest wine-growing area in the region.</p>
+          </div>
+          <div class="map__detail" data-location="soprabolzano">
+            <span class="map__detail-label">Altopiano del Renon</span>
+            <h3 class="map__detail-name">Soprabolzano</h3>
+            <p class="map__detail-info">High above Bolzano on the Renon plateau, where altitude shapes character.</p>
+          </div>
+        </div>
+
+        <!-- Layer 4: Static UI — title + nav, never transforms -->
+        <div class="map__ui">
+          <div class="map__header">
+            <h2 class="map__title">Explore<br />the territory</h2>
+            <p class="map__subtitle">Discover where our story unfolds.</p>
+          </div>
+          <div class="map__nav">
+            <button class="map__nav-btn active" data-location="all">All locations</button>
+            <button class="map__nav-btn" data-location="pochi">Pochi di Salorno</button>
+            <button class="map__nav-btn" data-location="caldaro">Castelvecchio</button>
+            <button class="map__nav-btn" data-location="soprabolzano">Soprabolzano</button>
+          </div>
+        </div>
+
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
