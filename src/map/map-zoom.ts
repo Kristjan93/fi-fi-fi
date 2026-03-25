@@ -10,10 +10,9 @@
  *   .map__nav-btn      — nav buttons, toggled via .active class
  *   [data-location]    — any clickable element (buttons, markers)
  *
- * State machine:
- *   OVERVIEW  → scale(1), markers visible
- *   ZOOMED    → scale(N), markers hidden, one detail panel active
- *   ANIMATING → in-flight, clicks ignored
+ * Interruptible: any click mid-animation kills the current timeline and
+ * starts a new one from wherever the scale currently is. Durations scale
+ * proportionally so short distances = fast transitions.
  *
  * Key rule: never CSS-transition transform-origin.
  * At scale(1) all origins look identical — snap origin freely there.
@@ -36,14 +35,8 @@ export interface MapLocation {
 export interface MapZoomConfig {
   /** Zoom scale factor. Default: 2.5 */
   scale?: number;
-  /** Duration for overview <-> zoomed (seconds). Default: 0.9 */
+  /** Base duration for a full zoom in/out (seconds). Default: 0.9 */
   zoomDuration?: number;
-  /** Location switch — phase 1 zoom-out duration. Default: 1.084 */
-  switchOutDuration?: number;
-  /** Location switch — pause at scale(1) before re-zoom. Default: 0.52 */
-  switchPause?: number;
-  /** Location switch — phase 3 zoom-in duration. Default: 1.497 */
-  switchInDuration?: number;
   /** GSAP easing. Default: "power2.inOut" */
   ease?: string;
 }
@@ -51,13 +44,11 @@ export interface MapZoomConfig {
 const DEFAULTS: Required<MapZoomConfig> = {
   scale: 2.5,
   zoomDuration: 0.9,
-  switchOutDuration: 1.084,
-  switchPause: 0.52,
-  switchInDuration: 1.497,
   ease: "power2.inOut",
 };
 
-type State = "overview" | "zoomed" | "animating";
+// Below this scale, we consider the map "at overview" — safe to snap origin
+const SNAP_THRESHOLD = 1.02;
 
 export class MapZoom {
   private container: HTMLElement;
@@ -65,8 +56,8 @@ export class MapZoom {
   private locations: MapLocation[];
   private config: Required<MapZoomConfig>;
 
-  private state: State = "overview";
-  private currentId: string | null = null;
+  private currentId: string | null = null; // committed after animation completes
+  private targetId: string | null = null; // what we're heading toward right now
   private tl: gsap.core.Timeline | null = null;
 
   private boundClick: (e: Event) => void;
@@ -84,7 +75,6 @@ export class MapZoom {
     if (!imageEl) throw new Error("MapZoom: .map__image not found");
     this.imageEl = imageEl;
 
-    // Single delegated listener — handles nav buttons AND marker clicks
     this.boundClick = this.onClick.bind(this);
     container.addEventListener("click", this.boundClick);
   }
@@ -92,31 +82,23 @@ export class MapZoom {
   // ── Public API ───────────────────────────────────────
 
   zoomTo(id: string): void {
-    if (this.state === "animating") return;
-
     const loc = this.locations.find((l) => l.id === id);
     if (!loc) return;
-
-    if (this.state === "zoomed" && this.currentId === id) return;
-    if (this.state === "zoomed") {
-      this.switchLocation(loc);
-      return;
-    }
-
-    this.animateIn(loc);
+    if (this.targetId === id) return; // already heading there
+    this.transitionTo(loc);
   }
 
   zoomOut(): void {
-    if (this.state !== "zoomed") return;
-    this.animateOut();
+    if (this.targetId === null && !this.tl) return; // already at rest in overview
+    this.transitionTo(null);
   }
 
   destroy(): void {
     this.container.removeEventListener("click", this.boundClick);
     this.tl?.kill();
     this.tl = null;
-    this.state = "overview";
     this.currentId = null;
+    this.targetId = null;
     this.imageEl.style.transform = "";
     this.imageEl.style.transformOrigin = "";
     this.container.classList.remove("zoomed");
@@ -124,90 +106,78 @@ export class MapZoom {
     this.setActiveBtn("all");
   }
 
-  // ── Animations ───────────────────────────────────────
+  // ── Core transition ──────────────────────────────────
+  //
+  // Every action funnels through here. Kill whatever is running,
+  // read the current scale, build a new timeline from that point.
 
-  /** OVERVIEW -> ZOOMED: set origin at scale(1), then animate scale up */
-  private animateIn(loc: MapLocation): void {
-    this.state = "animating";
-    const { scale, zoomDuration, ease } = this.config;
+  private transitionTo(loc: MapLocation | null): void {
+    const currentScale = this.interrupt();
+    const { scale: maxScale, ease } = this.config;
 
-    // Origin snap is invisible at scale(1)
-    this.setOrigin(loc);
-
+    this.targetId = loc?.id ?? null;
     this.tl = gsap.timeline({
-      onComplete: () => this.settle("zoomed", loc.id),
-    });
-    this.tl.to(this.imageEl, { scale, duration: zoomDuration, ease });
-
-    this.container.classList.add("zoomed");
-    this.showDetail(loc.id);
-    this.setActiveBtn(loc.id);
-  }
-
-  /** ZOOMED -> OVERVIEW: animate scale down, restore UI */
-  private animateOut(): void {
-    this.state = "animating";
-    const { zoomDuration, ease } = this.config;
-
-    this.tl = gsap.timeline({
-      onComplete: () => this.settle("overview", null),
-    });
-    this.tl.to(this.imageEl, { scale: 1, duration: zoomDuration, ease });
-
-    this.container.classList.remove("zoomed");
-    this.clearDetails();
-    this.setActiveBtn("all");
-  }
-
-  /**
-   * ZOOMED(a) -> ZOOMED(b): the 3-phase dance.
-   * Phase 1: zoom out to scale(1), keeping OLD origin.
-   * Phase 2: pause, snap origin to NEW location (invisible at scale 1).
-   * Phase 3: zoom in to scale(N) from NEW origin.
-   */
-  private switchLocation(loc: MapLocation): void {
-    this.state = "animating";
-    const { scale, switchOutDuration, switchPause, switchInDuration, ease } =
-      this.config;
-
-    this.tl = gsap.timeline({
-      onComplete: () => this.settle("zoomed", loc.id),
-    });
-
-    // Phase 1: zoom out
-    this.tl.to(this.imageEl, {
-      scale: 1,
-      duration: switchOutDuration,
-      ease,
-    });
-
-    // Phase 2: snap origin + swap detail (at scale 1, invisible)
-    this.tl.call(
-      () => {
-        this.setOrigin(loc);
-        this.clearDetails();
-        this.showDetail(loc.id);
+      onComplete: () => {
+        this.currentId = this.targetId;
+        this.tl = null;
       },
-      [],
-      `+=${switchPause}`,
-    );
-
-    // Phase 3: zoom back in
-    this.tl.to(this.imageEl, {
-      scale,
-      duration: switchInDuration,
-      ease,
     });
 
-    this.setActiveBtn(loc.id);
+    if (loc) {
+      // ── Going to a location ────────────────────────
+      if (currentScale < SNAP_THRESHOLD) {
+        // Near scale(1) — snap origin and zoom straight in
+        this.setOrigin(loc);
+        this.tl.to(this.imageEl, {
+          scale: maxScale,
+          duration: this.duration(currentScale, maxScale),
+          ease,
+        });
+      } else {
+        // Mid-zoom — animate down to 1, snap origin, zoom back up
+        this.tl.to(this.imageEl, {
+          scale: 1,
+          duration: this.duration(currentScale, 1),
+          ease,
+        });
+        this.tl.call(() => this.setOrigin(loc));
+        this.tl.to(this.imageEl, {
+          scale: maxScale,
+          duration: this.config.zoomDuration,
+          ease,
+        });
+      }
+
+      this.container.classList.add("zoomed");
+      this.showDetail(loc.id);
+      this.setActiveBtn(loc.id);
+    } else {
+      // ── Going to overview ──────────────────────────
+      const dur = this.duration(currentScale, 1);
+      if (dur > 0.05) {
+        this.tl.to(this.imageEl, { scale: 1, duration: dur, ease });
+      }
+
+      this.container.classList.remove("zoomed");
+      this.clearDetails();
+      this.setActiveBtn("all");
+    }
   }
 
   // ── Helpers ──────────────────────────────────────────
 
-  private settle(state: State, id: string | null): void {
-    this.state = state;
-    this.currentId = id;
+  /** Kill in-flight animation, return the current scale. */
+  private interrupt(): number {
+    this.tl?.kill();
     this.tl = null;
+    return (gsap.getProperty(this.imageEl, "scaleX") as number) || 1;
+  }
+
+  /** Proportional duration — short distances animate fast. */
+  private duration(from: number, to: number): number {
+    const fullRange = this.config.scale - 1; // e.g. 2.5 - 1 = 1.5
+    const proportion = Math.abs(from - to) / fullRange;
+    return proportion * this.config.zoomDuration;
   }
 
   private setOrigin(loc: MapLocation): void {
