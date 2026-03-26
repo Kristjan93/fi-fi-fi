@@ -29,9 +29,38 @@ src/
   main.ts          # JS entry — hero animation
   style.css        # Global styles + utilities (.sr-only)
   map/
-    map.css        # Map zoom component — pure CSS, no JS dependency
+    map.css        # Map zoom — pure CSS (@property + :has() + radio buttons)
+data/              # Geographic source data (GeoJSON, locations)
+scripts/           # Build-time scripts (D3 projection, terrain processing)
 docs/              # Reference material + decision records
+public/assets/     # Generated terrain + route images
 ```
+
+## Iceland Map
+
+Active development on branch `feature/icelandic-map` in `.worktrees/icelandic-map/`.
+
+**Key docs — read these before touching the map:**
+- `docs/iceland-map-reference.md` — full technical reference (D3, GeoJSON, ESRI, zoom mechanics)
+- `docs/kettmeir-map-technique.md` — reverse-engineered Kettmeir zoom blueprint
+- `.claude/skills/map-workflow/` — skill for adding locations/routes (invoke `/map-workflow`)
+
+**Build pipeline** (D3 + Python at build time, zero shipped to browser):
+```sh
+bun run generate-map     # D3 projects GeoJSON → SVG + locations + route images + raw terrain
+uv run scripts/process-terrain.py  # Python/Pillow → processed terrain AVIF
+```
+
+**Terrain processing** (in `scripts/process-terrain.py`):
+- Source: ESRI World Hillshade (free, no API key)
+- Approach: hillshade only (no shaded relief composite — tested, looked worse)
+- Settings: `max_dark=0.50`, S-curve `strength=0.7`, white background
+- Output: AVIF for `mix-blend-mode: multiply` on warm paper (#c5bdb9)
+
+**Alignment contract:**
+All layers share the same coordinate space via a locked aspect-ratio container.
+Terrain image, route overlays, and HTML markers all use positions from the same D3 projection.
+Breaking this (adding `object-fit: cover`, changing aspect ratio) causes drift.
 
 ## Rules
 
