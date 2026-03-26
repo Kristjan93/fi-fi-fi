@@ -301,35 +301,43 @@ const clusters = CLUSTER_DEFS.map((def) => {
 });
 
 // ── Generate cluster SVG ────────────────────────────────
-// One dashed circle + one rotating text ring per cluster.
-// All hut names on a single circular path inside the dashed boundary.
+// Dashed circle boundary + concentric text rings (one per hut name).
+// Each ring rotates around the cluster center. Alternating directions.
 
 function clusterSvg(cluster: typeof clusters[0]): string {
   const cxPx = (cluster.cx / 100) * W;
   const cyPx = (cluster.cy / 100) * H;
   const rPx = (cluster.radius / 100) * Math.min(W, H);
 
-  // Text ring sits slightly inside the dashed circle
-  const textR = rPx * 0.78;
+  // Ring spacing: outer ring at 90% of boundary, each ring ~14px closer to center
+  const ringSpacing = 14;
+  const outerStart = rPx * 0.88;
+  const minRadius = 18; // don't go smaller than this
 
-  const pathId = `${cluster.id}-text`;
-  const textD = `M ${(cxPx - textR).toFixed(1)},${cyPx.toFixed(1)} a ${textR.toFixed(1)},${textR.toFixed(1)} 0 1,1 ${(textR * 2).toFixed(1)},0 a ${textR.toFixed(1)},${textR.toFixed(1)} 0 1,1 ${(-textR * 2).toFixed(1)},0`;
+  const rings = cluster.labels.map((label, i) => {
+    const r = Math.max(minRadius, outerStart - i * ringSpacing);
+    const pathId = `${cluster.id}-r${i}`;
+    const d = `M ${(cxPx - r).toFixed(1)},${cyPx.toFixed(1)} a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(r * 2).toFixed(1)},0 a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(-r * 2).toFixed(1)},0`;
 
-  // All hut names on one ring, separated by dots
-  const names = cluster.labels.map((l) => l.name.split(" / ")[0]);
-  const namesText = names.join("  ·  ");
-  // Repeat to fill the circle
-  const circumference = 2 * Math.PI * textR;
-  const approxLen = namesText.length * 6;
-  const repeats = Math.max(1, Math.ceil(circumference / approxLen));
-  const fullText = Array(repeats).fill(namesText).join("  ·  ");
+    const displayName = label.name.split(" / ")[0].toUpperCase();
+    // Repeat to fill the circumference
+    const circumference = 2 * Math.PI * r;
+    const approxCharWidth = 7;
+    const repeats = Math.max(1, Math.ceil(circumference / ((displayName.length + 3) * approxCharWidth)));
+    const fullText = Array(repeats).fill(displayName).join("  ·  ");
+
+    // Alternating direction
+    const dir = i % 2 === 0 ? "cw" : "ccw";
+
+    return `    <path id="${pathId}" d="${d}" fill="none" stroke="none" />
+    <g class="cluster__ring cluster__ring--${dir}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
+      <text class="cluster__ring-text"><textPath href="#${pathId}">${fullText}</textPath></text>
+    </g>`;
+  });
 
   return `  <g class="cluster-group" data-cluster="${cluster.id}">
     <circle cx="${cxPx.toFixed(1)}" cy="${cyPx.toFixed(1)}" r="${rPx.toFixed(1)}" class="cluster__circle" />
-    <path id="${pathId}" d="${textD}" fill="none" stroke="none" />
-    <g class="cluster__ring" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
-      <text class="cluster__ring-text"><textPath href="#${pathId}">${fullText}</textPath></text>
-    </g>
+${rings.join("\n")}
   </g>`;
 }
 

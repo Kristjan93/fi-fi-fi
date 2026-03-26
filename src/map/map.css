@@ -80,38 +80,61 @@
   stroke-width: 1.5;
   stroke-dasharray: 6 4;
   opacity: 0.35;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease, stroke-dashoffset 0.4s ease;
 }
 
 .cluster-group:hover .cluster__circle {
-  opacity: 0.6;
+  opacity: 0.55;
+  animation: dash-spin 8s linear infinite;
 }
 
+@keyframes dash-spin {
+  to { stroke-dashoffset: -40; }
+}
+
+/* Text rings — contrast halo via paint-order stroke behind fill */
 .cluster__ring-text {
   fill: var(--map-text);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  opacity: 0.5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+  stroke: var(--map-bg);
+  stroke-width: 3px;
+  paint-order: stroke;
 }
 
-@keyframes spin {
+/* Alternating rotation */
+@keyframes spin-cw {
   to { transform: rotate(360deg); }
+}
+@keyframes spin-ccw {
+  to { transform: rotate(-360deg); }
 }
 
 .cluster__ring {
   transform-box: view-box;
-  animation: spin 80s linear infinite;
 }
 
-/* Hover: speed up + brighten */
-.cluster-group:hover .cluster__ring {
-  animation-duration: 18s;
+.cluster__ring--cw {
+  animation: spin-cw 90s linear infinite;
+}
+
+.cluster__ring--ccw {
+  animation: spin-ccw 70s linear infinite;
+}
+
+/* Hover on cluster GROUP — speed up all rings, brighten text */
+.cluster-group:hover .cluster__ring--cw {
+  animation-duration: 16s;
+}
+
+.cluster-group:hover .cluster__ring--ccw {
+  animation-duration: 12s;
 }
 
 .cluster-group:hover .cluster__ring-text {
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 /* Hide clusters when zoomed or during fade */
@@ -123,7 +146,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cluster__ring {
+  .cluster__ring--cw,
+  .cluster__ring--ccw {
+    animation: none;
+  }
+  .cluster-group:hover .cluster__circle {
     animation: none;
   }
 }
