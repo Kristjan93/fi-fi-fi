@@ -74,45 +74,43 @@
   pointer-events: auto;
 }
 
-.cluster__ring-text {
-  fill: var(--map-text);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.45;
+.cluster__circle {
+  fill: none;
+  stroke: var(--map-text);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
 }
 
-/* Alternating rotation — clockwise and counter-clockwise */
-@keyframes spin-cw {
-  to { transform: rotate(360deg); }
+.cluster-group:hover .cluster__circle {
+  opacity: 0.6;
 }
-@keyframes spin-ccw {
-  to { transform: rotate(-360deg); }
+
+.cluster__ring-text {
+  fill: var(--map-text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .cluster__ring {
-  transform-origin: center;
+  animation: spin 80s linear infinite;
 }
 
-.cluster__ring--cw {
-  animation: spin-cw 90s linear infinite;
-}
-
-.cluster__ring--ccw {
-  animation: spin-ccw 70s linear infinite;
-}
-
-/* Hover: speed up rotation */
-.cluster-group:hover .cluster__ring--cw {
-  animation-duration: 20s;
-}
-.cluster-group:hover .cluster__ring--ccw {
-  animation-duration: 15s;
+/* Hover: speed up + brighten */
+.cluster-group:hover .cluster__ring {
+  animation-duration: 18s;
 }
 
 .cluster-group:hover .cluster__ring-text {
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 /* Hide clusters when zoomed or during fade */
@@ -124,8 +122,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cluster__ring--cw,
-  .cluster__ring--ccw {
+  .cluster__ring {
     animation: none;
   }
 }

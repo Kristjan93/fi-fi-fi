@@ -301,51 +301,40 @@ const clusters = CLUSTER_DEFS.map((def) => {
 });
 
 // ── Generate cluster SVG ────────────────────────────────
-// Concentric rotating text rings for each cluster.
-// Uses SVG <textPath> for text-on-a-circle. viewBox matches map pixel space.
+// One dashed circle + one rotating text ring per cluster.
+// All hut names on a single circular path inside the dashed boundary.
 
-function clusterSvgRings(cluster: typeof clusters[0]): string {
+function clusterSvg(cluster: typeof clusters[0]): string {
   const cxPx = (cluster.cx / 100) * W;
   const cyPx = (cluster.cy / 100) * H;
-  const baseRadius = (cluster.radius / 100) * Math.min(W, H);
+  const rPx = (cluster.radius / 100) * Math.min(W, H);
 
-  // Each hut name gets a ring. Outermost = first hut, innermost = last.
-  // Ring spacing: shrink by ~12px per ring
-  const ringSpacing = Math.max(10, baseRadius / (cluster.labels.length + 1));
+  // Text ring sits slightly inside the dashed circle
+  const textR = rPx * 0.78;
 
-  const rings = cluster.labels.map((label, i) => {
-    const r = baseRadius - i * ringSpacing;
-    if (r < 8) return ""; // too small
+  const pathId = `${cluster.id}-text`;
+  const textD = `M ${(cxPx - textR).toFixed(1)},${cyPx.toFixed(1)} a ${textR.toFixed(1)},${textR.toFixed(1)} 0 1,1 ${(textR * 2).toFixed(1)},0 a ${textR.toFixed(1)},${textR.toFixed(1)} 0 1,1 ${(-textR * 2).toFixed(1)},0`;
 
-    const pathId = `${cluster.id}-ring-${i}`;
-    // SVG circle path (clockwise). Text flows along this path.
-    // M cx-r,cy a r,r 0 1,1 2r,0 a r,r 0 1,1 -2r,0
-    const d = `M ${(cxPx - r).toFixed(1)},${cyPx.toFixed(1)} a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(r * 2).toFixed(1)},0 a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(-r * 2).toFixed(1)},0`;
-
-    // Alternating direction: even rings clockwise (default), odd counter-clockwise
-    const direction = i % 2 === 0 ? "cw" : "ccw";
-    // Use short name for display (strip " / ..." suffixes)
-    const displayName = label.name.split(" / ")[0];
-    // Repeat name to fill the circle
-    const circumference = 2 * Math.PI * r;
-    const approxCharWidth = 8;
-    const textLen = displayName.length * approxCharWidth;
-    const repeats = Math.max(1, Math.ceil(circumference / (textLen + approxCharWidth * 4)));
-    const repeatedText = Array(repeats).fill(displayName).join("  ·  ");
-
-    return `    <path id="${pathId}" d="${d}" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--${direction}">
-      <text class="cluster__ring-text"><textPath href="#${pathId}">${repeatedText}</textPath></text>
-    </g>`;
-  });
+  // All hut names on one ring, separated by dots
+  const names = cluster.labels.map((l) => l.name.split(" / ")[0]);
+  const namesText = names.join("  ·  ");
+  // Repeat to fill the circle
+  const circumference = 2 * Math.PI * textR;
+  const approxLen = namesText.length * 6;
+  const repeats = Math.max(1, Math.ceil(circumference / approxLen));
+  const fullText = Array(repeats).fill(namesText).join("  ·  ");
 
   return `  <g class="cluster-group" data-cluster="${cluster.id}">
-${rings.filter(Boolean).join("\n")}
+    <circle cx="${cxPx.toFixed(1)}" cy="${cyPx.toFixed(1)}" r="${rPx.toFixed(1)}" class="cluster__circle" />
+    <path id="${pathId}" d="${textD}" fill="none" stroke="none" />
+    <g class="cluster__ring">
+      <text class="cluster__ring-text"><textPath href="#${pathId}">${fullText}</textPath></text>
+    </g>
   </g>`;
 }
 
 const clustersSvg = `<svg class="map__clusters" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-${clusters.map(clusterSvgRings).join("\n")}
+${clusters.map(clusterSvg).join("\n")}
 </svg>`;
 
 await Bun.write("src/map/clusters.svg", clustersSvg);

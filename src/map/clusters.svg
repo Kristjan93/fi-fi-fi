@@ -1,66 +1,30 @@
 <svg class="map__clusters" viewBox="0 0 1440 1080" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <g class="cluster-group" data-cluster="laugavegur">
-    <path id="laugavegur-ring-0" d="M 594.6,894.8 a 91.3,91.3 0 1,1 182.5,0 a 91.3,91.3 0 1,1 -182.5,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-0">Landmannalaugar  ·  Landmannalaugar  ·  Landmannalaugar  ·  Landmannalaugar</textPath></text>
-    </g>
-    <path id="laugavegur-ring-1" d="M 606.0,894.8 a 79.9,79.9 0 1,1 159.7,0 a 79.9,79.9 0 1,1 -159.7,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-1">Hrafntinnusker  ·  Hrafntinnusker  ·  Hrafntinnusker  ·  Hrafntinnusker</textPath></text>
-    </g>
-    <path id="laugavegur-ring-2" d="M 617.4,894.8 a 68.4,68.4 0 1,1 136.9,0 a 68.4,68.4 0 1,1 -136.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-2">Álftavatn  ·  Álftavatn  ·  Álftavatn  ·  Álftavatn  ·  Álftavatn</textPath></text>
-    </g>
-    <path id="laugavegur-ring-3" d="M 628.8,894.8 a 57.0,57.0 0 1,1 114.1,0 a 57.0,57.0 0 1,1 -114.1,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-3">Hvanngil  ·  Hvanngil  ·  Hvanngil  ·  Hvanngil</textPath></text>
-    </g>
-    <path id="laugavegur-ring-4" d="M 640.2,894.8 a 45.6,45.6 0 1,1 91.3,0 a 45.6,45.6 0 1,1 -91.3,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-4">Emstrur  ·  Emstrur  ·  Emstrur  ·  Emstrur</textPath></text>
-    </g>
-    <path id="laugavegur-ring-5" d="M 651.6,894.8 a 34.2,34.2 0 1,1 68.4,0 a 34.2,34.2 0 1,1 -68.4,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-5">Þórsmörk  ·  Þórsmörk  ·  Þórsmörk</textPath></text>
-    </g>
-    <path id="laugavegur-ring-6" d="M 663.1,894.8 a 22.8,22.8 0 1,1 45.6,0 a 22.8,22.8 0 1,1 -45.6,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-ring-6">Fimmvörðuháls  ·  Fimmvörðuháls</textPath></text>
+    <circle cx="685.9" cy="894.8" r="91.3" class="cluster__circle" />
+    <path id="laugavegur-text" d="M 614.7,894.8 a 71.2,71.2 0 1,1 142.4,0 a 71.2,71.2 0 1,1 -142.4,0" fill="none" stroke="none" />
+    <g class="cluster__ring">
+      <text class="cluster__ring-text"><textPath href="#laugavegur-text">Landmannalaugar  ·  Hrafntinnusker  ·  Álftavatn  ·  Hvanngil  ·  Emstrur  ·  Þórsmörk  ·  Fimmvörðuháls</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="kjolur">
-    <path id="kjolur-ring-0" d="M 571.9,632.1 a 62.5,62.5 0 1,1 125.1,0 a 62.5,62.5 0 1,1 -125.1,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#kjolur-ring-0">Hvítárnes  ·  Hvítárnes  ·  Hvítárnes  ·  Hvítárnes</textPath></text>
-    </g>
-    <path id="kjolur-ring-1" d="M 587.6,632.1 a 46.9,46.9 0 1,1 93.8,0 a 46.9,46.9 0 1,1 -93.8,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw">
-      <text class="cluster__ring-text"><textPath href="#kjolur-ring-1">Þverbrekknamúli  ·  Þverbrekknamúli</textPath></text>
-    </g>
-    <path id="kjolur-ring-2" d="M 603.2,632.1 a 31.3,31.3 0 1,1 62.5,0 a 31.3,31.3 0 1,1 -62.5,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#kjolur-ring-2">Þjófadalir  ·  Þjófadalir</textPath></text>
+    <circle cx="634.5" cy="632.1" r="62.5" class="cluster__circle" />
+    <path id="kjolur-text" d="M 585.7,632.1 a 48.8,48.8 0 1,1 97.5,0 a 48.8,48.8 0 1,1 -97.5,0" fill="none" stroke="none" />
+    <g class="cluster__ring">
+      <text class="cluster__ring-text"><textPath href="#kjolur-text">Hvítárnes  ·  Þverbrekknamúli  ·  Þjófadalir  ·  Hvítárnes  ·  Þverbrekknamúli  ·  Þjófadalir</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="langjokull">
-    <path id="langjokull-ring-0" d="M 494.4,716.1 a 48.0,48.0 0 1,1 95.9,0 a 48.0,48.0 0 1,1 -95.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#langjokull-ring-0">Hagavatn  ·  Hagavatn  ·  Hagavatn  ·  Hagavatn</textPath></text>
-    </g>
-    <path id="langjokull-ring-1" d="M 510.3,716.1 a 32.0,32.0 0 1,1 63.9,0 a 32.0,32.0 0 1,1 -63.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw">
-      <text class="cluster__ring-text"><textPath href="#langjokull-ring-1">Hlöðuvellir  ·  Hlöðuvellir</textPath></text>
+    <circle cx="542.3" cy="716.1" r="48.0" class="cluster__circle" />
+    <path id="langjokull-text" d="M 504.9,716.1 a 37.4,37.4 0 1,1 74.8,0 a 37.4,37.4 0 1,1 -74.8,0" fill="none" stroke="none" />
+    <g class="cluster__ring">
+      <text class="cluster__ring-text"><textPath href="#langjokull-text">Hagavatn  ·  Hlöðuvellir  ·  Hagavatn  ·  Hlöðuvellir</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="hornstrandir">
-    <path id="hornstrandir-ring-0" d="M 247.1,172.4 a 100.3,100.3 0 1,1 200.7,0 a 100.3,100.3 0 1,1 -200.7,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw">
-      <text class="cluster__ring-text"><textPath href="#hornstrandir-ring-0">Hornbjargsviti  ·  Hornbjargsviti  ·  Hornbjargsviti  ·  Hornbjargsviti  ·  Hornbjargsviti</textPath></text>
-    </g>
-    <path id="hornstrandir-ring-1" d="M 280.6,172.4 a 66.9,66.9 0 1,1 133.8,0 a 66.9,66.9 0 1,1 -133.8,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw">
-      <text class="cluster__ring-text"><textPath href="#hornstrandir-ring-1">Norðurfjörður  ·  Norðurfjörður  ·  Norðurfjörður  ·  Norðurfjörður</textPath></text>
+    <circle cx="347.5" cy="172.4" r="100.3" class="cluster__circle" />
+    <path id="hornstrandir-text" d="M 269.2,172.4 a 78.3,78.3 0 1,1 156.5,0 a 78.3,78.3 0 1,1 -156.5,0" fill="none" stroke="none" />
+    <g class="cluster__ring">
+      <text class="cluster__ring-text"><textPath href="#hornstrandir-text">Hornbjargsviti  ·  Norðurfjörður  ·  Hornbjargsviti  ·  Norðurfjörður  ·  Hornbjargsviti  ·  Norðurfjörður</textPath></text>
     </g>
   </g>
 </svg>
