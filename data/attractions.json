@@ -10,7 +10,7 @@
     "id": "rhyolite-mountains",
     "name": "Litríkar líparitfjöll",
     "coords": null,
-    "info": "Fjöllit líparitfjöll í Fjallabaki, þekkt fyrir regnbogaliti sína.",
+    "info": "Líparitfjöll í Fjallabaki, þekkt fyrir regnbogaliti sína.",
     "huts": ["lml-hut"],
     "_note": "Area feature, not a single point"
   },
@@ -112,7 +112,7 @@
     "id": "arctic-fox",
     "name": "Tófuáhorf á Hornströndum",
     "coords": null,
-    "info": "Hornstrandir eru besta svæðið á Íslandi til að sjá heimafox í villtri náttúru.",
+    "info": "Hornstrandir eru besta svæðið á Íslandi til að sjá tófur í villtri náttúru.",
     "huts": ["hrn"],
     "_note": "Area feature across the reserve"
   },
