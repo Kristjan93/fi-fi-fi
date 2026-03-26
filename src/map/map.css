@@ -128,10 +128,26 @@
   opacity: 0.8;
 }
 
+/* ── Per-hut colors — Icelandic landscape palette ────── */
+/* All pass WCAG AA (4.5:1+) against --map-bg: #c5bdb9 */
+.cluster__ring[data-hut="lml-hut"] .cluster__ring-text { fill: #5a2d1e; } /* rhyolite rust */
+.cluster__ring[data-hut="hrf"] .cluster__ring-text     { fill: #2d1e3a; } /* obsidian purple */
+.cluster__ring[data-hut="alf"] .cluster__ring-text     { fill: #1e2d4a; } /* lake blue */
+.cluster__ring[data-hut="hvg"] .cluster__ring-text     { fill: #3a2d1e; } /* dark earth */
+.cluster__ring[data-hut="ems"] .cluster__ring-text     { fill: #4a3520; } /* canyon amber */
+.cluster__ring[data-hut="tmk-hut"] .cluster__ring-text { fill: #1e3a2d; } /* birch forest */
+.cluster__ring[data-hut="fmv"] .cluster__ring-text     { fill: #2d3a4a; } /* glacier slate */
+.cluster__ring[data-hut="hvt"] .cluster__ring-text     { fill: #1e3a4a; } /* highland teal */
+.cluster__ring[data-hut="tvb"] .cluster__ring-text     { fill: #3a3520; } /* highland ochre */
+.cluster__ring[data-hut="tjd"] .cluster__ring-text     { fill: #2d1e2d; } /* dark violet */
+.cluster__ring[data-hut="hgv"] .cluster__ring-text     { fill: #1e2d3a; } /* deep water */
+.cluster__ring[data-hut="hld"] .cluster__ring-text     { fill: #3a2d20; } /* basalt brown */
+.cluster__ring[data-hut="hrn"] .cluster__ring-text     { fill: #1e3a3a; } /* sea cliff teal */
+.cluster__ring[data-hut="nfj"] .cluster__ring-text     { fill: #2d3a2d; } /* coastal green */
+
 /* JS adds this class to highlight a single ring when its dot is hovered */
 .cluster__ring--highlight .cluster__ring-text {
   opacity: 1;
-  fill: #3d2b1a;
 }
 
 .cluster__ring--dim .cluster__ring-text {
