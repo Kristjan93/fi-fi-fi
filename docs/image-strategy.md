@@ -99,10 +99,7 @@ Marker icons appear at 10-20px on the map at overview zoom. Photos are unreadabl
 
 These should be inline SVG or a small SVG sprite. No image loading, zero network cost, scales perfectly at any zoom level. Color: `currentColor` so they inherit the map's `--map-text` value.
 
-**Where to get them:**
-- Draw them by hand in Figma/Inkscape (5-10 simple shapes, 30 min total)
-- Use an open-source icon set as a starting point: [Maki by Mapbox](https://labs.mapbox.com/maki-icons/) (CC0, designed for maps) or [Temaki](https://ideditor.github.io/temaki/docs/) (map-specific supplement)
-- Generate with an AI image tool then trace to SVG (overkill for simple icons)
+**Source: [Maki by Mapbox](https://labs.mapbox.com/maki-icons/)** (CC0, designed specifically for maps). Supplement with [Temaki](https://ideditor.github.io/temaki/docs/) if Maki doesn't cover a category. No need to draw or generate — these exist and are battle-tested.
 
 ### 2.2 Detail Panel Thumbnails: The Main Challenge
 
