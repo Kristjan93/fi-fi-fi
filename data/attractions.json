@@ -9,51 +9,41 @@
   {
     "id": "rhyolite-mountains",
     "name": "Litríkar líparitfjöll",
-    "coords": "TODO",
+    "coords": null,
     "info": "Fjöllit líparitfjöll í Fjallabaki, þekkt fyrir regnbogaliti sína.",
-    "huts": ["lml-hut"]
+    "huts": ["lml-hut"],
+    "_note": "Area feature, not a single point"
   },
   {
     "id": "fridland-fjallabaki",
     "name": "Friðland að Fjallabaki",
-    "coords": "TODO",
+    "coords": null,
     "info": "Náttúruverndarsvæði í kringum Landmannalaugar, fjölbreyttar gönguleiðir.",
-    "huts": ["lml-hut"]
+    "huts": ["lml-hut"],
+    "_note": "Area feature, not a single point"
   },
   {
     "id": "obsidian",
     "name": "Hrafntinnuhraunssvæðið",
-    "coords": "TODO",
+    "coords": null,
     "info": "Svartur hrafntinna (obsidían) í hrauninu við Hrafntinnusker.",
-    "huts": ["hrf"]
+    "huts": ["hrf"],
+    "_note": "Area feature near hut"
   },
   {
     "id": "ice-caves",
     "name": "Íshellar",
-    "coords": "TODO",
+    "coords": null,
     "info": "Íshellar í nágrenni Hrafntinnuskers, myndaðir af jarðhita og jöklum.",
-    "huts": ["hrf"]
+    "huts": ["hrf"],
+    "_note": "Locations shift seasonally"
   },
   {
     "id": "alftaskard",
     "name": "Álftaskarð",
-    "coords": "TODO",
+    "coords": [-19.2100, 63.8650],
     "info": "Skarð nálægt Álftavatni, stutt ganga frá skálanum.",
     "huts": ["alf"]
-  },
-  {
-    "id": "bratthals",
-    "name": "Brattaháls",
-    "coords": "TODO",
-    "info": "Hálsar og giljur nálægt Álftavatni á Laugavegi.",
-    "huts": ["alf"]
-  },
-  {
-    "id": "hvanngilshraun",
-    "name": "Hvanngilshraun",
-    "coords": "TODO",
-    "info": "Hraunbreiða sem veitir skjól fyrir tjaldstæðið við Hvanngil.",
-    "huts": ["hvg"]
   },
   {
     "id": "markarfljotsgljufur",
@@ -65,21 +55,21 @@
   {
     "id": "valahnukur",
     "name": "Valahnúkur",
-    "coords": [-19.5100, 63.6750],
+    "coords": [-19.5200, 63.6780],
     "info": "Útsýnistindur í Þórsmörk, stutt en brött ganga með víðsýni yfir dalinn.",
     "huts": ["tmk-hut"]
   },
   {
     "id": "stakkholtsgja",
     "name": "Stakkholtsgjá",
-    "coords": "TODO",
+    "coords": [-19.4850, 63.6700],
     "info": "Þröngt og falleg gjá í Þórsmörk, með foss innst í gljúfrinu.",
     "huts": ["tmk-hut"]
   },
   {
     "id": "nauthusagil",
     "name": "Nauthúsagil",
-    "coords": "TODO",
+    "coords": [-19.5250, 63.6350],
     "info": "Leyndardómsfull gjá sem opnast inn í mosaklædd gljúfur með foss.",
     "huts": ["tmk-hut"]
   },
@@ -100,14 +90,14 @@
   {
     "id": "hlodufell",
     "name": "Hlöðufell",
-    "coords": "TODO",
+    "coords": [-20.5500, 64.4100],
     "info": "Stórbrotið stapafjall nálægt Langjökli.",
     "huts": ["hld"]
   },
   {
     "id": "tungnafellsjokull",
     "name": "Tungnafellsjökull",
-    "coords": "TODO",
+    "coords": [-17.9200, 64.7350],
     "info": "Litill jökull á Sprengisandi, nálægt Nýjadal.",
     "huts": ["nyd"]
   },
@@ -121,14 +111,15 @@
   {
     "id": "arctic-fox",
     "name": "Tófuáhorf á Hornströndum",
-    "coords": "TODO",
+    "coords": null,
     "info": "Hornstrandir eru besta svæðið á Íslandi til að sjá heimafox í villtri náttúru.",
-    "huts": ["hrn"]
+    "huts": ["hrn"],
+    "_note": "Area feature across the reserve"
   },
   {
     "id": "krossneslaug",
     "name": "Krossneslaug",
-    "coords": [-21.5000, 66.0800],
+    "coords": [-21.5100, 66.0830],
     "info": "Heit útisundlaug á ströndinni í Norðurfirði, með útsýni yfir Grænlandshafið.",
     "huts": ["nfj"]
   }
