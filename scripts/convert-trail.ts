@@ -19,10 +19,13 @@ export {};
 const TOLERANCE = 0.0004;
 
 // ── Load ────────────────────────────────────────────────
+// Usage: bun scripts/convert-trail.ts <overpass-json-file>
+// Get the file: curl -s "https://overpass-api.de/api/interpreter" \
+//   --data-urlencode 'data=[out:json];relation(1225037);(._;>;);out body;' \
+//   -o data/raw/laugavegur-overpass.json
 
-const data = await Bun.file(
-  "/private/tmp/claude-501/laugavegur-full.json",
-).json();
+const inputFile = process.argv[2] || "data/raw/laugavegur-overpass.json";
+const data = await Bun.file(inputFile).json();
 const nodes = data.elements.filter((e: any) => e.type === "node");
 const ways = data.elements.filter((e: any) => e.type === "way");
 const rel = data.elements.find((e: any) => e.type === "relation");

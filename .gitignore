@@ -43,3 +43,7 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Build cache (intermediate terrain files — NOT shipped to browser)
 .build-cache/
+
+# Claude Code plugin artifacts
+.agents/
+skills-lock.json

@@ -1,14 +1,15 @@
 /**
  * Convert OSM glacier data to a single GeoJSON MultiPolygon.
- * Input:  /private/tmp/claude-501/iceland-glaciers.json (Overpass API)
  * Output: data/glaciers.geojson
  *
- * Run: bun scripts/convert-glaciers.ts
+ * Usage: bun scripts/convert-glaciers.ts <overpass-json-file>
+ * Get the file: curl -s "https://overpass-api.de/api/interpreter" \
+ *   --data-urlencode 'data=[out:json][timeout:30];(relation["natural"="glacier"](63.3,-24.5,66.5,-13.5);way["natural"="glacier"](63.3,-24.5,66.5,-13.5););out body;>;out skel qt;' \
+ *   -o data/raw/iceland-glaciers-overpass.json
  */
 
-const data = await Bun.file(
-  "/private/tmp/claude-501/iceland-glaciers.json",
-).json();
+const inputFile = process.argv[2] || "data/raw/iceland-glaciers-overpass.json";
+const data = await Bun.file(inputFile).json();
 
 type Coord = [number, number];
 
