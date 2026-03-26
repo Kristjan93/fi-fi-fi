@@ -1,21 +1,22 @@
 /**
- * map-data.ts — Shared types and loader for hut/trail/attraction data.
+ * map-data.ts — Read map data from SQLite.
  */
 
-import { readFileSync } from "fs";
+import { Database } from "bun:sqlite";
+
+const DB_PATH = "data/map.db";
 
 export interface Hut {
   id: string;
   name: string;
-  coords: [number, number];
+  lon: number;
+  lat: number;
   beds: number;
   elevation: number | null;
-  open: string;
+  open: string | null;
   label: string;
   info: string;
-  trails: string[];
-  attractions: string[];
-  source: string;
+  source: string | null;
 }
 
 export interface Trail {
@@ -25,21 +26,34 @@ export interface Trail {
   duration: string | null;
   info: string;
   geojson: string | null;
-  _note?: string;
 }
 
 export interface Attraction {
   id: string;
   name: string;
-  coords: [number, number] | null;
+  lon: number | null;
+  lat: number | null;
   info: string;
-  _note?: string;
 }
 
-export function loadMapData() {
-  return {
-    huts: JSON.parse(readFileSync("data/huts.json", "utf8")) as Hut[],
-    trails: JSON.parse(readFileSync("data/trails.json", "utf8")) as Trail[],
-    attractions: JSON.parse(readFileSync("data/attractions.json", "utf8")) as Attraction[],
-  };
+export function openMapDb() {
+  const db = new Database(DB_PATH, { readonly: true });
+  db.exec("PRAGMA foreign_keys = ON");
+  return db;
+}
+
+export function getHuts(db: Database): Hut[] {
+  return db.query("SELECT * FROM huts").all() as Hut[];
+}
+
+export function getTrailsForHut(db: Database, hutId: string): Trail[] {
+  return db.query(
+    "SELECT t.* FROM trails t JOIN hut_trails ht ON ht.trail_id = t.id WHERE ht.hut_id = ?"
+  ).all(hutId) as Trail[];
+}
+
+export function getAttractionsForHut(db: Database, hutId: string): Attraction[] {
+  return db.query(
+    "SELECT a.* FROM attractions a JOIN hut_attractions ha ON ha.attraction_id = a.id WHERE ha.hut_id = ?"
+  ).all(hutId) as Attraction[];
 }
