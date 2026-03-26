@@ -9,12 +9,11 @@
  */
 
 import { Database } from "bun:sqlite";
-import { unlinkSync, existsSync } from "fs";
 import { loadMapData } from "./map-data";
 
 const DB_PATH = "data/map.db";
 
-if (existsSync(DB_PATH)) unlinkSync(DB_PATH);
+try { require("fs").unlinkSync(DB_PATH); } catch {}
 
 const db = new Database(DB_PATH);
 db.exec("PRAGMA journal_mode = WAL");

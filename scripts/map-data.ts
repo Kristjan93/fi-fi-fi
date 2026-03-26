@@ -1,13 +1,8 @@
 /**
  * map-data.ts — Shared types and loader for hut/trail/attraction data.
- *
- * Single source of truth for the data shape. Both init-db.ts and
- * validate-data.ts import from here.
  */
 
 import { readFileSync } from "fs";
-
-// ── Types ──────────────────────────────────────
 
 export interface Hut {
   id: string;
@@ -41,18 +36,10 @@ export interface Attraction {
   _note?: string;
 }
 
-// ── Loader ─────────────────────────────────────
-
-export interface MapData {
-  huts: Hut[];
-  trails: Trail[];
-  attractions: Attraction[];
-}
-
-export function loadMapData(): MapData {
+export function loadMapData() {
   return {
-    huts: JSON.parse(readFileSync("data/huts.json", "utf8")),
-    trails: JSON.parse(readFileSync("data/trails.json", "utf8")),
-    attractions: JSON.parse(readFileSync("data/attractions.json", "utf8")),
+    huts: JSON.parse(readFileSync("data/huts.json", "utf8")) as Hut[],
+    trails: JSON.parse(readFileSync("data/trails.json", "utf8")) as Trail[],
+    attractions: JSON.parse(readFileSync("data/attractions.json", "utf8")) as Attraction[],
   };
 }
