@@ -320,18 +320,13 @@ function clusterSvg(cluster: typeof clusters[0]): string {
     const d = `M ${(cxPx - r).toFixed(1)},${cyPx.toFixed(1)} a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(r * 2).toFixed(1)},0 a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(-r * 2).toFixed(1)},0`;
 
     const displayName = label.name.split(" / ")[0].toUpperCase();
-    // Repeat to fill the circumference
-    const circumference = 2 * Math.PI * r;
-    const approxCharWidth = 7;
-    const repeats = Math.max(1, Math.ceil(circumference / ((displayName.length + 3) * approxCharWidth)));
-    const fullText = Array(repeats).fill(displayName).join("  ·  ");
 
     // Alternating direction
     const dir = i % 2 === 0 ? "cw" : "ccw";
 
     return `    <path id="${pathId}" d="${d}" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--${dir}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
-      <text class="cluster__ring-text"><textPath href="#${pathId}">${fullText}</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#${pathId}">${displayName}</textPath></text>
     </g>`;
   });
 

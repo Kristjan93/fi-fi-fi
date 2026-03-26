@@ -75,12 +75,13 @@
 }
 
 .cluster__circle {
-  fill: none;
+  fill: transparent;
   stroke: var(--map-text);
   stroke-width: 1.8;
   stroke-dasharray: 8 5;
   opacity: 0.3;
   transition: opacity 0.4s ease, stroke 0.4s ease;
+  pointer-events: fill;
 }
 
 .cluster-group:hover .cluster__circle {
@@ -116,6 +117,7 @@
 
 .cluster__ring {
   transform-box: view-box;
+  pointer-events: none;
 }
 
 .cluster__ring--cw {

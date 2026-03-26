@@ -3,68 +3,68 @@
     <circle cx="685.9" cy="894.8" r="112.9" class="cluster__circle" />
     <path id="laugavegur-r0" d="M 586.6,894.8 a 99.3,99.3 0 1,1 198.6,0 a 99.3,99.3 0 1,1 -198.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r0">LANDMANNALAUGAR  ·  LANDMANNALAUGAR  ·  LANDMANNALAUGAR  ·  LANDMANNALAUGAR  ·  LANDMANNALAUGAR</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r0">LANDMANNALAUGAR</textPath></text>
     </g>
     <path id="laugavegur-r1" d="M 604.6,894.8 a 81.3,81.3 0 1,1 162.6,0 a 81.3,81.3 0 1,1 -162.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r1">HRAFNTINNUSKER  ·  HRAFNTINNUSKER  ·  HRAFNTINNUSKER  ·  HRAFNTINNUSKER  ·  HRAFNTINNUSKER</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r1">HRAFNTINNUSKER</textPath></text>
     </g>
     <path id="laugavegur-r2" d="M 622.6,894.8 a 63.3,63.3 0 1,1 126.6,0 a 63.3,63.3 0 1,1 -126.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r2">ÁLFTAVATN  ·  ÁLFTAVATN  ·  ÁLFTAVATN  ·  ÁLFTAVATN  ·  ÁLFTAVATN</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r2">ÁLFTAVATN</textPath></text>
     </g>
     <path id="laugavegur-r3" d="M 640.6,894.8 a 45.3,45.3 0 1,1 90.6,0 a 45.3,45.3 0 1,1 -90.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r3">HVANNGIL  ·  HVANNGIL  ·  HVANNGIL  ·  HVANNGIL</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r3">HVANNGIL</textPath></text>
     </g>
     <path id="laugavegur-r4" d="M 658.6,894.8 a 27.3,27.3 0 1,1 54.6,0 a 27.3,27.3 0 1,1 -54.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r4">EMSTRUR  ·  EMSTRUR  ·  EMSTRUR</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r4">EMSTRUR</textPath></text>
     </g>
     <path id="laugavegur-r5" d="M 665.9,894.8 a 20.0,20.0 0 1,1 40.0,0 a 20.0,20.0 0 1,1 -40.0,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r5">ÞÓRSMÖRK  ·  ÞÓRSMÖRK</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r5">ÞÓRSMÖRK</textPath></text>
     </g>
     <path id="laugavegur-r6" d="M 665.9,894.8 a 20.0,20.0 0 1,1 40.0,0 a 20.0,20.0 0 1,1 -40.0,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text"><textPath href="#laugavegur-r6">FIMMVÖRÐUHÁLS  ·  FIMMVÖRÐUHÁLS</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#laugavegur-r6">FIMMVÖRÐUHÁLS</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="kjolur">
     <circle cx="634.5" cy="632.1" r="84.1" class="cluster__circle" />
     <path id="kjolur-r0" d="M 560.4,632.1 a 74.0,74.0 0 1,1 148.1,0 a 74.0,74.0 0 1,1 -148.1,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 634.5px 632.1px">
-      <text class="cluster__ring-text"><textPath href="#kjolur-r0">HVÍTÁRNES  ·  HVÍTÁRNES  ·  HVÍTÁRNES  ·  HVÍTÁRNES  ·  HVÍTÁRNES  ·  HVÍTÁRNES</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#kjolur-r0">HVÍTÁRNES</textPath></text>
     </g>
     <path id="kjolur-r1" d="M 578.4,632.1 a 56.0,56.0 0 1,1 112.1,0 a 56.0,56.0 0 1,1 -112.1,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" style="transform-origin: 634.5px 632.1px">
-      <text class="cluster__ring-text"><textPath href="#kjolur-r1">ÞVERBREKKNAMÚLI  ·  ÞVERBREKKNAMÚLI  ·  ÞVERBREKKNAMÚLI</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#kjolur-r1">ÞVERBREKKNAMÚLI</textPath></text>
     </g>
     <path id="kjolur-r2" d="M 596.4,632.1 a 38.0,38.0 0 1,1 76.1,0 a 38.0,38.0 0 1,1 -76.1,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 634.5px 632.1px">
-      <text class="cluster__ring-text"><textPath href="#kjolur-r2">ÞJÓFADALIR  ·  ÞJÓFADALIR  ·  ÞJÓFADALIR</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#kjolur-r2">ÞJÓFADALIR</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="langjokull">
     <circle cx="542.3" cy="716.1" r="69.6" class="cluster__circle" />
     <path id="langjokull-r0" d="M 481.1,716.1 a 61.2,61.2 0 1,1 122.4,0 a 61.2,61.2 0 1,1 -122.4,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 542.3px 716.1px">
-      <text class="cluster__ring-text"><textPath href="#langjokull-r0">HAGAVATN  ·  HAGAVATN  ·  HAGAVATN  ·  HAGAVATN  ·  HAGAVATN</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#langjokull-r0">HAGAVATN</textPath></text>
     </g>
     <path id="langjokull-r1" d="M 499.1,716.1 a 43.2,43.2 0 1,1 86.4,0 a 43.2,43.2 0 1,1 -86.4,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" style="transform-origin: 542.3px 716.1px">
-      <text class="cluster__ring-text"><textPath href="#langjokull-r1">HLÖÐUVELLIR  ·  HLÖÐUVELLIR  ·  HLÖÐUVELLIR</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#langjokull-r1">HLÖÐUVELLIR</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="hornstrandir">
     <circle cx="347.5" cy="172.4" r="121.9" class="cluster__circle" />
     <path id="hornstrandir-r0" d="M 240.2,172.4 a 107.3,107.3 0 1,1 214.6,0 a 107.3,107.3 0 1,1 -214.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" style="transform-origin: 347.5px 172.4px">
-      <text class="cluster__ring-text"><textPath href="#hornstrandir-r0">HORNBJARGSVITI  ·  HORNBJARGSVITI  ·  HORNBJARGSVITI  ·  HORNBJARGSVITI  ·  HORNBJARGSVITI  ·  HORNBJARGSVITI</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#hornstrandir-r0">HORNBJARGSVITI</textPath></text>
     </g>
     <path id="hornstrandir-r1" d="M 258.2,172.4 a 89.3,89.3 0 1,1 178.6,0 a 89.3,89.3 0 1,1 -178.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" style="transform-origin: 347.5px 172.4px">
-      <text class="cluster__ring-text"><textPath href="#hornstrandir-r1">NORÐURFJÖRÐUR  ·  NORÐURFJÖRÐUR  ·  NORÐURFJÖRÐUR  ·  NORÐURFJÖRÐUR  ·  NORÐURFJÖRÐUR  ·  NORÐURFJÖRÐUR</textPath></text>
+      <text class="cluster__ring-text"><textPath href="#hornstrandir-r1">NORÐURFJÖRÐUR</textPath></text>
     </g>
   </g>
 </svg>
