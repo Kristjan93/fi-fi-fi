@@ -160,9 +160,9 @@ export class MapController {
     this.map.classList.add("map--hiding");
     await this.waitMs(250);
 
-    // 2. Reset state
+    // 2. Keep everything hidden during zoom-out
     this.state = { type: "overview" };
-    this.map.className = "map";
+    this.map.className = "map map--hiding";
     this.map.removeAttribute("data-active-cluster");
 
     const allRadio = this.map.querySelector<HTMLInputElement>("#map-all");
@@ -171,8 +171,11 @@ export class MapController {
     // 3. Zoom out
     this.image.style.transform = "scale(1)";
 
-    // 4. Wait for zoom
+    // 4. Wait for zoom to complete
     await this.waitMs(900);
+
+    // 5. NOW reveal markers
+    this.map.classList.remove("map--hiding");
     this.animating = false;
   }
 
