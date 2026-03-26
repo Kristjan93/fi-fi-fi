@@ -271,7 +271,7 @@ const clusters = CLUSTER_DEFS.map((def) => {
   const cx = members.reduce((s, m) => s + m.x, 0) / members.length;
   const cy = members.reduce((s, m) => s + m.y, 0) / members.length;
   const maxDist = Math.max(...members.map((m) => Math.sqrt((m.x - cx) ** 2 + (m.y - cy) ** 2)));
-  const radius = maxDist + 5; // padding in % units — room for text rings
+  const radius = maxDist + 7; // padding in % units — room for bigger text rings
 
   // Radial labels: angle from centroid to each hut, label placed on circle edge
   const labels = members.map((m) => {
@@ -309,33 +309,37 @@ function clusterSvg(cluster: typeof clusters[0]): string {
   const cyPx = (cluster.cy / 100) * H;
   const rPx = (cluster.radius / 100) * Math.min(W, H);
 
-  // Pair names on shared rings (2 per ring, last ring gets 1 if odd count)
-  const pairs: typeof cluster.labels[] = [];
-  for (let i = 0; i < cluster.labels.length; i += 2) {
-    pairs.push(cluster.labels.slice(i, i + 2));
+  // Group names onto rings — outer ring gets 3 for big clusters, rest get 2
+  const groups: typeof cluster.labels[] = [];
+  const labels = [...cluster.labels];
+  if (labels.length >= 5) {
+    groups.push(labels.splice(0, 3)); // 3 on outer ring
+  }
+  while (labels.length > 0) {
+    groups.push(labels.splice(0, 2));
   }
 
-  // Ring spacing: outer ring at 85% of boundary
-  const ringSpacing = 24;
-  const outerStart = rPx * 0.85;
-  const minRadius = 22;
+  // Ring spacing: text well inside the boundary (75% start), generous spacing
+  const ringSpacing = 28;
+  const outerStart = rPx * 0.75;
+  const minRadius = 24;
 
-  const rings = pairs.map((pair, i) => {
+  const rings = groups.map((group, i) => {
     const r = Math.max(minRadius, outerStart - i * ringSpacing);
     const pathId = `${cluster.id}-r${i}`;
     const d = `M ${(cxPx - r).toFixed(1)},${cyPx.toFixed(1)} a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(r * 2).toFixed(1)},0 a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(-r * 2).toFixed(1)},0`;
 
     const dir = i % 2 === 0 ? "cw" : "ccw";
 
-    // Each name in the pair gets its own <text> with startOffset to space them
-    const texts = pair.map((label, j) => {
+    // Distribute names evenly around the circle
+    const texts = group.map((label, j) => {
       const name = label.name.split(" / ")[0].toUpperCase();
-      const offset = pair.length === 2 ? (j === 0 ? "5%" : "55%") : "5%";
+      const step = Math.floor(100 / group.length);
+      const offset = `${3 + j * step}%`;
       return `      <text class="cluster__ring-text" data-hut="${label.hutId}"><textPath href="#${pathId}" startOffset="${offset}">${name}</textPath></text>`;
     });
 
-    // data-hut on the ring group uses first hut (for single highlight, JS handles both)
-    const hutIds = pair.map((l) => l.hutId).join(",");
+    const hutIds = group.map((l) => l.hutId).join(",");
 
     return `    <path id="${pathId}" d="${d}" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--${dir}" data-huts="${hutIds}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">

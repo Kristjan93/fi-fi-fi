@@ -1,52 +1,49 @@
 <svg class="map__clusters" viewBox="0 0 1440 1080" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <g class="cluster-group" data-cluster="laugavegur">
-    <circle cx="685.9" cy="894.8" r="112.9" class="cluster__circle" />
-    <path id="laugavegur-r0" d="M 589.9,894.8 a 95.9,95.9 0 1,1 191.9,0 a 95.9,95.9 0 1,1 -191.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw" data-huts="lml-hut,hrf" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text" data-hut="lml-hut"><textPath href="#laugavegur-r0" startOffset="5%">LANDMANNALAUGAR</textPath></text>
-      <text class="cluster__ring-text" data-hut="hrf"><textPath href="#laugavegur-r0" startOffset="55%">HRAFNTINNUSKER</textPath></text>
+    <circle cx="685.9" cy="894.8" r="134.5" class="cluster__circle" />
+    <path id="laugavegur-r0" d="M 585.0,894.8 a 100.8,100.8 0 1,1 201.7,0 a 100.8,100.8 0 1,1 -201.7,0" fill="none" stroke="none" />
+    <g class="cluster__ring cluster__ring--cw" data-huts="lml-hut,hrf,alf" style="transform-origin: 685.9px 894.8px">
+      <text class="cluster__ring-text" data-hut="lml-hut"><textPath href="#laugavegur-r0" startOffset="3%">LANDMANNALAUGAR</textPath></text>
+      <text class="cluster__ring-text" data-hut="hrf"><textPath href="#laugavegur-r0" startOffset="36%">HRAFNTINNUSKER</textPath></text>
+      <text class="cluster__ring-text" data-hut="alf"><textPath href="#laugavegur-r0" startOffset="69%">ÁLFTAVATN</textPath></text>
     </g>
-    <path id="laugavegur-r1" d="M 613.9,894.8 a 71.9,71.9 0 1,1 143.9,0 a 71.9,71.9 0 1,1 -143.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw" data-huts="alf,hvg" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text" data-hut="alf"><textPath href="#laugavegur-r1" startOffset="5%">ÁLFTAVATN</textPath></text>
-      <text class="cluster__ring-text" data-hut="hvg"><textPath href="#laugavegur-r1" startOffset="55%">HVANNGIL</textPath></text>
+    <path id="laugavegur-r1" d="M 613.0,894.8 a 72.8,72.8 0 1,1 145.7,0 a 72.8,72.8 0 1,1 -145.7,0" fill="none" stroke="none" />
+    <g class="cluster__ring cluster__ring--ccw" data-huts="hvg,ems" style="transform-origin: 685.9px 894.8px">
+      <text class="cluster__ring-text" data-hut="hvg"><textPath href="#laugavegur-r1" startOffset="3%">HVANNGIL</textPath></text>
+      <text class="cluster__ring-text" data-hut="ems"><textPath href="#laugavegur-r1" startOffset="53%">EMSTRUR</textPath></text>
     </g>
-    <path id="laugavegur-r2" d="M 637.9,894.8 a 47.9,47.9 0 1,1 95.9,0 a 47.9,47.9 0 1,1 -95.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--cw" data-huts="ems,tmk-hut" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text" data-hut="ems"><textPath href="#laugavegur-r2" startOffset="5%">EMSTRUR</textPath></text>
-      <text class="cluster__ring-text" data-hut="tmk-hut"><textPath href="#laugavegur-r2" startOffset="55%">ÞÓRSMÖRK</textPath></text>
-    </g>
-    <path id="laugavegur-r3" d="M 661.9,894.8 a 23.9,23.9 0 1,1 47.9,0 a 23.9,23.9 0 1,1 -47.9,0" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--ccw" data-huts="fmv" style="transform-origin: 685.9px 894.8px">
-      <text class="cluster__ring-text" data-hut="fmv"><textPath href="#laugavegur-r3" startOffset="5%">FIMMVÖRÐUHÁLS</textPath></text>
+    <path id="laugavegur-r2" d="M 641.0,894.8 a 44.8,44.8 0 1,1 89.7,0 a 44.8,44.8 0 1,1 -89.7,0" fill="none" stroke="none" />
+    <g class="cluster__ring cluster__ring--cw" data-huts="tmk-hut,fmv" style="transform-origin: 685.9px 894.8px">
+      <text class="cluster__ring-text" data-hut="tmk-hut"><textPath href="#laugavegur-r2" startOffset="3%">ÞÓRSMÖRK</textPath></text>
+      <text class="cluster__ring-text" data-hut="fmv"><textPath href="#laugavegur-r2" startOffset="53%">FIMMVÖRÐUHÁLS</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="kjolur">
-    <circle cx="634.5" cy="632.1" r="84.1" class="cluster__circle" />
-    <path id="kjolur-r0" d="M 563.0,632.1 a 71.5,71.5 0 1,1 143.0,0 a 71.5,71.5 0 1,1 -143.0,0" fill="none" stroke="none" />
+    <circle cx="634.5" cy="632.1" r="105.7" class="cluster__circle" />
+    <path id="kjolur-r0" d="M 555.2,632.1 a 79.3,79.3 0 1,1 158.6,0 a 79.3,79.3 0 1,1 -158.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" data-huts="hvt,tvb" style="transform-origin: 634.5px 632.1px">
-      <text class="cluster__ring-text" data-hut="hvt"><textPath href="#kjolur-r0" startOffset="5%">HVÍTÁRNES</textPath></text>
-      <text class="cluster__ring-text" data-hut="tvb"><textPath href="#kjolur-r0" startOffset="55%">ÞVERBREKKNAMÚLI</textPath></text>
+      <text class="cluster__ring-text" data-hut="hvt"><textPath href="#kjolur-r0" startOffset="3%">HVÍTÁRNES</textPath></text>
+      <text class="cluster__ring-text" data-hut="tvb"><textPath href="#kjolur-r0" startOffset="53%">ÞVERBREKKNAMÚLI</textPath></text>
     </g>
-    <path id="kjolur-r1" d="M 587.0,632.1 a 47.5,47.5 0 1,1 95.0,0 a 47.5,47.5 0 1,1 -95.0,0" fill="none" stroke="none" />
+    <path id="kjolur-r1" d="M 583.2,632.1 a 51.3,51.3 0 1,1 102.6,0 a 51.3,51.3 0 1,1 -102.6,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--ccw" data-huts="tjd" style="transform-origin: 634.5px 632.1px">
-      <text class="cluster__ring-text" data-hut="tjd"><textPath href="#kjolur-r1" startOffset="5%">ÞJÓFADALIR</textPath></text>
+      <text class="cluster__ring-text" data-hut="tjd"><textPath href="#kjolur-r1" startOffset="3%">ÞJÓFADALIR</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="langjokull">
-    <circle cx="542.3" cy="716.1" r="69.6" class="cluster__circle" />
-    <path id="langjokull-r0" d="M 483.2,716.1 a 59.1,59.1 0 1,1 118.2,0 a 59.1,59.1 0 1,1 -118.2,0" fill="none" stroke="none" />
+    <circle cx="542.3" cy="716.1" r="91.2" class="cluster__circle" />
+    <path id="langjokull-r0" d="M 473.9,716.1 a 68.4,68.4 0 1,1 136.7,0 a 68.4,68.4 0 1,1 -136.7,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" data-huts="hgv,hld" style="transform-origin: 542.3px 716.1px">
-      <text class="cluster__ring-text" data-hut="hgv"><textPath href="#langjokull-r0" startOffset="5%">HAGAVATN</textPath></text>
-      <text class="cluster__ring-text" data-hut="hld"><textPath href="#langjokull-r0" startOffset="55%">HLÖÐUVELLIR</textPath></text>
+      <text class="cluster__ring-text" data-hut="hgv"><textPath href="#langjokull-r0" startOffset="3%">HAGAVATN</textPath></text>
+      <text class="cluster__ring-text" data-hut="hld"><textPath href="#langjokull-r0" startOffset="53%">HLÖÐUVELLIR</textPath></text>
     </g>
   </g>
   <g class="cluster-group" data-cluster="hornstrandir">
-    <circle cx="347.5" cy="172.4" r="121.9" class="cluster__circle" />
-    <path id="hornstrandir-r0" d="M 243.8,172.4 a 103.6,103.6 0 1,1 207.3,0 a 103.6,103.6 0 1,1 -207.3,0" fill="none" stroke="none" />
+    <circle cx="347.5" cy="172.4" r="143.5" class="cluster__circle" />
+    <path id="hornstrandir-r0" d="M 239.8,172.4 a 107.6,107.6 0 1,1 215.3,0 a 107.6,107.6 0 1,1 -215.3,0" fill="none" stroke="none" />
     <g class="cluster__ring cluster__ring--cw" data-huts="hrn,nfj" style="transform-origin: 347.5px 172.4px">
-      <text class="cluster__ring-text" data-hut="hrn"><textPath href="#hornstrandir-r0" startOffset="5%">HORNBJARGSVITI</textPath></text>
-      <text class="cluster__ring-text" data-hut="nfj"><textPath href="#hornstrandir-r0" startOffset="55%">NORÐURFJÖRÐUR</textPath></text>
+      <text class="cluster__ring-text" data-hut="hrn"><textPath href="#hornstrandir-r0" startOffset="3%">HORNBJARGSVITI</textPath></text>
+      <text class="cluster__ring-text" data-hut="nfj"><textPath href="#hornstrandir-r0" startOffset="53%">NORÐURFJÖRÐUR</textPath></text>
     </g>
   </g>
 </svg>
