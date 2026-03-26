@@ -95,6 +95,36 @@ export class MapController {
       }
     });
 
+    // Dot hover → highlight corresponding ring text, dim others
+    const markerEls = container.querySelectorAll<HTMLElement>(".marker[data-in-cluster]");
+    for (const marker of markerEls) {
+      const clusterId = marker.dataset.inCluster!;
+      const hutId = marker.querySelector("label")?.getAttribute("for")?.replace("map-", "");
+      if (!hutId) continue;
+
+      marker.addEventListener("mouseenter", () => {
+        const group = container.querySelector(`[data-cluster="${clusterId}"]`);
+        if (!group) return;
+        for (const ring of group.querySelectorAll<HTMLElement>(".cluster__ring")) {
+          if (ring.dataset.hut === hutId) {
+            ring.classList.add("cluster__ring--highlight");
+            ring.classList.remove("cluster__ring--dim");
+          } else {
+            ring.classList.add("cluster__ring--dim");
+            ring.classList.remove("cluster__ring--highlight");
+          }
+        }
+      });
+
+      marker.addEventListener("mouseleave", () => {
+        const group = container.querySelector(`[data-cluster="${clusterId}"]`);
+        if (!group) return;
+        for (const ring of group.querySelectorAll<HTMLElement>(".cluster__ring")) {
+          ring.classList.remove("cluster__ring--highlight", "cluster__ring--dim");
+        }
+      });
+    }
+
     this.map.style.touchAction = "manipulation";
   }
 

@@ -85,13 +85,8 @@
 }
 
 .cluster-group:hover .cluster__circle {
-  opacity: 0.6;
+  opacity: 0.55;
   stroke: #5a3e2b;
-  animation: dash-spin 8s linear infinite;
-}
-
-@keyframes dash-spin {
-  to { stroke-dashoffset: -52; }
 }
 
 /* Text rings — contrast halo via paint-order stroke behind fill */
@@ -100,14 +95,14 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
-  opacity: 0.55;
+  opacity: 0.5;
   stroke: var(--map-bg);
   stroke-width: 4px;
   paint-order: stroke;
-  transition: fill 0.4s ease, opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
-/* Alternating rotation */
+/* Alternating rotation — constant speed, never changes */
 @keyframes spin-cw {
   to { transform: rotate(360deg); }
 }
@@ -128,18 +123,19 @@
   animation: spin-ccw 70s linear infinite;
 }
 
-/* Hover on cluster GROUP — speed up, warm color, brighten */
-.cluster-group:hover .cluster__ring--cw {
-  animation-duration: 16s;
-}
-
-.cluster-group:hover .cluster__ring--ccw {
-  animation-duration: 12s;
-}
-
+/* Hover on cluster — brighten text, no speed change */
 .cluster-group:hover .cluster__ring-text {
-  opacity: 0.85;
+  opacity: 0.8;
+}
+
+/* JS adds this class to highlight a single ring when its dot is hovered */
+.cluster__ring--highlight .cluster__ring-text {
+  opacity: 1;
   fill: #3d2b1a;
+}
+
+.cluster__ring--dim .cluster__ring-text {
+  opacity: 0.15;
 }
 
 /* Hide clusters when zoomed or during fade */

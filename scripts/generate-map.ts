@@ -325,7 +325,7 @@ function clusterSvg(cluster: typeof clusters[0]): string {
     const dir = i % 2 === 0 ? "cw" : "ccw";
 
     return `    <path id="${pathId}" d="${d}" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--${dir}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
+    <g class="cluster__ring cluster__ring--${dir}" data-hut="${label.hutId}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
       <text class="cluster__ring-text"><textPath href="#${pathId}">${displayName}</textPath></text>
     </g>`;
   });
