@@ -47,7 +47,7 @@
   max-height: 100%;
 }
 
-/* ── Layer 1: Map image — ONLY element that transforms ── */
+/* ── Layer 1: Map image — transforms on zoom (scale + translate) ── */
 
 .map__image {
   position: absolute;
@@ -222,7 +222,7 @@
 }
 
 .map__detail-name {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-weight: 300;
   font-size: clamp(32px, 3.5vw, 48px);
   line-height: 1.1;
@@ -230,7 +230,7 @@
 }
 
 .map__detail-info {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-weight: 300;
   font-style: italic;
   font-size: 16px;
@@ -265,7 +265,7 @@
 }
 
 .map__title {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-weight: 300;
   font-size: clamp(48px, 6vw, 88px);
   line-height: 1;
@@ -273,7 +273,7 @@
 }
 
 .map__subtitle {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-weight: 300;
   font-style: italic;
   font-size: clamp(14px, 1.5vw, 20px);
@@ -289,18 +289,6 @@
   flex-direction: column;
   gap: 6px;
   width: 220px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 .map__nav-btn {

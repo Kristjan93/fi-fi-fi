@@ -2,8 +2,9 @@
  * generate-map.ts — Build-time SVG generator.
  *
  * Reads GeoJSON coastline data, projects it with D3, and outputs:
- *   1. src/map/iceland.svg  — static SVG coastline (fill="currentColor")
- *   2. src/map/locations.ts — location data with computed x/y percentages
+ *   1. src/map/iceland.svg   — static SVG coastline + routes + markers (dev preview)
+ *   2. src/map/locations.json — location data with computed x/y/tx/ty values
+ *   3. public/assets/route-*.webp — transparent route overlay images
  *
  * Run: bun scripts/generate-map.ts
  * D3 is a devDependency — nothing here ships to the browser.
