@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="is">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,69 +14,121 @@
         <p class="hero-subtitle">fancy things, incoming</p>
       </section>
 
-      <!-- Map zoom PoC — uses Kettmeir assets for prototyping.
-           Replace image src and location data for production. -->
-      <section class="map" id="map">
+      <!-- Map zoom — pure CSS with @property + :has() + radio buttons -->
+      <section class="map" id="map" aria-label="Gagnvirkt kort af Íslandi">
+        <div class="map__inner">
 
         <!-- Layer 1: Map image — ONLY layer that transforms -->
         <div class="map__image">
+          <picture>
+            <source srcset="/assets/iceland-map.avif" type="image/avif" />
+            <img
+              src="/assets/iceland-map.webp"
+              alt="Hæðarkort af Íslandi"
+              draggable="false"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           <img
-            src="/images/map.webp"
-            alt="Map of Alto Adige wine region"
-            loading="lazy"
-            decoding="async"
+            src="/assets/route-laugavegur.webp"
+            alt=""
+            class="route-overlay"
+            draggable="false"
           />
         </div>
 
         <!-- Layer 2: Markers — positioned at scale(1), hidden when zoomed -->
-        <div class="map__markers">
-          <div class="marker" data-location="pochi" style="left: 68%; top: 54%">
-            <span class="marker__dot"></span>
-            <span class="marker__label">Pochi di Salorno</span>
+        <div class="map__markers" aria-hidden="true">
+          <div class="marker" style="left: 30.07%; top: 74.84%">
+            <label for="map-rvk"><span class="marker__dot"></span><span class="marker__label">Reykjavík</span></label>
           </div>
-          <div class="marker" data-location="caldaro" style="left: 55%; top: 35%">
-            <span class="marker__dot"></span>
-            <span class="marker__label">Castelvecchio</span>
+          <div class="marker" style="left: 46.56%; top: 87.68%">
+            <label for="map-tmk"><span class="marker__dot"></span><span class="marker__label">Þórsmörk</span></label>
           </div>
-          <div class="marker" data-location="soprabolzano" style="left: 60%; top: 25%">
-            <span class="marker__dot"></span>
-            <span class="marker__label">Soprabolzano</span>
+          <div class="marker" style="left: 69.29%; top: 76.68%">
+            <label for="map-jkl"><span class="marker__dot"></span><span class="marker__label">Jökulsárlón</span></label>
+          </div>
+          <div class="marker" style="left: 49.62%; top: 79.45%">
+            <label for="map-lml"><span class="marker__dot"></span><span class="marker__label">Landmannalaugar</span></label>
+          </div>
+          <div class="marker" style="left: 17.63%; top: 56.21%">
+            <label for="map-snf"><span class="marker__dot"></span><span class="marker__label">Snæfellsjökull</span></label>
+          </div>
+          <div class="marker" style="left: 56.22%; top: 31.07%">
+            <label for="map-aku"><span class="marker__dot"></span><span class="marker__label">Akureyri</span></label>
+          </div>
+          <div class="marker" style="left: 63.98%; top: 33.41%">
+            <label for="map-myt"><span class="marker__dot"></span><span class="marker__label">Mývatn</span></label>
           </div>
         </div>
 
-        <!-- Layer 3: Detail panels — one per location, toggled via .active -->
-        <div class="map__details">
-          <div class="map__detail" data-location="pochi">
-            <span class="map__detail-label">Bassa Atesina</span>
-            <h3 class="map__detail-name">Pochi di Salorno</h3>
-            <p class="map__detail-info">The southernmost point of South Tyrol, where warm Mediterranean winds meet Alpine air.</p>
+        <!-- Layer 3: Detail panels — toggled via :has() -->
+        <div class="map__details" aria-live="polite">
+          <div class="map__detail" data-location="rvk">
+            <span class="map__detail-label">Höfuðborg</span>
+            <h3 class="map__detail-name">Reykjavík</h3>
+            <p class="map__detail-info">Norðurljós borgarinnar, þar sem skapandi menning og náttúra mætast.</p>
           </div>
-          <div class="map__detail" data-location="caldaro">
-            <span class="map__detail-label">Lago di Caldaro</span>
-            <h3 class="map__detail-name">Castelvecchio</h3>
-            <p class="map__detail-info">Perched above Lake Caldaro, the oldest wine-growing area in the region.</p>
+          <div class="map__detail" data-location="tmk">
+            <span class="map__detail-label">Dalur</span>
+            <h3 class="map__detail-name">Þórsmörk</h3>
+            <p class="map__detail-info">Falinn dalur milli jökla, vafinn birki og villtum blómum.</p>
           </div>
-          <div class="map__detail" data-location="soprabolzano">
-            <span class="map__detail-label">Altopiano del Renon</span>
-            <h3 class="map__detail-name">Soprabolzano</h3>
-            <p class="map__detail-info">High above Bolzano on the Renon plateau, where altitude shapes character.</p>
+          <div class="map__detail" data-location="jkl">
+            <span class="map__detail-label">Jökullón</span>
+            <h3 class="map__detail-name">Jökulsárlón</h3>
+            <p class="map__detail-info">Ísmoldur reka á lóninu þar sem jökull og sjór mætast.</p>
+          </div>
+          <div class="map__detail" data-location="lml">
+            <span class="map__detail-label">Hálendi</span>
+            <h3 class="map__detail-name">Landmannalaugar</h3>
+            <p class="map__detail-info">Litríkar líparitfjöll og heitar laugar í hjarta hálendisins.</p>
+          </div>
+          <div class="map__detail" data-location="snf">
+            <span class="map__detail-label">Jökuleldfjall</span>
+            <h3 class="map__detail-name">Snæfellsjökull</h3>
+            <p class="map__detail-info">Jökullinn sem Jules Verne valdi sem hlið inn í jörðina.</p>
+          </div>
+          <div class="map__detail" data-location="aku">
+            <span class="map__detail-label">Norðurland</span>
+            <h3 class="map__detail-name">Akureyri</h3>
+            <p class="map__detail-info">Höfuðborg norðursins, umkringd fjöllum og Eyjafjörður.</p>
+          </div>
+          <div class="map__detail" data-location="myt">
+            <span class="map__detail-label">Eldfjallahérað</span>
+            <h3 class="map__detail-name">Mývatn</h3>
+            <p class="map__detail-info">Jarðhitasvæði og lághitaeldfjöll við norðurhöf.</p>
           </div>
         </div>
 
         <!-- Layer 4: Static UI — title + nav, never transforms -->
         <div class="map__ui">
           <div class="map__header">
-            <h2 class="map__title">Explore<br />the territory</h2>
-            <p class="map__subtitle">Discover where our story unfolds.</p>
+            <h2 class="map__title">Kannaðu<br />landið</h2>
+            <p class="map__subtitle">Uppgötvaðu hvar sagan okkar gerist.</p>
           </div>
-          <div class="map__nav">
-            <button class="map__nav-btn active" data-location="all">All locations</button>
-            <button class="map__nav-btn" data-location="pochi">Pochi di Salorno</button>
-            <button class="map__nav-btn" data-location="caldaro">Castelvecchio</button>
-            <button class="map__nav-btn" data-location="soprabolzano">Soprabolzano</button>
+          <div class="map__nav" role="radiogroup" aria-label="Veldu staðsetningu">
+            <input type="radio" name="map-loc" id="map-all" checked class="sr-only" />
+            <label for="map-all" class="map__nav-btn">Allir staðir</label>
+            <input type="radio" name="map-loc" id="map-rvk" class="sr-only" />
+            <label for="map-rvk" class="map__nav-btn">Reykjavík</label>
+            <input type="radio" name="map-loc" id="map-tmk" class="sr-only" />
+            <label for="map-tmk" class="map__nav-btn">Þórsmörk</label>
+            <input type="radio" name="map-loc" id="map-jkl" class="sr-only" />
+            <label for="map-jkl" class="map__nav-btn">Jökulsárlón</label>
+            <input type="radio" name="map-loc" id="map-lml" class="sr-only" />
+            <label for="map-lml" class="map__nav-btn">Landmannalaugar</label>
+            <input type="radio" name="map-loc" id="map-snf" class="sr-only" />
+            <label for="map-snf" class="map__nav-btn">Snæfellsjökull</label>
+            <input type="radio" name="map-loc" id="map-aku" class="sr-only" />
+            <label for="map-aku" class="map__nav-btn">Akureyri</label>
+            <input type="radio" name="map-loc" id="map-myt" class="sr-only" />
+            <label for="map-myt" class="map__nav-btn">Mývatn</label>
           </div>
         </div>
 
+        </div><!-- .map__inner -->
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>

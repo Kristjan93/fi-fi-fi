@@ -1,7 +1,26 @@
 /* ── Map Section ─────────────────────────────────────────
- * Self-contained styles for the map zoom component.
- * Uses its own CSS custom properties — easy to re-theme.
+ * Pure CSS map zoom with @property + :has() + radio buttons.
+ * No JavaScript required. Location-to-location = smooth pan.
  * ─────────────────────────────────────────────────────── */
+
+@property --map-scale {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+@property --map-tx {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --map-ty {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* ── Map container ─────────────────────────────────────── */
+/* Outer: fills viewport, centers the 16:9 map, shows bg on tall screens */
 
 .map {
   --map-bg: #c5bdb9;
@@ -13,49 +32,125 @@
   overflow: hidden;
   background-color: var(--map-bg);
   color: var(--map-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner: locked 16:9, holds everything that transforms + overlays.
+   Markers, routes, and terrain all share the same coordinate space. */
+
+.map__inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 1080;
+  max-height: 100%;
 }
 
 /* ── Layer 1: Map image — ONLY element that transforms ── */
 
 .map__image {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   mix-blend-mode: multiply;
   transform-origin: 50% 50%;
-  /* No CSS transition or will-change — GSAP owns the animation.
-     will-change would conflict with mix-blend-mode compositing.
-     GSAP handles GPU promotion internally per-frame. */
+  transform:
+    translate(calc(var(--map-tx) * 1%), calc(var(--map-ty) * 1%))
+    scale(var(--map-scale));
+  transition:
+    --map-scale 900ms cubic-bezier(0.45, 0, 0.55, 1),
+    --map-tx 900ms cubic-bezier(0.45, 0, 0.55, 1),
+    --map-ty 900ms cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 .map__image img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* ── Layer 2: Markers ────────────────────────────────── */
+.map__image .route-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Per-location transform values ───────────────────────
+ * Generated from locations.json: tx = -(x - 50) * (2.8 - 1)
+ * ──────────────────────────────────────────────────────── */
+
+.map:has(#map-rvk:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: 35.9;
+  --map-ty: -44.7;
+}
+.map:has(#map-tmk:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: 6.2;
+  --map-ty: -67.8;
+}
+.map:has(#map-jkl:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: -34.7;
+  --map-ty: -48;
+}
+.map:has(#map-lml:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: 0.7;
+  --map-ty: -53;
+}
+.map:has(#map-snf:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: 58.3;
+  --map-ty: -11.2;
+}
+.map:has(#map-aku:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: -11.2;
+  --map-ty: 34.1;
+}
+.map:has(#map-myt:checked) .map__image {
+  --map-scale: 2.8;
+  --map-tx: -25.2;
+  --map-ty: 29.9;
+}
+
+/* ── Layer 2: Markers ──────────────────────────────────── */
 
 .map__markers {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    visibility 0s linear 0.5s;
 }
 
-.map.zoomed .map__markers {
+.map:has(input[name="map-loc"]:not(#map-all):checked) .map__markers {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+  transition:
+    opacity 0.5s ease,
+    visibility 0s linear 0s;
 }
 
 .marker {
   position: absolute;
-  pointer-events: auto;
-  cursor: pointer;
   display: flex;
   align-items: center;
+  /* Offset so the dot CENTER sits on the geographic coordinate,
+     not the div's top-left corner. Half of dot size (10px). */
+  transform: translate(-5px, -5px);
+}
+
+.marker label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .marker__dot {
@@ -75,7 +170,7 @@
   white-space: nowrap;
 }
 
-/* ── Layer 3: Detail panels ──────────────────────────── */
+/* ── Layer 3: Detail panels ────────────────────────────── */
 
 .map__details {
   position: absolute;
@@ -99,7 +194,13 @@
   pointer-events: none;
 }
 
-.map__detail.active {
+.map:has(#map-rvk:checked) .map__detail[data-location="rvk"],
+.map:has(#map-tmk:checked) .map__detail[data-location="tmk"],
+.map:has(#map-jkl:checked) .map__detail[data-location="jkl"],
+.map:has(#map-lml:checked) .map__detail[data-location="lml"],
+.map:has(#map-snf:checked) .map__detail[data-location="snf"],
+.map:has(#map-aku:checked) .map__detail[data-location="aku"],
+.map:has(#map-myt:checked) .map__detail[data-location="myt"] {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -137,7 +238,7 @@
   opacity: 0.45;
 }
 
-/* ── Layer 4: Static UI ──────────────────────────────── */
+/* ── Layer 4: Static UI ────────────────────────────────── */
 
 .map__ui {
   position: absolute;
@@ -157,7 +258,7 @@
     transform 0.4s ease;
 }
 
-.map.zoomed .map__header {
+.map:has(input[name="map-loc"]:not(#map-all):checked) .map__header {
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
@@ -180,7 +281,7 @@
   margin-top: 10px;
 }
 
-/* ── Nav buttons ─────────────────────────────────────── */
+/* ── Nav buttons (labels) ──────────────────────────────── */
 
 .map__nav {
   pointer-events: auto;
@@ -188,6 +289,18 @@
   flex-direction: column;
   gap: 6px;
   width: 220px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .map__nav-btn {
@@ -213,12 +326,39 @@
   background: rgba(0, 0, 0, 0.06);
 }
 
-.map__nav-btn.active {
+/* Active button states */
+.map:has(#map-all:checked) label[for="map-all"],
+.map:has(#map-rvk:checked) label[for="map-rvk"],
+.map:has(#map-tmk:checked) label[for="map-tmk"],
+.map:has(#map-jkl:checked) label[for="map-jkl"],
+.map:has(#map-lml:checked) label[for="map-lml"],
+.map:has(#map-snf:checked) label[for="map-snf"],
+.map:has(#map-aku:checked) label[for="map-aku"],
+.map:has(#map-myt:checked) label[for="map-myt"] {
   background: var(--map-text);
   color: var(--map-bg);
 }
 
-/* ── Mobile ──────────────────────────────────────────── */
+/* ── Focus (keyboard navigation) ───────────────────────── */
+
+input.sr-only:focus-visible + .map__nav-btn {
+  outline: 2px solid var(--map-text);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .map__image,
+  .map__markers,
+  .map__detail,
+  .map__header,
+  .map__nav-btn {
+    transition: none;
+  }
+}
+
+/* ── Mobile ────────────────────────────────────────────── */
 
 @media (max-width: 480px) {
   .map__ui {

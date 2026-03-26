@@ -5,10 +5,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-map": "bun scripts/generate-map.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/d3-geo": "^3.1.0",
+    "@types/d3-shape": "^3.1.8",
+    "d3-geo": "^3.1.1",
+    "d3-shape": "^3.2.0",
+    "sharp": "^0.34.5",
     "typescript": "^5",
     "vite": "^8.0.2"
   },
