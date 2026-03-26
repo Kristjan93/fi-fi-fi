@@ -271,7 +271,7 @@ const clusters = CLUSTER_DEFS.map((def) => {
   const cx = members.reduce((s, m) => s + m.x, 0) / members.length;
   const cy = members.reduce((s, m) => s + m.y, 0) / members.length;
   const maxDist = Math.max(...members.map((m) => Math.sqrt((m.x - cx) ** 2 + (m.y - cy) ** 2)));
-  const radius = maxDist + 3; // padding in % units
+  const radius = maxDist + 5; // padding in % units — room for text rings
 
   // Radial labels: angle from centroid to each hut, label placed on circle edge
   const labels = members.map((m) => {
@@ -309,10 +309,10 @@ function clusterSvg(cluster: typeof clusters[0]): string {
   const cyPx = (cluster.cy / 100) * H;
   const rPx = (cluster.radius / 100) * Math.min(W, H);
 
-  // Ring spacing: outer ring at 90% of boundary, each ring ~14px closer to center
-  const ringSpacing = 14;
+  // Ring spacing: outer ring at 88% of boundary, each ring ~18px closer to center
+  const ringSpacing = 18;
   const outerStart = rPx * 0.88;
-  const minRadius = 18; // don't go smaller than this
+  const minRadius = 20; // don't go smaller than this
 
   const rings = cluster.labels.map((label, i) => {
     const r = Math.max(minRadius, outerStart - i * ringSpacing);

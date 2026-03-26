@@ -567,7 +567,7 @@
       "name": "Laugavegurinn",
       "cx": 47.63,
       "cy": 82.85,
-      "radius": 8.45,
+      "radius": 10.45,
       "scale": 2.5,
       "labels": [
         {
@@ -575,8 +575,8 @@
           "name": "Landmannalaugar",
           "x": 49.59,
           "y": 78.02,
-          "lx": 51.37,
-          "ly": 73.63,
+          "lx": 52.12,
+          "ly": 71.78,
           "angle": -67.9,
           "anchor": "start"
         },
@@ -585,8 +585,8 @@
           "name": "Hrafntinnusker",
           "x": 48.65,
           "y": 79.61,
-          "lx": 50.61,
-          "ly": 73.36,
+          "lx": 51.21,
+          "ly": 71.45,
           "angle": -72.6,
           "anchor": "start"
         },
@@ -595,8 +595,8 @@
           "name": "Álftavatn",
           "x": 48.13,
           "y": 81.62,
-          "lx": 51.36,
-          "ly": 73.63,
+          "lx": 52.11,
+          "ly": 71.77,
           "angle": -68,
           "anchor": "start"
         },
@@ -605,8 +605,8 @@
           "name": "Hvanngil",
           "x": 48.33,
           "y": 82.3,
-          "lx": 55.44,
-          "ly": 76.69,
+          "lx": 57.01,
+          "ly": 75.45,
           "angle": -38.3,
           "anchor": "start"
         },
@@ -615,8 +615,8 @@
           "name": "Emstrur",
           "x": 46.85,
           "y": 84.04,
-          "lx": 42.17,
-          "ly": 91.16,
+          "lx": 41.07,
+          "ly": 92.83,
           "angle": 123.3,
           "anchor": "end"
         },
@@ -625,8 +625,8 @@
           "name": "Þórsmörk / Langidalur",
           "x": 45.62,
           "y": 86.24,
-          "lx": 42.56,
-          "ly": 91.4,
+          "lx": 41.53,
+          "ly": 93.12,
           "angle": 120.7,
           "anchor": "end"
         },
@@ -635,8 +635,8 @@
           "name": "Fimmvörðuháls / Baldvinsskáli",
           "x": 46.26,
           "y": 88.12,
-          "lx": 45.13,
-          "ly": 92.47,
+          "lx": 44.62,
+          "ly": 94.41,
           "angle": 104.6,
           "anchor": "end"
         }
@@ -656,7 +656,7 @@
       "name": "Kjölur",
       "cx": 44.06,
       "cy": 58.53,
-      "radius": 5.79,
+      "radius": 7.79,
       "scale": 2.5,
       "labels": [
         {
@@ -664,8 +664,8 @@
           "name": "Hvítárnes",
           "x": 43.5,
           "y": 61.26,
-          "lx": 42.6,
-          "ly": 65.67,
+          "lx": 42.2,
+          "ly": 67.63,
           "angle": 101.5,
           "anchor": "end"
         },
@@ -674,8 +674,8 @@
           "name": "Þverbrekknamúli",
           "x": 44.75,
           "y": 58.49,
-          "lx": 51.33,
-          "ly": 58.11,
+          "lx": 53.33,
+          "ly": 58,
           "angle": -3.3,
           "anchor": "start"
         },
@@ -684,8 +684,8 @@
           "name": "Þjófadalir",
           "x": 43.92,
           "y": 55.84,
-          "lx": 43.69,
-          "ly": 51.25,
+          "lx": 43.59,
+          "ly": 49.26,
           "angle": -92.9,
           "anchor": "middle"
         }
@@ -701,7 +701,7 @@
       "name": "Langjökull",
       "cx": 37.66,
       "cy": 66.31,
-      "radius": 4.44,
+      "radius": 6.44,
       "scale": 2.5,
       "labels": [
         {
@@ -709,8 +709,8 @@
           "name": "Hagavatn",
           "x": 38.81,
           "y": 65.44,
-          "lx": 42.41,
-          "ly": 62.73,
+          "lx": 44,
+          "ly": 61.53,
           "angle": -36.9,
           "anchor": "start"
         },
@@ -719,8 +719,8 @@
           "name": "Hlöðuvellir",
           "x": 36.51,
           "y": 67.17,
-          "lx": 32.91,
-          "ly": 69.88,
+          "lx": 31.32,
+          "ly": 71.08,
           "angle": 143.1,
           "anchor": "end"
         }
@@ -735,7 +735,7 @@
       "name": "Hornstrandir",
       "cx": 24.13,
       "cy": 15.96,
-      "radius": 9.29,
+      "radius": 11.29,
       "scale": 2.5,
       "labels": [
         {
@@ -743,8 +743,8 @@
           "name": "Hornbjargsviti",
           "x": 20.57,
           "y": 10.77,
-          "lx": 18.03,
-          "ly": 7.06,
+          "lx": 16.9,
+          "ly": 5.41,
           "angle": -124.4,
           "anchor": "end"
         },
@@ -753,8 +753,8 @@
           "name": "Norðurfjörður / Valgeirsstaðir",
           "x": 27.68,
           "y": 21.16,
-          "lx": 30.22,
-          "ly": 24.87,
+          "lx": 31.35,
+          "ly": 26.52,
           "angle": 55.6,
           "anchor": "start"
         }

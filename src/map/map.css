@@ -77,31 +77,33 @@
 .cluster__circle {
   fill: none;
   stroke: var(--map-text);
-  stroke-width: 1.5;
-  stroke-dasharray: 6 4;
-  opacity: 0.35;
-  transition: opacity 0.4s ease, stroke-dashoffset 0.4s ease;
+  stroke-width: 1.8;
+  stroke-dasharray: 8 5;
+  opacity: 0.3;
+  transition: opacity 0.4s ease, stroke 0.4s ease;
 }
 
 .cluster-group:hover .cluster__circle {
-  opacity: 0.55;
+  opacity: 0.6;
+  stroke: #5a3e2b;
   animation: dash-spin 8s linear infinite;
 }
 
 @keyframes dash-spin {
-  to { stroke-dashoffset: -40; }
+  to { stroke-dashoffset: -52; }
 }
 
 /* Text rings — contrast halo via paint-order stroke behind fill */
 .cluster__ring-text {
   fill: var(--map-text);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  opacity: 0.7;
+  letter-spacing: 0.16em;
+  opacity: 0.55;
   stroke: var(--map-bg);
-  stroke-width: 3px;
+  stroke-width: 4px;
   paint-order: stroke;
+  transition: fill 0.4s ease, opacity 0.4s ease;
 }
 
 /* Alternating rotation */
@@ -124,7 +126,7 @@
   animation: spin-ccw 70s linear infinite;
 }
 
-/* Hover on cluster GROUP — speed up all rings, brighten text */
+/* Hover on cluster GROUP — speed up, warm color, brighten */
 .cluster-group:hover .cluster__ring--cw {
   animation-duration: 16s;
 }
@@ -134,7 +136,8 @@
 }
 
 .cluster-group:hover .cluster__ring-text {
-  opacity: 0.9;
+  opacity: 0.85;
+  fill: #3d2b1a;
 }
 
 /* Hide clusters when zoomed or during fade */
@@ -235,11 +238,13 @@
   opacity: 1;
 }
 
+/* Dots inside clusters: NO label on hover — the rotating ring IS the label */
+/* Only standalone markers show label on hover */
 @media (hover: hover) {
   .marker:hover .marker__dot {
     transform: scale(1.4);
   }
-  .marker:hover .marker__label {
+  .marker--standalone:hover .marker__label {
     opacity: 1;
   }
 }
