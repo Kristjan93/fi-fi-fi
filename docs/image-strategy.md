@@ -26,7 +26,7 @@ These are FI-owned mountain huts and shelters. They need both a marker icon (con
 | 9 | Thverbrekknnamuli | Highlands | Kjalvegur trail |
 | 10 | Thjofadalir | Highlands | Remote, Kjalvegur |
 | 11 | Hagavatn | Highlands | Near Langjokull |
-| 12 | Hloduvellir | Highlands | Sprengisandur |
+| 12 | Hloduvellir | Highlands | Near Langjokull |
 | 13 | Nyidalur | Highlands | Central highlands |
 | 14 | Hornbjargsviti | Westfjords | Lighthouse keeper's house |
 | 15 | Nordurfjordur/Valgeirsstadir | Westfjords | Hornstrandir |
@@ -38,7 +38,7 @@ Trails are rendered as route overlays on the map (already handled by the SVG/Web
 
 | # | Name | Length | Notes |
 |---|------|--------|-------|
-| 1 | Laugavegurinn | ~55 km | Most famous Icelandic trek |
+| 1 | Laugavegurinn | 54 km | Most famous Icelandic trek |
 | 2 | Fimmvorduhals | ~25 km | Thorsmork to Skogar |
 | 3 | Tindfjallahringur | ~30 km | Loop around Tindfjallajokull |
 | 4 | Kjalvegur | ~55 km | Ancient highland route |
@@ -46,7 +46,7 @@ Trails are rendered as route overlays on the map (already handled by the SVG/Web
 | 6 | Sprengisandsleid | ~200 km | Central desert crossing |
 | 7 | Hornstrandir | varies | Westfjords wilderness |
 
-### 1.3 Attractions (19)
+### 1.3 Attractions (17)
 
 Points of interest along or near trails. Need a small thumbnail for the detail panel. Some may also get a distinct marker icon if they differ visually from hut markers.
 
@@ -58,19 +58,17 @@ Points of interest along or near trails. Need a small thumbnail for the detail p
 | 4 | Hrafntinnuhraunssvaedid | Obsidian field | Hrafntinnusker |
 | 5 | Ishellar | Ice caves | Hrafntinnusker |
 | 6 | Alftaskard | Mountain pass | Alftavatn |
-| 7 | Brattahals | Ridge | Alftavatn |
-| 8 | Hvanngilshraun | Lava field | Hvanngil |
-| 9 | Markarfljotsgljufur | Canyon | Emstrur |
-| 10 | Valahnukur | Viewpoint peak | Thorsmork |
-| 11 | Stakkholtsja | Canyon | Thorsmork |
-| 12 | Nauthusagil | Ravine | Thorsmork |
-| 13 | Magni og Modi | Eruption craters | Fimmvorduhals |
-| 14 | Hagavatn | Glacial lake | Langjokull |
-| 15 | Hlodufell | Tuya / table mountain | Langjokull |
-| 16 | Tungnafellsjokull | Glacier | Central highlands |
-| 17 | Hornbjarg | Sea cliffs | Hornstrandir |
-| 18 | Arctic fox viewing | Wildlife | Hornstrandir |
-| 19 | Krossneslaug | Hot spring by ocean | Westfjords |
+| 7 | Markarfljotsgljufur | Canyon | Emstrur |
+| 8 | Valahnukur | Viewpoint peak | Thorsmork |
+| 9 | Stakkholtsja | Canyon | Thorsmork |
+| 10 | Nauthusagil | Ravine | Thorsmork |
+| 11 | Magni og Modi | Eruption craters | Fimmvorduhals |
+| 12 | Hagavatn | Glacial lake | Langjokull |
+| 13 | Hlodufell | Tuya / table mountain | Langjokull |
+| 14 | Tungnafellsjokull | Glacier | Central highlands |
+| 15 | Hornbjarg | Sea cliffs | Hornstrandir |
+| 16 | Arctic fox viewing | Wildlife | Hornstrandir |
+| 17 | Krossneslaug | Hot spring by ocean | Westfjords |
 
 ### 1.4 Summary
 
@@ -78,8 +76,8 @@ Points of interest along or near trails. Need a small thumbnail for the detail p
 |----------|-------|-------------|------------------|
 | Huts | 16 | Yes (shared icon) | Yes (individual) |
 | Trails | 7 | No (route overlay) | Yes (individual) |
-| Attractions | 19 | Yes (category icons) | Yes (individual) |
-| **Total** | **42** | ~20 icons | ~42 thumbnails |
+| Attractions | 17 | Yes (category icons) | Yes (individual) |
+| **Total** | **40** | ~18 icons | ~40 thumbnails |
 
 ---
 
@@ -288,7 +286,6 @@ is grand but the mood is quiet. [STYLE SUFFIX]
 | Litrikar liparitfjoll | Rounded rhyolite mountain ridges striped in rust, ochre, pale green, and lavender. Patches of snow in the gullies. The colors are muted but still visible through the warm monochrome wash |
 | Hrafntinnuhraunssvaedid | A field of black obsidian chunks, glassy and angular, scattered across grey volcanic soil. Faint reflections on the obsidian surfaces |
 | Ishellar | The dark entrance to an ice cave in a glacier, with pale blue ice visible inside. Black volcanic ground leading to the opening |
-| Hvanngilshraun | A rough lava field, dark and cracked, with tufts of moss growing in the crevices. A faint trail winding through |
 | Hlodufell | A flat-topped table mountain (tuya) rising abruptly from a plain, its steep sides showing columnar basalt. Formed under a glacier |
 | Tungnafellsjokull | A distant glacier cap sitting on a dark highland mountain, clouds wrapped around its flanks |
 
@@ -316,7 +313,6 @@ below. A solitary figure would be ant-sized. [STYLE SUFFIX]
 | Attraction | View Description |
 |------------|-----------------|
 | Alftaskard | A high mountain pass with sweeping views down to a highland lake. The trail is a thin switchback line ascending the slope |
-| Brattahals | A steep ridge with drops on both sides, the trail running along the knife-edge. Valleys falling away on either flank |
 | Valahnukur | The summit of a small pointed peak, looking down at a braided glacial river system winding through a vast green valley |
 
 #### Volcanic / Eruption
@@ -391,19 +387,17 @@ Quick reference: which prompt to use for each item.
 | 27 | Hrafntinnuhraunssvaedid | Geological -- obsidian |
 | 28 | Ishellar | Geological -- ice cave |
 | 29 | Alftaskard | Viewpoint -- pass |
-| 30 | Brattahals | Viewpoint -- ridge |
-| 31 | Hvanngilshraun | Geological -- lava field |
-| 32 | Markarfljotsgljufur | Canyon |
-| 33 | Valahnukur | Viewpoint -- peak |
-| 34 | Stakkholtsja | Canyon -- slot |
-| 35 | Nauthusagil | Canyon -- ravine |
-| 36 | Magni og Modi | Volcanic craters |
-| 37 | Hagavatn | Lake |
-| 38 | Hlodufell | Geological -- tuya |
-| 39 | Tungnafellsjokull | Geological -- glacier |
-| 40 | Hornbjarg | Sea cliffs |
-| 41 | Arctic fox viewing | Wildlife |
-| 42 | Krossneslaug | Hot springs (coastal) |
+| 30 | Markarfljotsgljufur | Canyon |
+| 31 | Valahnukur | Viewpoint -- peak |
+| 32 | Stakkholtsja | Canyon -- slot |
+| 33 | Nauthusagil | Canyon -- ravine |
+| 34 | Magni og Modi | Volcanic craters |
+| 35 | Hagavatn | Lake |
+| 36 | Hlodufell | Geological -- tuya |
+| 37 | Tungnafellsjokull | Geological -- glacier |
+| 38 | Hornbjarg | Sea cliffs |
+| 39 | Arctic fox viewing | Wildlife |
+| 40 | Krossneslaug | Hot springs (coastal) |
 
 ---
 
@@ -481,7 +475,7 @@ A single inline SVG block with symbol definitions, referenced via `<use>`:
 </span>
 ```
 
-These are placeholders. Final icon paths should be drawn or sourced from Maki/Temaki and refined to match the map's weight and feel.
+These are rough placeholders — the SVG paths are not production-ready. Final icons should be drawn or sourced from [Maki](https://labs.mapbox.com/maki-icons/) / [Temaki](https://ideditor.github.io/temaki/docs/) and refined to match the map's stroke weight and feel.
 
 ---
 
