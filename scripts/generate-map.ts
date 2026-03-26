@@ -327,7 +327,7 @@ function clusterSvg(cluster: typeof clusters[0]): string {
   return `  <g class="cluster-group" data-cluster="${cluster.id}">
     <circle cx="${cxPx.toFixed(1)}" cy="${cyPx.toFixed(1)}" r="${rPx.toFixed(1)}" class="cluster__circle" />
     <path id="${pathId}" d="${textD}" fill="none" stroke="none" />
-    <g class="cluster__ring">
+    <g class="cluster__ring" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
       <text class="cluster__ring-text"><textPath href="#${pathId}">${fullText}</textPath></text>
     </g>
   </g>`;

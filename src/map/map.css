@@ -101,6 +101,7 @@
 }
 
 .cluster__ring {
+  transform-box: view-box;
   animation: spin 80s linear infinite;
 }
 
