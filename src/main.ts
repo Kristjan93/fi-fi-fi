@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { MapZoom } from "./map/map-zoom";
+import { MapZoomCSS } from "./map/map-zoom-css";
 import { locations } from "./map/locations";
 
 // ── Hero animation ─────────────────────────────────────
@@ -24,9 +24,9 @@ tl.to(".hero-title", {
   )
   .from(".hero-subtitle", { y: 20, duration: 0.8 }, "<");
 
-// ── Map zoom ───────────────────────────────────────────
+// ── Map zoom (CSS transitions — no GSAP) ──────────────
 
 const mapEl = document.querySelector<HTMLElement>("#map");
 if (mapEl) {
-  new MapZoom(mapEl, locations);
+  new MapZoomCSS(mapEl, locations);
 }

@@ -1,4 +1,4 @@
-import type { MapLocation } from "./map-zoom";
+import type { MapLocation } from "./map-zoom-css";
 
 /**
  * PoC location data — Kettmeir wine regions (Alto Adige).
