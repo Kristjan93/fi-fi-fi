@@ -250,11 +250,66 @@ const locations = projected.map((loc, i) => {
   return { ...loc, scale, tx, ty };
 });
 
+// ── Compute clusters ────────────────────────────────────
+// Groups of nearby huts. Geometry: bounding circle + radial label positions.
+// Standalone huts (not in any cluster) get direct labels.
+
+const CLUSTER_DEFS = [
+  { id: "laugavegur", name: "Laugavegurinn", huts: ["lml-hut", "hrf", "alf", "hvg", "ems", "tmk-hut", "fmv"] },
+  { id: "kjolur", name: "Kjölur", huts: ["hvt", "tvb", "tjd"] },
+  { id: "langjokull", name: "Langjökull", huts: ["hgv", "hld"] },
+  { id: "hornstrandir", name: "Hornstrandir", huts: ["hrn", "nfj"] },
+];
+
+const clusteredHutIds = new Set(CLUSTER_DEFS.flatMap((c) => c.huts));
+const standaloneHuts = locations.filter((l) => !clusteredHutIds.has(l.id));
+
+const clusters = CLUSTER_DEFS.map((def) => {
+  const members = def.huts.map((id) => locations.find((l) => l.id === id)!);
+
+  // Bounding circle: centroid + radius
+  const cx = members.reduce((s, m) => s + m.x, 0) / members.length;
+  const cy = members.reduce((s, m) => s + m.y, 0) / members.length;
+  const maxDist = Math.max(...members.map((m) => Math.sqrt((m.x - cx) ** 2 + (m.y - cy) ** 2)));
+  const radius = maxDist + 3; // padding in % units
+
+  // Radial labels: angle from centroid to each hut, label placed on circle edge
+  const labels = members.map((m) => {
+    const angle = Math.atan2(m.y - cy, m.x - cx);
+    // Label position: on the circle edge + offset outward
+    const labelDist = radius + 1.5;
+    const lx = +(cx + Math.cos(angle) * labelDist).toFixed(2);
+    const ly = +(cy + Math.sin(angle) * labelDist).toFixed(2);
+    // Text anchor: left of center → right-align, right → left-align
+    const anchor = Math.cos(angle) < -0.1 ? "end" : Math.cos(angle) > 0.1 ? "start" : "middle";
+    return { hutId: m.id, name: m.name, x: m.x, y: m.y, lx, ly, angle: +(angle * 180 / Math.PI).toFixed(1), anchor };
+  });
+
+  // Zoom for cluster view: use transform-origin at centroid, scale 2.5
+  const clusterScale = 2.5;
+
+  return {
+    id: def.id,
+    name: def.name,
+    cx: +cx.toFixed(2),
+    cy: +cy.toFixed(2),
+    radius: +radius.toFixed(2),
+    scale: clusterScale,
+    labels,
+    hutIds: def.huts,
+  };
+});
+
 // ── Generate locations.json ─────────────────────────────
-// Full hut data with computed positions — used for HTML generation reference.
+// Full hut data + cluster data — used for HTML generation and MapController.
 
 const locationsJson = locations.map(({ coords, ...rest }) => rest);
-await Bun.write("src/map/locations.json", JSON.stringify(locationsJson, null, 2));
+const outputData = {
+  huts: locationsJson,
+  clusters,
+  standalone: standaloneHuts.map((h) => ({ id: h.id, name: h.name, x: h.x, y: h.y })),
+};
+await Bun.write("src/map/locations.json", JSON.stringify(outputData, null, 2));
 
 // ── Generate locations.css ──────────────────────────────
 // Detail panel visibility only. Transforms are handled by MapController (JS).

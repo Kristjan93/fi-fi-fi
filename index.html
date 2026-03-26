@@ -59,54 +59,110 @@
           />
         </div>
 
-        <!-- Layer 2: Markers — dots only at overview, labels on hover -->
+        <!-- Layer 2: Cluster overlay — circles, lines, labels. Visible at overview. -->
+        <svg class="map__clusters" viewBox="0 0 1440 1080" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Laugavegurinn cluster -->
+          <g class="cluster" data-cluster="laugavegur">
+            <ellipse cx="686" cy="895" rx="122" ry="91" class="cluster__ring" />
+            <text x="686" y="870" class="cluster__name">Laugavegurinn</text>
+            <!-- Lines from huts to label positions -->
+            <line x1="714" y1="843" x2="740" y2="795" class="cluster__line" />
+            <line x1="700" y1="860" x2="729" y2="792" class="cluster__line" />
+            <line x1="693" y1="882" x2="740" y2="795" class="cluster__line" />
+            <line x1="696" y1="889" x2="798" y2="828" class="cluster__line" />
+            <line x1="675" y1="908" x2="607" y2="985" class="cluster__line" />
+            <line x1="657" y1="931" x2="613" y2="987" class="cluster__line" />
+            <line x1="666" y1="952" x2="650" y2="999" class="cluster__line" />
+            <!-- Label positions -->
+            <text x="746" y="793" text-anchor="start" class="cluster__label">Landmannalaugar</text>
+            <text x="735" y="788" text-anchor="start" class="cluster__label">Hrafntinnusker</text>
+            <text x="746" y="803" text-anchor="start" class="cluster__label">Álftavatn</text>
+            <text x="804" y="830" text-anchor="start" class="cluster__label">Hvanngil</text>
+            <text x="601" y="990" text-anchor="end" class="cluster__label">Emstrur</text>
+            <text x="607" y="1003" text-anchor="end" class="cluster__label">Þórsmörk</text>
+            <text x="644" y="1010" text-anchor="end" class="cluster__label">Fimmvörðuháls</text>
+          </g>
+          <!-- Kjölur cluster -->
+          <g class="cluster" data-cluster="kjolur">
+            <ellipse cx="634" cy="632" rx="83" ry="63" class="cluster__ring" />
+            <text x="634" y="610" class="cluster__name">Kjölur</text>
+            <line x1="626" y1="662" x2="613" y2="709" class="cluster__line" />
+            <line x1="645" y1="632" x2="739" y2="627" class="cluster__line" />
+            <line x1="632" y1="603" x2="629" y2="553" class="cluster__line" />
+            <text x="607" y="718" text-anchor="end" class="cluster__label">Hvítárnes</text>
+            <text x="745" y="631" text-anchor="start" class="cluster__label">Þverbrekknamúli</text>
+            <text x="625" y="546" text-anchor="middle" class="cluster__label">Þjófadalir</text>
+          </g>
+          <!-- Langjökull cluster -->
+          <g class="cluster" data-cluster="langjokull">
+            <ellipse cx="542" cy="716" rx="64" ry="48" class="cluster__ring" />
+            <text x="542" y="700" class="cluster__name">Langjökull</text>
+            <line x1="559" y1="707" x2="611" y2="678" class="cluster__line" />
+            <line x1="526" y1="725" x2="474" y2="755" class="cluster__line" />
+            <text x="617" y="676" text-anchor="start" class="cluster__label">Hagavatn</text>
+            <text x="468" y="760" text-anchor="end" class="cluster__label">Hlöðuvellir</text>
+          </g>
+          <!-- Hornstrandir cluster -->
+          <g class="cluster" data-cluster="hornstrandir">
+            <ellipse cx="347" cy="172" rx="134" ry="100" class="cluster__ring" />
+            <text x="347" y="155" class="cluster__name">Hornstrandir</text>
+            <line x1="296" y1="116" x2="260" y2="76" class="cluster__line" />
+            <line x1="399" y1="228" x2="435" y2="268" class="cluster__line" />
+            <text x="254" y="70" text-anchor="end" class="cluster__label">Hornbjargsviti</text>
+            <text x="441" y="276" text-anchor="start" class="cluster__label">Norðurfjörður</text>
+          </g>
+        </svg>
+
+        <!-- Layer 3: Markers — dots at hut positions -->
         <div class="map__markers" aria-hidden="true">
-          <div class="marker" style="left: 49.59%; top: 78.02%">
+          <!-- Cluster huts -->
+          <div class="marker" data-in-cluster="laugavegur" style="left: 49.59%; top: 78.02%">
             <label for="map-lml-hut"><span class="marker__dot"></span><span class="marker__label">Landmannalaugar</span></label>
           </div>
-          <div class="marker" style="left: 48.65%; top: 79.61%">
+          <div class="marker" data-in-cluster="laugavegur" style="left: 48.65%; top: 79.61%">
             <label for="map-hrf"><span class="marker__dot"></span><span class="marker__label">Hrafntinnusker</span></label>
           </div>
-          <div class="marker" style="left: 48.13%; top: 81.62%">
+          <div class="marker" data-in-cluster="laugavegur" style="left: 48.13%; top: 81.62%">
             <label for="map-alf"><span class="marker__dot"></span><span class="marker__label">Álftavatn</span></label>
           </div>
-          <div class="marker" style="left: 48.33%; top: 82.3%">
+          <div class="marker" data-in-cluster="laugavegur" style="left: 48.33%; top: 82.3%">
             <label for="map-hvg"><span class="marker__dot"></span><span class="marker__label">Hvanngil</span></label>
           </div>
-          <div class="marker" style="left: 46.85%; top: 84.04%">
+          <div class="marker" data-in-cluster="laugavegur" style="left: 46.85%; top: 84.04%">
             <label for="map-ems"><span class="marker__dot"></span><span class="marker__label">Emstrur</span></label>
           </div>
-          <div class="marker" style="left: 45.62%; top: 86.24%">
+          <div class="marker" data-in-cluster="laugavegur" style="left: 45.62%; top: 86.24%">
             <label for="map-tmk-hut"><span class="marker__dot"></span><span class="marker__label">Þórsmörk</span></label>
           </div>
-          <div class="marker" style="left: 46.26%; top: 88.12%">
+          <div class="marker" data-in-cluster="laugavegur" style="left: 46.26%; top: 88.12%">
             <label for="map-fmv"><span class="marker__dot"></span><span class="marker__label">Fimmvörðuháls</span></label>
           </div>
-          <div class="marker" style="left: 43.5%; top: 61.26%">
+          <div class="marker" data-in-cluster="kjolur" style="left: 43.5%; top: 61.26%">
             <label for="map-hvt"><span class="marker__dot"></span><span class="marker__label">Hvítárnes</span></label>
           </div>
-          <div class="marker" style="left: 44.75%; top: 58.49%">
+          <div class="marker" data-in-cluster="kjolur" style="left: 44.75%; top: 58.49%">
             <label for="map-tvb"><span class="marker__dot"></span><span class="marker__label">Þverbrekknamúli</span></label>
           </div>
-          <div class="marker" style="left: 43.92%; top: 55.84%">
+          <div class="marker" data-in-cluster="kjolur" style="left: 43.92%; top: 55.84%">
             <label for="map-tjd"><span class="marker__dot"></span><span class="marker__label">Þjófadalir</span></label>
           </div>
-          <div class="marker" style="left: 38.81%; top: 65.44%">
+          <div class="marker" data-in-cluster="langjokull" style="left: 38.81%; top: 65.44%">
             <label for="map-hgv"><span class="marker__dot"></span><span class="marker__label">Hagavatn</span></label>
           </div>
-          <div class="marker" style="left: 36.51%; top: 67.17%">
+          <div class="marker" data-in-cluster="langjokull" style="left: 36.51%; top: 67.17%">
             <label for="map-hld"><span class="marker__dot"></span><span class="marker__label">Hlöðuvellir</span></label>
           </div>
-          <div class="marker" style="left: 58.23%; top: 58.02%">
-            <label for="map-nyd"><span class="marker__dot"></span><span class="marker__label">Nýidalur</span></label>
-          </div>
-          <div class="marker" style="left: 20.57%; top: 10.77%">
+          <div class="marker" data-in-cluster="hornstrandir" style="left: 20.57%; top: 10.77%">
             <label for="map-hrn"><span class="marker__dot"></span><span class="marker__label">Hornbjargsviti</span></label>
           </div>
-          <div class="marker" style="left: 27.68%; top: 21.16%">
+          <div class="marker" data-in-cluster="hornstrandir" style="left: 27.68%; top: 21.16%">
             <label for="map-nfj"><span class="marker__dot"></span><span class="marker__label">Norðurfjörður</span></label>
           </div>
-          <div class="marker" style="left: 29.18%; top: 73.22%">
+          <!-- Standalone huts — always show label -->
+          <div class="marker marker--standalone" style="left: 58.23%; top: 58.02%">
+            <label for="map-nyd"><span class="marker__dot"></span><span class="marker__label">Nýidalur</span></label>
+          </div>
+          <div class="marker marker--standalone" style="left: 29.18%; top: 73.22%">
             <label for="map-mos"><span class="marker__dot"></span><span class="marker__label">Mosfellsheiði</span></label>
           </div>
         </div>
