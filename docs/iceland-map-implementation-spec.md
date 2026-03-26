@@ -40,18 +40,17 @@ In `scripts/generate-map.ts`:
 - Desktop (16:9): map fills height, warm paper on sides
 - iPad portrait (3:4): map fills width, warm paper above/below
 
-**1.3 — Drop `<picture>`, use AVIF directly**
-Replace `<picture><source><img></picture>` with `<img src="*.avif">`. AVIF has 97%+ support (Safari since iOS 16, 2022). Simpler HTML.
+**1.3 — Keep `<picture>` with AVIF + WebP fallback**
+Keep the existing `<picture>` element with AVIF source and WebP fallback. The extra 2 lines of HTML cost nothing at runtime and provide a safety net for older browsers.
 
-**1.4 — Move location data to `data/locations.json`**
-Currently hardcoded in `generate-map.ts`. Move to its own file as the single source of truth. Build script reads from there.
+**1.4 — Data source: SQLite database**
+Hut data lives in `data/map.db` (SQLite), seeded by `scripts/seed-db.ts`. The build script reads huts via `scripts/map-data.ts` query helpers. 16 FÍ mountain huts with trails, attractions, and relational links.
 
 **1.5 — Generate `src/map/locations.css`**
-Build script outputs all per-location `:has()` rules:
+Build script outputs all per-hut `:has()` rules:
 - Transform values (--map-scale, --map-tx, --map-ty)
 - Detail panel visibility
-- Active button state
-Never hand-write location-specific CSS again.
+Never hand-write hut-specific CSS again.
 
 **1.6 — Marker touch targets**
 Marker dots are 10px — way below the 44px Apple HIG minimum. The `<label>` wrapper needs `min-width: 44px; min-height: 44px` with the dot centered inside. Visible dot stays 10px, tappable area is 44px.
