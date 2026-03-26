@@ -52,3 +52,4 @@ data/map.db-shm
 # Claude Code plugin artifacts
 .agents/
 skills-lock.json
+data/raw/
