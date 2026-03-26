@@ -25,4 +25,9 @@ tl.to(".hero-title", {
   )
   .from(".hero-subtitle", { y: 20 }, "<");
 
-// ── Map zoom is pure CSS — no JS needed ────────────────
+// ── Map controller — adaptive zoom + keyboard nav ───────
+
+import { MapController } from "./map/map-controller";
+
+const mapEl = document.querySelector<HTMLElement>("#map");
+if (mapEl) new MapController(mapEl);
