@@ -1,15 +1,14 @@
 /**
- * MapController — Two-level zoom with clustering.
+ * MapController — Sequenced two-level zoom with choreographed transitions.
  *
- * States:
- *   OVERVIEW          → Full map, clusters + standalone huts visible
- *   CLUSTER(id)       → Zoomed to cluster region (~2.5x), individual huts visible
- *   HUT(id)           → Zoomed tight on a single hut (~4-5x), detail panel shown
+ * Animation sequence (overview → cluster):
+ *   1. Markers fade out (250ms)
+ *   2. Wait for fade to complete
+ *   3. Zoom starts (900ms, transform-origin technique)
+ *   4. Cluster-level labels appear after zoom
  *
  * Uses transform-origin + scale (Kettmeir technique):
- *   - Set transform-origin to target point
- *   - Animate scale only
- *   - NEVER transition transform-origin
+ *   - NEVER transition transform-origin, only transform
  */
 
 import data from "./locations.json";
@@ -20,8 +19,6 @@ interface HutData {
   x: number;
   y: number;
   scale: number;
-  tx: number;
-  ty: number;
 }
 
 interface ClusterData {
@@ -29,142 +26,158 @@ interface ClusterData {
   name: string;
   cx: number;
   cy: number;
-  radius: number;
   scale: number;
   hutIds: string[];
-  labels: { hutId: string; name: string; x: number; y: number; lx: number; ly: number; angle: number; anchor: string }[];
 }
 
-type State = { type: "overview" } | { type: "cluster"; id: string } | { type: "hut"; id: string };
+type State =
+  | { type: "overview" }
+  | { type: "cluster"; id: string }
+  | { type: "hut"; id: string };
 
 export class MapController {
   private map: HTMLElement;
   private image: HTMLElement;
+  private markersEl: HTMLElement;
+  private clustersEl: HTMLElement;
   private state: State = { type: "overview" };
   private huts: HutData[];
   private clusters: ClusterData[];
+  private animating = false;
 
   constructor(container: HTMLElement) {
     this.map = container;
     this.image = container.querySelector(".map__image")!;
+    this.markersEl = container.querySelector(".map__markers")!;
+    this.clustersEl = container.querySelector(".map__clusters")!;
     this.huts = (data as any).huts;
     this.clusters = (data as any).clusters;
 
-    // Cluster circle clicks
-    container.addEventListener("click", (e) => {
-      const clusterEl = (e.target as HTMLElement).closest<HTMLElement>("[data-cluster]");
-      if (clusterEl) {
-        e.preventDefault();
-        this.zoomToCluster(clusterEl.dataset.cluster!);
-        return;
-      }
+    // Cluster clicks
+    this.clustersEl.addEventListener("click", (e) => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>("[data-cluster]");
+      if (el && !this.animating) this.zoomToCluster(el.dataset.cluster!);
     });
 
-    // Radio button changes (hut marker clicks)
+    // Marker label clicks (radio change)
     container.addEventListener("change", (e) => {
-      const target = e.target as HTMLInputElement;
-      if (target.name !== "map-loc") return;
-      if (target.id === "map-all") {
+      const t = e.target as HTMLInputElement;
+      if (t.name !== "map-loc" || this.animating) return;
+      if (t.id === "map-all") {
         this.zoomToOverview();
       } else {
-        const hutId = target.id.replace("map-", "");
-        this.zoomToHut(hutId);
+        this.zoomToHut(t.id.replace("map-", ""));
       }
     });
 
     // Back button
-    const backBtn = container.querySelector(".map__back-btn");
-    if (backBtn) {
-      backBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (this.state.type === "hut") {
-          // Find which cluster this hut belongs to
-          const cluster = this.clusters.find((c) => c.hutIds.includes(this.state.type === "hut" ? (this.state as any).id : ""));
-          if (cluster) {
-            this.zoomToCluster(cluster.id);
-          } else {
-            this.zoomToOverview();
-          }
-        } else {
-          this.zoomToOverview();
-        }
-      });
-    }
+    container.querySelector(".map__back-btn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (this.animating) return;
+      if (this.state.type === "hut") {
+        const cluster = this.clusters.find((c) => c.hutIds.includes((this.state as any).id));
+        cluster ? this.zoomToCluster(cluster.id) : this.zoomToOverview();
+      } else {
+        this.zoomToOverview();
+      }
+    });
 
     // Keyboard
     document.addEventListener("keydown", (e) => {
+      if (this.animating) return;
       if (e.key === "Escape") {
         if (this.state.type === "hut") {
           const cluster = this.clusters.find((c) => c.hutIds.includes((this.state as any).id));
-          if (cluster) {
-            this.zoomToCluster(cluster.id);
-          } else {
-            this.zoomToOverview();
-          }
-        } else {
+          cluster ? this.zoomToCluster(cluster.id) : this.zoomToOverview();
+        } else if (this.state.type === "cluster") {
           this.zoomToOverview();
         }
       }
     });
 
-    // Prevent double-tap zoom
     this.map.style.touchAction = "manipulation";
   }
 
-  private zoomToOverview() {
-    this.state = { type: "overview" };
+  // ── Transitions ──────────────────────────────────────
 
-    // Reset zoom
-    this.image.style.transform = "scale(1)";
-
-    // Reset radio
-    const allRadio = this.map.querySelector<HTMLInputElement>("#map-all");
-    if (allRadio) allRadio.checked = true;
-
-    // Update CSS state classes
-    this.map.classList.remove("map--cluster", "map--hut");
-    this.map.removeAttribute("data-active-cluster");
-  }
-
-  private zoomToCluster(clusterId: string) {
+  private async zoomToCluster(clusterId: string) {
     const cluster = this.clusters.find((c) => c.id === clusterId);
     if (!cluster) return;
+    this.animating = true;
 
+    // 1. Fade out current content
+    this.map.classList.add("map--hiding");
+    await this.waitMs(250);
+
+    // 2. Update state + set zoom target
     this.state = { type: "cluster", id: clusterId };
+    this.map.className = "map map--cluster";
+    this.map.setAttribute("data-active-cluster", clusterId);
 
-    // Transform-origin at cluster centroid, scale to cluster level
-    this.image.style.transformOrigin = `${cluster.cx}% ${cluster.cy}%`;
-    // Set origin THEN animate scale (origin change is invisible at current scale if we're at 1,
-    // or we need to zoom out first if coming from a hut)
-    requestAnimationFrame(() => {
-      this.image.style.transform = `scale(${cluster.scale})`;
-    });
-
-    // Reset radio to "all" (no specific hut selected)
+    // Uncheck any hut radio
     const allRadio = this.map.querySelector<HTMLInputElement>("#map-all");
     if (allRadio) allRadio.checked = true;
 
-    // CSS state
-    this.map.classList.add("map--cluster");
-    this.map.classList.remove("map--hut");
-    this.map.setAttribute("data-active-cluster", clusterId);
+    // 3. Set transform-origin at cluster center, then zoom
+    this.image.style.transformOrigin = `${cluster.cx}% ${cluster.cy}%`;
+    // Force reflow so origin is applied before transform changes
+    void this.image.offsetHeight;
+    this.image.style.transform = `scale(${cluster.scale})`;
+
+    // 4. Wait for zoom to complete
+    await this.waitMs(900);
+    this.animating = false;
   }
 
-  private zoomToHut(hutId: string) {
+  private async zoomToHut(hutId: string) {
     const hut = this.huts.find((h) => h.id === hutId);
     if (!hut) return;
+    this.animating = true;
 
+    // 1. Fade out current content
+    this.map.classList.add("map--hiding");
+    await this.waitMs(250);
+
+    // 2. Update state
     this.state = { type: "hut", id: hutId };
-
-    // Transform-origin at hut position, scale tight
-    this.image.style.transformOrigin = `${hut.x}% ${hut.y}%`;
-    requestAnimationFrame(() => {
-      this.image.style.transform = `scale(${hut.scale})`;
-    });
-
-    // CSS state
-    this.map.classList.add("map--hut");
-    this.map.classList.remove("map--cluster");
+    this.map.className = "map map--hut";
     this.map.removeAttribute("data-active-cluster");
+
+    // 3. Zoom to hut
+    this.image.style.transformOrigin = `${hut.x}% ${hut.y}%`;
+    void this.image.offsetHeight;
+    this.image.style.transform = `scale(${hut.scale})`;
+
+    // 4. Wait for zoom
+    await this.waitMs(900);
+    this.animating = false;
+  }
+
+  private async zoomToOverview() {
+    this.animating = true;
+
+    // 1. Fade out current content
+    this.map.classList.add("map--hiding");
+    await this.waitMs(250);
+
+    // 2. Reset state
+    this.state = { type: "overview" };
+    this.map.className = "map";
+    this.map.removeAttribute("data-active-cluster");
+
+    const allRadio = this.map.querySelector<HTMLInputElement>("#map-all");
+    if (allRadio) allRadio.checked = true;
+
+    // 3. Zoom out
+    this.image.style.transform = "scale(1)";
+
+    // 4. Wait for zoom
+    await this.waitMs(900);
+    this.animating = false;
+  }
+
+  // Simple delay — more reliable than transitionend for choreography
+  private waitMs(ms: number): Promise<void> {
+    return new Promise((r) => setTimeout(r, ms));
   }
 }

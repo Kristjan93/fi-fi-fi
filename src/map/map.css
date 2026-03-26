@@ -92,7 +92,8 @@
   white-space: nowrap;
 }
 
-/* Hide clusters when zoomed in */
+/* Hide clusters when zoomed or during fade */
+.map--hiding .map__clusters,
 .map--cluster .map__clusters,
 .map--hut .map__clusters {
   opacity: 0;
@@ -106,19 +107,20 @@
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  transition:
-    opacity 0.5s ease,
-    visibility 0s linear 0.5s;
+  transition: opacity 0.25s ease;
 }
 
-/* Hide markers when a specific hut is selected (zoomed to hut detail) */
+/* Fade out markers before zoom starts */
+.map--hiding .map__markers {
+  opacity: 0;
+}
+
+/* Keep markers hidden at cluster and hut zoom levels */
+.map--cluster .map__markers,
 .map--hut .map__markers {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition:
-    opacity 0.5s ease,
-    visibility 0s linear 0s;
 }
 
 .marker {
@@ -311,7 +313,8 @@
     transform 0.4s ease;
 }
 
-/* Hide title at cluster and hut zoom levels */
+/* Hide title during fade and at zoomed levels */
+.map--hiding .map__header,
 .map--cluster .map__header,
 .map--hut .map__header {
   opacity: 0;
