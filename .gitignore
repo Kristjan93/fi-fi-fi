@@ -44,6 +44,11 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # Build cache (intermediate terrain files — NOT shipped to browser)
 .build-cache/
 
+# Generated SQLite database (rebuilt from JSON via scripts/init-db.ts)
+data/map.db
+data/map.db-wal
+data/map.db-shm
+
 # Claude Code plugin artifacts
 .agents/
 skills-lock.json
