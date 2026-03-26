@@ -123,26 +123,32 @@
 
 .marker {
   position: absolute;
-  display: flex;
-  align-items: center;
   transform: translate(-5px, -5px);
 }
 
 .marker label {
-  display: flex;
-  align-items: center;
+  display: block;
+  position: relative;
   cursor: pointer;
   pointer-events: auto;
-  padding: 17px;
-  margin: -17px;
+  /* 44px hit area centered on the dot via pseudo-element */
+}
+
+.marker label::before {
+  content: '';
+  position: absolute;
+  top: -17px;
+  left: -17px;
+  width: 44px;
+  height: 44px;
 }
 
 .marker__dot {
+  display: block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: currentColor;
-  flex-shrink: 0;
   transition: transform 0.2s ease;
 }
 
