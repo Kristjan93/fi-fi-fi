@@ -20,6 +20,7 @@ bun run preview        # Preview production build locally
 bun test               # Run tests (bun:test)
 bun install            # Install dependencies
 bun run generate-map   # D3 → SVG + locations.json + route images + raw terrain
+bun scripts/seed-db.ts # Rebuild data/map.db (SQLite) from seed data
 uv run scripts/process-terrain.py  # Python/Pillow → processed terrain AVIF
 ```
 
@@ -32,7 +33,7 @@ src/
   style.css        # Global styles + utilities (.sr-only)
   map/
     map.css        # Map zoom — pure CSS (@property + :has() + radio buttons)
-data/              # Geographic source data (GeoJSON, locations)
+data/              # GeoJSON routes + map.db (SQLite, gitignored — rebuild via seed-db.ts)
 scripts/           # Build-time scripts (D3 projection, terrain processing)
 docs/              # Reference material + decision records
 public/assets/     # Final images only (terrain AVIF, route WebP)
