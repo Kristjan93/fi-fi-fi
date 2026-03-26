@@ -88,13 +88,15 @@
   opacity: 0.5;
 }
 
-/* Text rings — solid color background behind white text via paint-order */
+/* Text rings — colored text with warm paper halo for readability */
 .cluster__ring-text {
-  fill: #f0ece8;
+  fill: var(--map-text);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
-  stroke-width: 7px;
+  opacity: 0.7;
+  stroke: var(--map-bg);
+  stroke-width: 4px;
   paint-order: stroke;
   transition: opacity 0.3s ease;
 }
@@ -125,22 +127,22 @@
   opacity: 0.8;
 }
 
-/* ── Per-hut colors — stroke = solid background band ─── */
-/* Light fill text on colored background band. WCAG AA compliant. */
-.cluster__ring-text[data-hut="lml-hut"] { stroke: #6b3a28; } /* rhyolite rust */
-.cluster__ring-text[data-hut="hrf"]     { stroke: #3d2848; } /* obsidian purple */
-.cluster__ring-text[data-hut="alf"]     { stroke: #283d5a; } /* lake blue */
-.cluster__ring-text[data-hut="hvg"]     { stroke: #4a3828; } /* dark earth */
-.cluster__ring-text[data-hut="ems"]     { stroke: #5a4530; } /* canyon amber */
-.cluster__ring-text[data-hut="tmk-hut"] { stroke: #284a38; } /* birch forest */
-.cluster__ring-text[data-hut="fmv"]     { stroke: #384a5a; } /* glacier slate */
-.cluster__ring-text[data-hut="hvt"]     { stroke: #284a5a; } /* highland teal */
-.cluster__ring-text[data-hut="tvb"]     { stroke: #4a4530; } /* highland ochre */
-.cluster__ring-text[data-hut="tjd"]     { stroke: #3d2838; } /* dark violet */
-.cluster__ring-text[data-hut="hgv"]     { stroke: #283d4a; } /* deep water */
-.cluster__ring-text[data-hut="hld"]     { stroke: #4a3828; } /* basalt brown */
-.cluster__ring-text[data-hut="hrn"]     { stroke: #284a4a; } /* sea cliff teal */
-.cluster__ring-text[data-hut="nfj"]     { stroke: #384a38; } /* coastal green */
+/* ── Per-hut text colors — Icelandic landscape palette ── */
+/* Subtle colored text, warm paper halo. All WCAG AA against #c5bdb9. */
+.cluster__ring-text[data-hut="lml-hut"] { fill: #5a2d1e; } /* rhyolite rust */
+.cluster__ring-text[data-hut="hrf"]     { fill: #2d1e3a; } /* obsidian purple */
+.cluster__ring-text[data-hut="alf"]     { fill: #1e2d4a; } /* lake blue */
+.cluster__ring-text[data-hut="hvg"]     { fill: #3a2d1e; } /* dark earth */
+.cluster__ring-text[data-hut="ems"]     { fill: #4a3520; } /* canyon amber */
+.cluster__ring-text[data-hut="tmk-hut"] { fill: #1e3a2d; } /* birch forest */
+.cluster__ring-text[data-hut="fmv"]     { fill: #2d3a4a; } /* glacier slate */
+.cluster__ring-text[data-hut="hvt"]     { fill: #1e3a4a; } /* highland teal */
+.cluster__ring-text[data-hut="tvb"]     { fill: #3a3520; } /* highland ochre */
+.cluster__ring-text[data-hut="tjd"]     { fill: #2d1e2d; } /* dark violet */
+.cluster__ring-text[data-hut="hgv"]     { fill: #1e2d3a; } /* deep water */
+.cluster__ring-text[data-hut="hld"]     { fill: #3a2d20; } /* basalt brown */
+.cluster__ring-text[data-hut="hrn"]     { fill: #1e3a3a; } /* sea cliff teal */
+.cluster__ring-text[data-hut="nfj"]     { fill: #2d3a2d; } /* coastal green */
 
 /* JS adds these classes when a dot is hovered — doubled selector for specificity */
 .cluster-group .cluster__ring-text.cluster__ring-text--highlight {
