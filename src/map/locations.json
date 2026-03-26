@@ -1,72 +1,546 @@
 [
   {
-    "id": "rvk",
-    "name": "Reykjavík",
-    "label": "Höfuðborg",
-    "info": "Norðurljós borgarinnar, þar sem skapandi menning og náttúra mætast.",
-    "x": 30.07,
-    "y": 74.84,
-    "tx": 35.9,
-    "ty": -44.7
-  },
-  {
-    "id": "tmk",
-    "name": "Þórsmörk",
-    "label": "Dalur",
-    "info": "Falinn dalur milli jökla, vafinn birki og villtum blómum.",
-    "x": 46.56,
-    "y": 87.68,
-    "tx": 6.2,
-    "ty": -67.8
-  },
-  {
-    "id": "jkl",
-    "name": "Jökulsárlón",
-    "label": "Jökullón",
-    "info": "Ísmoldur reka á lóninu þar sem jökull og sjór mætast.",
-    "x": 69.29,
-    "y": 76.68,
-    "tx": -34.7,
-    "ty": -48
-  },
-  {
-    "id": "lml",
+    "id": "lml-hut",
     "name": "Landmannalaugar",
-    "label": "Hálendi",
-    "info": "Litríkar líparitfjöll og heitar laugar í hjarta hálendisins.",
-    "x": 49.62,
-    "y": 79.45,
+    "label": "Skáli",
+    "info": "Stór skáli við Laugahraun, upphaf Laugavegar, með heitum laugum og litríkum líparitfjöllum.",
+    "beds": 78,
+    "elevation": 550,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/landmannalaugar",
+    "trails": [
+      {
+        "id": "laugavegur",
+        "name": "Laugavegurinn",
+        "distance": "54 km",
+        "duration": "2–4 dagar",
+        "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
+        "geojson": "data/laugavegur.geojson"
+      }
+    ],
+    "attractions": [
+      {
+        "id": "fridland-fjallabaki",
+        "name": "Friðland að Fjallabaki",
+        "lon": null,
+        "lat": null,
+        "info": "Náttúruverndarsvæði í kringum Landmannalaugar, fjölbreyttar gönguleiðir."
+      },
+      {
+        "id": "hot-springs-lml",
+        "name": "Heitar laugar Landmannalauga",
+        "lon": -19.058,
+        "lat": 63.994,
+        "info": "Náttúrulegar heitar laugar við jaðar Laugahrauns, frægasta sundlaug hálendisins."
+      },
+      {
+        "id": "rhyolite-mountains",
+        "name": "Litríkar líparitfjöll",
+        "lon": null,
+        "lat": null,
+        "info": "Líparitfjöll í Fjallabaki, þekkt fyrir regnbogaliti sína."
+      }
+    ],
+    "x": 49.59,
+    "y": 78.02,
     "tx": 0.7,
-    "ty": -53
+    "ty": -50.4
   },
   {
-    "id": "snf",
-    "name": "Snæfellsjökull",
-    "label": "Jökuleldfjall",
-    "info": "Jökullinn sem Jules Verne valdi sem hlið inn í jörðina.",
-    "x": 17.63,
-    "y": 56.21,
-    "tx": 58.3,
-    "ty": -11.2
+    "id": "hrf",
+    "name": "Hrafntinnusker",
+    "label": "Skáli",
+    "info": "Hæsti skáli FÍ, 1.100 m y.s., umkringdur hrauni, jöklum og hverasvæðum á Laugavegi.",
+    "beds": 52,
+    "elevation": 1100,
+    "open": "~seint í júní – ~byrjun september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hrafntinnusker",
+    "trails": [
+      {
+        "id": "laugavegur",
+        "name": "Laugavegurinn",
+        "distance": "54 km",
+        "duration": "2–4 dagar",
+        "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
+        "geojson": "data/laugavegur.geojson"
+      }
+    ],
+    "attractions": [
+      {
+        "id": "ice-caves",
+        "name": "Íshellar",
+        "lon": null,
+        "lat": null,
+        "info": "Íshellar í nágrenni Hrafntinnuskers, myndaðir af jarðhita og jöklum."
+      },
+      {
+        "id": "obsidian",
+        "name": "Hrafntinnuhraunssvæðið",
+        "lon": null,
+        "lat": null,
+        "info": "Svartur hrafntinna (obsidían) í hrauninu við Hrafntinnusker."
+      }
+    ],
+    "x": 48.65,
+    "y": 79.61,
+    "tx": 2.4,
+    "ty": -53.3
   },
   {
-    "id": "aku",
-    "name": "Akureyri",
-    "label": "Norðurland",
-    "info": "Höfuðborg norðursins, umkringd fjöllum og Eyjafjörður.",
-    "x": 56.22,
-    "y": 31.07,
-    "tx": -11.2,
-    "ty": 34.1
+    "id": "alf",
+    "name": "Álftavatn",
+    "label": "Skáli",
+    "info": "Tveir skálar við Álftavatn, áfangastaður á Laugavegi með útsýni yfir vatnið.",
+    "beds": 72,
+    "elevation": 550,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/alftavatn",
+    "trails": [
+      {
+        "id": "laugavegur",
+        "name": "Laugavegurinn",
+        "distance": "54 km",
+        "duration": "2–4 dagar",
+        "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
+        "geojson": "data/laugavegur.geojson"
+      }
+    ],
+    "attractions": [
+      {
+        "id": "alftaskard",
+        "name": "Álftaskarð",
+        "lon": -19.21,
+        "lat": 63.865,
+        "info": "Skarð nálægt Álftavatni, stutt ganga frá skálanum."
+      }
+    ],
+    "x": 48.13,
+    "y": 81.62,
+    "tx": 3.4,
+    "ty": -56.9
   },
   {
-    "id": "myt",
-    "name": "Mývatn",
-    "label": "Eldfjallahérað",
-    "info": "Jarðhitasvæði og lághitaeldfjöll við norðurhöf.",
-    "x": 63.98,
-    "y": 33.41,
-    "tx": -25.2,
-    "ty": 29.9
+    "id": "hvg",
+    "name": "Hvanngil",
+    "label": "Skáli",
+    "info": "Rúmgóður skáli í Hvanngilshrauni á Laugavegi, skjólgóður tjaldstaður.",
+    "beds": 60,
+    "elevation": 550,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hvanngil",
+    "trails": [
+      {
+        "id": "laugavegur",
+        "name": "Laugavegurinn",
+        "distance": "54 km",
+        "duration": "2–4 dagar",
+        "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
+        "geojson": "data/laugavegur.geojson"
+      }
+    ],
+    "attractions": [],
+    "x": 48.33,
+    "y": 82.3,
+    "tx": 3,
+    "ty": -58.1
+  },
+  {
+    "id": "ems",
+    "name": "Emstrur",
+    "label": "Skáli",
+    "info": "Þrír eins skálar á Botnum í Emstrum, skammt frá Markarfljótsgljúfri.",
+    "beds": 60,
+    "elevation": 465,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/emstrur",
+    "trails": [
+      {
+        "id": "laugavegur",
+        "name": "Laugavegurinn",
+        "distance": "54 km",
+        "duration": "2–4 dagar",
+        "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
+        "geojson": "data/laugavegur.geojson"
+      }
+    ],
+    "attractions": [
+      {
+        "id": "markarfljotsgljufur",
+        "name": "Markarfljótsgljúfur",
+        "lon": -19.35,
+        "lat": 63.77,
+        "info": "Stórfenglegt og djúpt gil Markarfljóts, stutt ganga frá Emstrum."
+      }
+    ],
+    "x": 46.85,
+    "y": 84.04,
+    "tx": 5.7,
+    "ty": -61.3
+  },
+  {
+    "id": "tmk-hut",
+    "name": "Þórsmörk / Langidalur",
+    "label": "Skáli",
+    "info": "Aðalskáli FÍ í Þórsmörk, endastaður Laugavegar og upphaf Fimmvörðuhálsleiðar.",
+    "beds": 73,
+    "elevation": 200,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/thorsmork-langidalur",
+    "trails": [
+      {
+        "id": "fimmvorduhals",
+        "name": "Fimmvörðuháls",
+        "distance": "25 km",
+        "duration": "1 dagur",
+        "info": "Yfir skarðið milli Eyjafjallajökuls og Mýrdalsjökuls, frá Skógum til Þórsmerkur.",
+        "geojson": null
+      },
+      {
+        "id": "laugavegur",
+        "name": "Laugavegurinn",
+        "distance": "54 km",
+        "duration": "2–4 dagar",
+        "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
+        "geojson": "data/laugavegur.geojson"
+      },
+      {
+        "id": "tindfjallahringur",
+        "name": "Tindfjallahringur",
+        "distance": "~25 km",
+        "duration": "2 dagar",
+        "info": "Hringur um Tindfjöll í Þórsmörk.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "magni-modi",
+        "name": "Magni og Móði",
+        "lon": -19.44,
+        "lat": 63.63,
+        "info": "Gígir frá Fimmvörðuháls-gosinu 2010, nefndir eftir sonum Þórs."
+      },
+      {
+        "id": "nauthusagil",
+        "name": "Nauthúsagil",
+        "lon": -19.525,
+        "lat": 63.635,
+        "info": "Leyndardómsfull gjá sem opnast inn í mosaklædd gljúfur með foss."
+      },
+      {
+        "id": "stakkholtsgja",
+        "name": "Stakkholtsgjá",
+        "lon": -19.485,
+        "lat": 63.67,
+        "info": "Þröngt og falleg gjá í Þórsmörk, með foss innst í gljúfrinu."
+      },
+      {
+        "id": "valahnukur",
+        "name": "Valahnúkur",
+        "lon": -19.52,
+        "lat": 63.678,
+        "info": "Útsýnistindur í Þórsmörk, stutt en brött ganga með víðsýni yfir dalinn."
+      }
+    ],
+    "x": 45.62,
+    "y": 86.24,
+    "tx": 7.9,
+    "ty": -65.2
+  },
+  {
+    "id": "fmv",
+    "name": "Fimmvörðuháls / Baldvinsskáli",
+    "label": "Skáli",
+    "info": "Lítill neyðarskáli á 900 m hæð á Fimmvörðuhálsskarðinu milli Eyjafjallajökuls og Mýrdalsjökuls.",
+    "beds": 16,
+    "elevation": 900,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/fimmvorduhals-baldvinsskali",
+    "trails": [
+      {
+        "id": "fimmvorduhals",
+        "name": "Fimmvörðuháls",
+        "distance": "25 km",
+        "duration": "1 dagur",
+        "info": "Yfir skarðið milli Eyjafjallajökuls og Mýrdalsjökuls, frá Skógum til Þórsmerkur.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "magni-modi",
+        "name": "Magni og Móði",
+        "lon": -19.44,
+        "lat": 63.63,
+        "info": "Gígir frá Fimmvörðuháls-gosinu 2010, nefndir eftir sonum Þórs."
+      }
+    ],
+    "x": 46.26,
+    "y": 88.12,
+    "tx": 6.7,
+    "ty": -68.6
+  },
+  {
+    "id": "hvt",
+    "name": "Hvítárnes",
+    "label": "Skáli",
+    "info": "Elsti skáli FÍ, reistur 1930, á húsmunaverndarlista. Tveggja hæða skáli á Kjöl.",
+    "beds": 30,
+    "elevation": 550,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hvitarnes",
+    "trails": [
+      {
+        "id": "kjolur-interior",
+        "name": "Kjalvegur",
+        "distance": "~55 km",
+        "duration": "3–5 dagar",
+        "info": "Forn leið yfir hálendið milli Gullfoss og Hveravalla, meðfram Langjökli og Hofsjökli.",
+        "geojson": null
+      }
+    ],
+    "attractions": [],
+    "x": 43.5,
+    "y": 61.26,
+    "tx": 11.7,
+    "ty": -20.3
+  },
+  {
+    "id": "tvb",
+    "name": "Þverbrekknamúli",
+    "label": "Skáli",
+    "info": "Notalegur skáli á hálendinu, 20 rúm í opnu herbergi, aðeins aðgengilegur gangandi.",
+    "beds": 20,
+    "elevation": 520,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/thverbrekknamuli",
+    "trails": [
+      {
+        "id": "kjolur-interior",
+        "name": "Kjalvegur",
+        "distance": "~55 km",
+        "duration": "3–5 dagar",
+        "info": "Forn leið yfir hálendið milli Gullfoss og Hveravalla, meðfram Langjökli og Hofsjökli.",
+        "geojson": null
+      }
+    ],
+    "attractions": [],
+    "x": 44.75,
+    "y": 58.49,
+    "tx": 9.4,
+    "ty": -15.3
+  },
+  {
+    "id": "tjd",
+    "name": "Þjófadalir",
+    "label": "Skáli",
+    "info": "Lítill og afskektur skáli á hálendinu, reistur 1939, aðeins aðgengilegur gangandi.",
+    "beds": 12,
+    "elevation": 610,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/thjofadalir",
+    "trails": [
+      {
+        "id": "kjolur-interior",
+        "name": "Kjalvegur",
+        "distance": "~55 km",
+        "duration": "3–5 dagar",
+        "info": "Forn leið yfir hálendið milli Gullfoss og Hveravalla, meðfram Langjökli og Hofsjökli.",
+        "geojson": null
+      }
+    ],
+    "attractions": [],
+    "x": 43.92,
+    "y": 55.84,
+    "tx": 10.9,
+    "ty": -10.5
+  },
+  {
+    "id": "hgv",
+    "name": "Hagavatn",
+    "label": "Skáli",
+    "info": "Lítill skáli undir Einifelli við Hagavatn, nálægt Langjökli.",
+    "beds": 12,
+    "elevation": 320,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hagavatn",
+    "trails": [
+      {
+        "id": "langjokull-interior",
+        "name": "Langjökulsleiðir",
+        "distance": null,
+        "duration": null,
+        "info": "Hálendisleiðir nálægt Langjökli, milli Hagavatns og Hlöðuvalla.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "hagavatn-lake",
+        "name": "Hagavatn",
+        "lon": -20.2939,
+        "lat": 64.4627,
+        "info": "Hálendisvatn nálægt Langjökli."
+      }
+    ],
+    "x": 38.81,
+    "y": 65.44,
+    "tx": 20.1,
+    "ty": -27.8
+  },
+  {
+    "id": "hld",
+    "name": "Hlöðuvellir",
+    "label": "Skáli",
+    "info": "Skáli undir Hlöðufelli á hálendinu, 15 rúm, nálægt Langjökli.",
+    "beds": 15,
+    "elevation": 450,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hloduvellir",
+    "trails": [
+      {
+        "id": "langjokull-interior",
+        "name": "Langjökulsleiðir",
+        "distance": null,
+        "duration": null,
+        "info": "Hálendisleiðir nálægt Langjökli, milli Hagavatns og Hlöðuvalla.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "hlodufell",
+        "name": "Hlöðufell",
+        "lon": -20.55,
+        "lat": 64.41,
+        "info": "Stórbrotið stapafjall nálægt Langjökli."
+      }
+    ],
+    "x": 36.51,
+    "y": 67.17,
+    "tx": 24.3,
+    "ty": -30.9
+  },
+  {
+    "id": "nyd",
+    "name": "Nýidalur",
+    "label": "Skáli",
+    "info": "Tveir skálar á Sprengisandsleið, 830 m y.s., nálægt Tungnafellsjökli.",
+    "beds": 54,
+    "elevation": 830,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/nyidalur",
+    "trails": [
+      {
+        "id": "sprengisandur",
+        "name": "Sprengisandsleið",
+        "distance": "~200 km",
+        "duration": "Akstur 1 dagur, ganga margir dagar",
+        "info": "Leið yfir Sprengisand, óbyggðasta hálendi Íslands, milli norðurs og suðurs.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "tungnafellsjokull",
+        "name": "Tungnafellsjökull",
+        "lon": -17.92,
+        "lat": 64.735,
+        "info": "Litill jökull á Sprengisandi, nálægt Nýjadal."
+      }
+    ],
+    "x": 58.23,
+    "y": 58.02,
+    "tx": -14.8,
+    "ty": -14.4
+  },
+  {
+    "id": "hrn",
+    "name": "Hornbjargsviti",
+    "label": "Skáli",
+    "info": "Gamalt vitaverðahús á Hornströndum, við stórfenglegustu fuglabörg landsins.",
+    "beds": 40,
+    "elevation": 21,
+    "open": "~seint í júní – ~ágúst",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hornbjargsviti",
+    "trails": [
+      {
+        "id": "hornstrandir",
+        "name": "Hornstrandir",
+        "distance": null,
+        "duration": null,
+        "info": "Gönguleiðir á Hornströndum, ósnortnu náttúruverndarsvæði á Vestfjörðum.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "arctic-fox",
+        "name": "Tófuáhorf á Hornströndum",
+        "lon": null,
+        "lat": null,
+        "info": "Hornstrandir eru besta svæðið á Íslandi til að sjá tófur í villtri náttúru."
+      },
+      {
+        "id": "hornbjarg-cliffs",
+        "name": "Hornbjarg",
+        "lon": -22.38,
+        "lat": 66.42,
+        "info": "Ein af stórfenglegustu fuglabörgunum á Íslandi, á ysta norðurhorni Hornstrandna."
+      }
+    ],
+    "x": 20.57,
+    "y": 10.77,
+    "tx": 53,
+    "ty": 70.6
+  },
+  {
+    "id": "nfj",
+    "name": "Norðurfjörður / Valgeirsstaðir",
+    "label": "Skáli",
+    "info": "Gamall bær í Norðurfirði á Ströndum, nálægt Krossneslaugum.",
+    "beds": 26,
+    "elevation": 25,
+    "open": "~20. júní – ~15. september",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/nordurfjordur-valgeirsstadir",
+    "trails": [
+      {
+        "id": "hornstrandir",
+        "name": "Hornstrandir",
+        "distance": null,
+        "duration": null,
+        "info": "Gönguleiðir á Hornströndum, ósnortnu náttúruverndarsvæði á Vestfjörðum.",
+        "geojson": null
+      }
+    ],
+    "attractions": [
+      {
+        "id": "krossneslaug",
+        "name": "Krossneslaug",
+        "lon": -21.51,
+        "lat": 66.083,
+        "info": "Heit útisundlaug á ströndinni í Norðurfirði, með útsýni yfir Grænlandshafið."
+      }
+    ],
+    "x": 27.68,
+    "y": 21.16,
+    "tx": 40.2,
+    "ty": 51.9
+  },
+  {
+    "id": "mos",
+    "name": "Sæluhúsið á Mosfellsheiði",
+    "label": "Sæluhús",
+    "info": "Endurreist steinskýli frá um 1890 á Gamla Þingvallavegi, dagskýli, ekki til næturgistingar.",
+    "beds": 0,
+    "elevation": null,
+    "open": "Opið allt árið – dagskýli eingöngu",
+    "source": "https://www.fi.is/is/skalar/skalar-ferdafelags-islands/saeluhusid-a-mosfellsheidi",
+    "trails": [],
+    "attractions": [],
+    "x": 29.18,
+    "y": 73.22,
+    "tx": 37.5,
+    "ty": -41.8
   }
 ]
