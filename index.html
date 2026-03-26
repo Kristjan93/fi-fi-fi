@@ -16,6 +16,25 @@
 
       <!-- Map zoom — pure CSS with @property + :has() + radio buttons -->
       <section class="map" id="map" aria-label="Gagnvirkt kort af Íslandi">
+        <!-- Radio buttons drive CSS state — all sr-only -->
+        <input type="radio" name="map-loc" id="map-all" checked class="sr-only" />
+        <input type="radio" name="map-loc" id="map-lml-hut" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-hrf" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-alf" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-hvg" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-ems" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-tmk-hut" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-fmv" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-hvt" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-tvb" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-tjd" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-hgv" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-hld" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-nyd" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-hrn" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-nfj" class="sr-only" />
+        <input type="radio" name="map-loc" id="map-mos" class="sr-only" />
+
         <div class="map__inner">
 
         <!-- Layer 1: Map image — transforms on zoom (scale + translate) -->
@@ -40,94 +59,283 @@
           />
         </div>
 
-        <!-- Layer 2: Markers — positioned at scale(1), hidden when zoomed -->
+        <!-- Layer 2: Markers — dots only at overview, labels on hover -->
         <div class="map__markers" aria-hidden="true">
-          <div class="marker" style="left: 30.07%; top: 74.84%">
-            <label for="map-rvk"><span class="marker__dot"></span><span class="marker__label">Reykjavík</span></label>
+          <div class="marker" style="left: 49.59%; top: 78.02%">
+            <label for="map-lml-hut"><span class="marker__dot"></span><span class="marker__label">Landmannalaugar</span></label>
           </div>
-          <div class="marker" style="left: 46.56%; top: 87.68%">
-            <label for="map-tmk"><span class="marker__dot"></span><span class="marker__label">Þórsmörk</span></label>
+          <div class="marker" style="left: 48.65%; top: 79.61%">
+            <label for="map-hrf"><span class="marker__dot"></span><span class="marker__label">Hrafntinnusker</span></label>
           </div>
-          <div class="marker" style="left: 69.29%; top: 76.68%">
-            <label for="map-jkl"><span class="marker__dot"></span><span class="marker__label">Jökulsárlón</span></label>
+          <div class="marker" style="left: 48.13%; top: 81.62%">
+            <label for="map-alf"><span class="marker__dot"></span><span class="marker__label">Álftavatn</span></label>
           </div>
-          <div class="marker" style="left: 49.62%; top: 79.45%">
-            <label for="map-lml"><span class="marker__dot"></span><span class="marker__label">Landmannalaugar</span></label>
+          <div class="marker" style="left: 48.33%; top: 82.3%">
+            <label for="map-hvg"><span class="marker__dot"></span><span class="marker__label">Hvanngil</span></label>
           </div>
-          <div class="marker" style="left: 17.63%; top: 56.21%">
-            <label for="map-snf"><span class="marker__dot"></span><span class="marker__label">Snæfellsjökull</span></label>
+          <div class="marker" style="left: 46.85%; top: 84.04%">
+            <label for="map-ems"><span class="marker__dot"></span><span class="marker__label">Emstrur</span></label>
           </div>
-          <div class="marker" style="left: 56.22%; top: 31.07%">
-            <label for="map-aku"><span class="marker__dot"></span><span class="marker__label">Akureyri</span></label>
+          <div class="marker" style="left: 45.62%; top: 86.24%">
+            <label for="map-tmk-hut"><span class="marker__dot"></span><span class="marker__label">Þórsmörk</span></label>
           </div>
-          <div class="marker" style="left: 63.98%; top: 33.41%">
-            <label for="map-myt"><span class="marker__dot"></span><span class="marker__label">Mývatn</span></label>
+          <div class="marker" style="left: 46.26%; top: 88.12%">
+            <label for="map-fmv"><span class="marker__dot"></span><span class="marker__label">Fimmvörðuháls</span></label>
+          </div>
+          <div class="marker" style="left: 43.5%; top: 61.26%">
+            <label for="map-hvt"><span class="marker__dot"></span><span class="marker__label">Hvítárnes</span></label>
+          </div>
+          <div class="marker" style="left: 44.75%; top: 58.49%">
+            <label for="map-tvb"><span class="marker__dot"></span><span class="marker__label">Þverbrekknamúli</span></label>
+          </div>
+          <div class="marker" style="left: 43.92%; top: 55.84%">
+            <label for="map-tjd"><span class="marker__dot"></span><span class="marker__label">Þjófadalir</span></label>
+          </div>
+          <div class="marker" style="left: 38.81%; top: 65.44%">
+            <label for="map-hgv"><span class="marker__dot"></span><span class="marker__label">Hagavatn</span></label>
+          </div>
+          <div class="marker" style="left: 36.51%; top: 67.17%">
+            <label for="map-hld"><span class="marker__dot"></span><span class="marker__label">Hlöðuvellir</span></label>
+          </div>
+          <div class="marker" style="left: 58.23%; top: 58.02%">
+            <label for="map-nyd"><span class="marker__dot"></span><span class="marker__label">Nýidalur</span></label>
+          </div>
+          <div class="marker" style="left: 20.57%; top: 10.77%">
+            <label for="map-hrn"><span class="marker__dot"></span><span class="marker__label">Hornbjargsviti</span></label>
+          </div>
+          <div class="marker" style="left: 27.68%; top: 21.16%">
+            <label for="map-nfj"><span class="marker__dot"></span><span class="marker__label">Norðurfjörður</span></label>
+          </div>
+          <div class="marker" style="left: 29.18%; top: 73.22%">
+            <label for="map-mos"><span class="marker__dot"></span><span class="marker__label">Mosfellsheiði</span></label>
           </div>
         </div>
 
-        <!-- Layer 3: Detail panels — toggled via :has() -->
+        <!-- Layer 3: Detail panels — toggled via :has() in locations.css -->
         <div class="map__details" aria-live="polite">
-          <div class="map__detail" data-location="rvk">
-            <span class="map__detail-label">Höfuðborg</span>
-            <h3 class="map__detail-name">Reykjavík</h3>
-            <p class="map__detail-info">Norðurljós borgarinnar, þar sem skapandi menning og náttúra mætast.</p>
-          </div>
-          <div class="map__detail" data-location="tmk">
-            <span class="map__detail-label">Dalur</span>
-            <h3 class="map__detail-name">Þórsmörk</h3>
-            <p class="map__detail-info">Falinn dalur milli jökla, vafinn birki og villtum blómum.</p>
-          </div>
-          <div class="map__detail" data-location="jkl">
-            <span class="map__detail-label">Jökullón</span>
-            <h3 class="map__detail-name">Jökulsárlón</h3>
-            <p class="map__detail-info">Ísmoldur reka á lóninu þar sem jökull og sjór mætast.</p>
-          </div>
-          <div class="map__detail" data-location="lml">
-            <span class="map__detail-label">Hálendi</span>
+          <div class="map__detail" data-location="lml-hut">
+            <span class="map__detail-label">Skáli</span>
             <h3 class="map__detail-name">Landmannalaugar</h3>
-            <p class="map__detail-info">Litríkar líparitfjöll og heitar laugar í hjarta hálendisins.</p>
+            <p class="map__detail-stats">550 m · 78 rúm · Júní–september</p>
+            <p class="map__detail-info">Stór skáli við Laugahraun, upphaf Laugavegar, með heitum laugum og litríkum líparitfjöllum.</p>
+            <ul class="map__detail-trails">
+              <li>Laugavegurinn — 54 km, 2–4 dagar</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Heitar laugar Landmannalauga</li>
+              <li>Litríkar líparitfjöll</li>
+              <li>Friðland að Fjallabaki</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/landmannalaugar" target="_blank" rel="noopener">Nánar á fi.is</a>
           </div>
-          <div class="map__detail" data-location="snf">
-            <span class="map__detail-label">Jökuleldfjall</span>
-            <h3 class="map__detail-name">Snæfellsjökull</h3>
-            <p class="map__detail-info">Jökullinn sem Jules Verne valdi sem hlið inn í jörðina.</p>
+
+          <div class="map__detail" data-location="hrf">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Hrafntinnusker</h3>
+            <p class="map__detail-stats">1.100 m · 52 rúm · Júní–september</p>
+            <p class="map__detail-info">Hæsti skáli FÍ, 1.100 m y.s., umkringdur hrauni, jöklum og hverasvæðum á Laugavegi.</p>
+            <ul class="map__detail-trails">
+              <li>Laugavegurinn — 54 km, 2–4 dagar</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Hrafntinnuhraunssvæðið</li>
+              <li>Íshellar</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hrafntinnusker" target="_blank" rel="noopener">Nánar á fi.is</a>
           </div>
-          <div class="map__detail" data-location="aku">
-            <span class="map__detail-label">Norðurland</span>
-            <h3 class="map__detail-name">Akureyri</h3>
-            <p class="map__detail-info">Höfuðborg norðursins, umkringd fjöllum og Eyjafjörður.</p>
+
+          <div class="map__detail" data-location="alf">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Álftavatn</h3>
+            <p class="map__detail-stats">550 m · 72 rúm · Júní–september</p>
+            <p class="map__detail-info">Tveir skálar við Álftavatn, áfangastaður á Laugavegi með útsýni yfir vatnið.</p>
+            <ul class="map__detail-trails">
+              <li>Laugavegurinn — 54 km, 2–4 dagar</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Álftaskarð</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/alftavatn" target="_blank" rel="noopener">Nánar á fi.is</a>
           </div>
-          <div class="map__detail" data-location="myt">
-            <span class="map__detail-label">Eldfjallahérað</span>
-            <h3 class="map__detail-name">Mývatn</h3>
-            <p class="map__detail-info">Jarðhitasvæði og lághitaeldfjöll við norðurhöf.</p>
+
+          <div class="map__detail" data-location="hvg">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Hvanngil</h3>
+            <p class="map__detail-stats">550 m · 60 rúm · Júní–september</p>
+            <p class="map__detail-info">Rúmgóður skáli í Hvanngilshrauni á Laugavegi, skjólgóður tjaldstaður.</p>
+            <ul class="map__detail-trails">
+              <li>Laugavegurinn — 54 km, 2–4 dagar</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hvanngil" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="ems">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Emstrur</h3>
+            <p class="map__detail-stats">465 m · 60 rúm · Júní–september</p>
+            <p class="map__detail-info">Þrír eins skálar á Botnum í Emstrum, skammt frá Markarfljótsgljúfri.</p>
+            <ul class="map__detail-trails">
+              <li>Laugavegurinn — 54 km, 2–4 dagar</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Markarfljótsgljúfur</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/emstrur" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="tmk-hut">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Þórsmörk / Langidalur</h3>
+            <p class="map__detail-stats">200 m · 73 rúm · Júní–september</p>
+            <p class="map__detail-info">Aðalskáli FÍ í Þórsmörk, endastaður Laugavegar og upphaf Fimmvörðuhálsleiðar.</p>
+            <ul class="map__detail-trails">
+              <li>Laugavegurinn — 54 km, 2–4 dagar</li>
+              <li>Fimmvörðuháls — 25 km, 1 dagur</li>
+              <li>Tindfjallahringur — ~25 km, 2 dagar</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Valahnúkur</li>
+              <li>Stakkholtsgjá</li>
+              <li>Nauthúsagil</li>
+              <li>Magni og Móði</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/thorsmork-langidalur" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="fmv">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Fimmvörðuháls / Baldvinsskáli</h3>
+            <p class="map__detail-stats">900 m · 16 rúm · Júní–september</p>
+            <p class="map__detail-info">Lítill neyðarskáli á 900 m hæð á Fimmvörðuhálsskarðinu milli Eyjafjallajökuls og Mýrdalsjökuls.</p>
+            <ul class="map__detail-trails">
+              <li>Fimmvörðuháls — 25 km, 1 dagur</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Magni og Móði</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/fimmvorduhals-baldvinsskali" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="hvt">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Hvítárnes</h3>
+            <p class="map__detail-stats">550 m · 30 rúm · Júní–september</p>
+            <p class="map__detail-info">Elsti skáli FÍ, reistur 1930, á húsmunaverndarlista. Tveggja hæða skáli á Kjöl.</p>
+            <ul class="map__detail-trails">
+              <li>Kjalvegur — ~55 km, 3–5 dagar</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hvitarnes" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="tvb">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Þverbrekknamúli</h3>
+            <p class="map__detail-stats">520 m · 20 rúm · Júní–september</p>
+            <p class="map__detail-info">Notalegur skáli á hálendinu, 20 rúm í opnu herbergi, aðeins aðgengilegur gangandi.</p>
+            <ul class="map__detail-trails">
+              <li>Kjalvegur — ~55 km, 3–5 dagar</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/thverbrekknamuli" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="tjd">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Þjófadalir</h3>
+            <p class="map__detail-stats">610 m · 12 rúm · Júní–september</p>
+            <p class="map__detail-info">Lítill og afskektur skáli á hálendinu, reistur 1939, aðeins aðgengilegur gangandi.</p>
+            <ul class="map__detail-trails">
+              <li>Kjalvegur — ~55 km, 3–5 dagar</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/thjofadalir" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="hgv">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Hagavatn</h3>
+            <p class="map__detail-stats">320 m · 12 rúm · Júní–september</p>
+            <p class="map__detail-info">Lítill skáli undir Einifelli við Hagavatn, nálægt Langjökli.</p>
+            <ul class="map__detail-trails">
+              <li>Langjökulsleiðir</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Hagavatn</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hagavatn" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="hld">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Hlöðuvellir</h3>
+            <p class="map__detail-stats">450 m · 15 rúm · Júní–september</p>
+            <p class="map__detail-info">Skáli undir Hlöðufelli á hálendinu, 15 rúm, nálægt Langjökli.</p>
+            <ul class="map__detail-trails">
+              <li>Langjökulsleiðir</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Hlöðufell</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hloduvellir" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="nyd">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Nýidalur</h3>
+            <p class="map__detail-stats">830 m · 54 rúm · Júní–september</p>
+            <p class="map__detail-info">Tveir skálar á Sprengisandsleið, 830 m y.s., nálægt Tungnafellsjökli.</p>
+            <ul class="map__detail-trails">
+              <li>Sprengisandsleið — ~200 km</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Tungnafellsjökull</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/nyidalur" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="hrn">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Hornbjargsviti</h3>
+            <p class="map__detail-stats">21 m · 40 rúm · Júní–ágúst</p>
+            <p class="map__detail-info">Gamalt vitaverðahús á Hornströndum, við stórfenglegustu fuglabörg landsins.</p>
+            <ul class="map__detail-trails">
+              <li>Hornstrandir</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Hornbjarg</li>
+              <li>Tófuáhorf á Hornströndum</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/hornbjargsviti" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="nfj">
+            <span class="map__detail-label">Skáli</span>
+            <h3 class="map__detail-name">Norðurfjörður / Valgeirsstaðir</h3>
+            <p class="map__detail-stats">25 m · 26 rúm · Júní–september</p>
+            <p class="map__detail-info">Gamall bær í Norðurfirði á Ströndum, nálægt Krossneslaugum.</p>
+            <ul class="map__detail-trails">
+              <li>Hornstrandir</li>
+            </ul>
+            <ul class="map__detail-attractions">
+              <li>Krossneslaug</li>
+            </ul>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/nordurfjordur-valgeirsstadir" target="_blank" rel="noopener">Nánar á fi.is</a>
+          </div>
+
+          <div class="map__detail" data-location="mos">
+            <span class="map__detail-label">Sæluhús</span>
+            <h3 class="map__detail-name">Sæluhúsið á Mosfellsheiði</h3>
+            <p class="map__detail-stats">Dagskýli · Opið allt árið</p>
+            <p class="map__detail-info">Endurreist steinskýli frá um 1890 á Gamla Þingvallavegi, dagskýli, ekki til næturgistingar.</p>
+            <a class="map__detail-link" href="https://www.fi.is/is/skalar/skalar-ferdafelags-islands/saeluhusid-a-mosfellsheidi" target="_blank" rel="noopener">Nánar á fi.is</a>
           </div>
         </div>
 
-        <!-- Layer 4: Static UI — title + nav, never transforms -->
+        <!-- Layer 4: Static UI — title + back button, never transforms -->
         <div class="map__ui">
           <div class="map__header">
             <h2 class="map__title">Kannaðu<br />landið</h2>
-            <p class="map__subtitle">Uppgötvaðu hvar sagan okkar gerist.</p>
+            <p class="map__subtitle">Skálar Ferðafélags Íslands</p>
           </div>
-          <div class="map__nav" role="radiogroup" aria-label="Veldu staðsetningu">
-            <input type="radio" name="map-loc" id="map-all" checked class="sr-only" />
-            <label for="map-all" class="map__nav-btn">Allir staðir</label>
-            <input type="radio" name="map-loc" id="map-rvk" class="sr-only" />
-            <label for="map-rvk" class="map__nav-btn">Reykjavík</label>
-            <input type="radio" name="map-loc" id="map-tmk" class="sr-only" />
-            <label for="map-tmk" class="map__nav-btn">Þórsmörk</label>
-            <input type="radio" name="map-loc" id="map-jkl" class="sr-only" />
-            <label for="map-jkl" class="map__nav-btn">Jökulsárlón</label>
-            <input type="radio" name="map-loc" id="map-lml" class="sr-only" />
-            <label for="map-lml" class="map__nav-btn">Landmannalaugar</label>
-            <input type="radio" name="map-loc" id="map-snf" class="sr-only" />
-            <label for="map-snf" class="map__nav-btn">Snæfellsjökull</label>
-            <input type="radio" name="map-loc" id="map-aku" class="sr-only" />
-            <label for="map-aku" class="map__nav-btn">Akureyri</label>
-            <input type="radio" name="map-loc" id="map-myt" class="sr-only" />
-            <label for="map-myt" class="map__nav-btn">Mývatn</label>
-          </div>
+          <label for="map-all" class="map__back-btn" aria-label="Til baka">&#8592;</label>
         </div>
 
         </div><!-- .map__inner -->
