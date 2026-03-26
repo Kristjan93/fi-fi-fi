@@ -5,7 +5,6 @@
     "distance": "54 km",
     "duration": "2–4 dagar",
     "info": "Frægasta gönguleið Íslands, frá Landmannalaugum til Þórsmerkur yfir litríkt hálendi.",
-    "huts": ["lml-hut", "hrf", "alf", "hvg", "ems", "tmk-hut"],
     "geojson": "data/laugavegur.geojson"
   },
   {
@@ -14,7 +13,6 @@
     "distance": "25 km",
     "duration": "1 dagur",
     "info": "Yfir skarðið milli Eyjafjallajökuls og Mýrdalsjökuls, frá Skógum til Þórsmerkur.",
-    "huts": ["fmv", "tmk-hut"],
     "geojson": null
   },
   {
@@ -23,7 +21,6 @@
     "distance": "~25 km",
     "duration": "2 dagar",
     "info": "Hringur um Tindfjöll í Þórsmörk.",
-    "huts": ["tmk-hut"],
     "geojson": null
   },
   {
@@ -32,7 +29,6 @@
     "distance": "~55 km",
     "duration": "3–5 dagar",
     "info": "Forn leið yfir hálendið milli Gullfoss og Hveravalla, meðfram Langjökli og Hofsjökli.",
-    "huts": ["hvt", "tvb", "tjd"],
     "geojson": null
   },
   {
@@ -41,7 +37,6 @@
     "distance": null,
     "duration": null,
     "info": "Hálendisleiðir nálægt Langjökli, milli Hagavatns og Hlöðuvalla.",
-    "huts": ["hgv", "hld"],
     "geojson": null,
     "_note": "Not a single trail — network of routes near Langjökull"
   },
@@ -51,7 +46,6 @@
     "distance": "~200 km",
     "duration": "Akstur 1 dagur, ganga margir dagar",
     "info": "Leið yfir Sprengisand, óbyggðasta hálendi Íslands, milli norðurs og suðurs.",
-    "huts": ["nyd"],
     "geojson": null
   },
   {
@@ -60,7 +54,6 @@
     "distance": null,
     "duration": null,
     "info": "Gönguleiðir á Hornströndum, ósnortnu náttúruverndarsvæði á Vestfjörðum.",
-    "huts": ["hrn", "nfj"],
     "geojson": null,
     "_note": "Network of routes across the reserve, not a single trail"
   }

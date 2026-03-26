@@ -3,15 +3,13 @@
     "id": "hot-springs-lml",
     "name": "Heitar laugar Landmannalauga",
     "coords": [-19.0580, 63.9940],
-    "info": "Náttúrulegar heitar laugar við jaðar Laugahrauns, frægasta sundlaug hálendisins.",
-    "huts": ["lml-hut"]
+    "info": "Náttúrulegar heitar laugar við jaðar Laugahrauns, frægasta sundlaug hálendisins."
   },
   {
     "id": "rhyolite-mountains",
     "name": "Litríkar líparitfjöll",
     "coords": null,
     "info": "Líparitfjöll í Fjallabaki, þekkt fyrir regnbogaliti sína.",
-    "huts": ["lml-hut"],
     "_note": "Area feature, not a single point"
   },
   {
@@ -19,7 +17,6 @@
     "name": "Friðland að Fjallabaki",
     "coords": null,
     "info": "Náttúruverndarsvæði í kringum Landmannalaugar, fjölbreyttar gönguleiðir.",
-    "huts": ["lml-hut"],
     "_note": "Area feature, not a single point"
   },
   {
@@ -27,7 +24,6 @@
     "name": "Hrafntinnuhraunssvæðið",
     "coords": null,
     "info": "Svartur hrafntinna (obsidían) í hrauninu við Hrafntinnusker.",
-    "huts": ["hrf"],
     "_note": "Area feature near hut"
   },
   {
@@ -35,92 +31,79 @@
     "name": "Íshellar",
     "coords": null,
     "info": "Íshellar í nágrenni Hrafntinnuskers, myndaðir af jarðhita og jöklum.",
-    "huts": ["hrf"],
     "_note": "Locations shift seasonally"
   },
   {
     "id": "alftaskard",
     "name": "Álftaskarð",
     "coords": [-19.2100, 63.8650],
-    "info": "Skarð nálægt Álftavatni, stutt ganga frá skálanum.",
-    "huts": ["alf"]
+    "info": "Skarð nálægt Álftavatni, stutt ganga frá skálanum."
   },
   {
     "id": "markarfljotsgljufur",
     "name": "Markarfljótsgljúfur",
     "coords": [-19.3500, 63.7700],
-    "info": "Stórfenglegt og djúpt gil Markarfljóts, stutt ganga frá Emstrum.",
-    "huts": ["ems"]
+    "info": "Stórfenglegt og djúpt gil Markarfljóts, stutt ganga frá Emstrum."
   },
   {
     "id": "valahnukur",
     "name": "Valahnúkur",
     "coords": [-19.5200, 63.6780],
-    "info": "Útsýnistindur í Þórsmörk, stutt en brött ganga með víðsýni yfir dalinn.",
-    "huts": ["tmk-hut"]
+    "info": "Útsýnistindur í Þórsmörk, stutt en brött ganga með víðsýni yfir dalinn."
   },
   {
     "id": "stakkholtsgja",
     "name": "Stakkholtsgjá",
     "coords": [-19.4850, 63.6700],
-    "info": "Þröngt og falleg gjá í Þórsmörk, með foss innst í gljúfrinu.",
-    "huts": ["tmk-hut"]
+    "info": "Þröngt og falleg gjá í Þórsmörk, með foss innst í gljúfrinu."
   },
   {
     "id": "nauthusagil",
     "name": "Nauthúsagil",
     "coords": [-19.5250, 63.6350],
-    "info": "Leyndardómsfull gjá sem opnast inn í mosaklædd gljúfur með foss.",
-    "huts": ["tmk-hut"]
+    "info": "Leyndardómsfull gjá sem opnast inn í mosaklædd gljúfur með foss."
   },
   {
     "id": "magni-modi",
     "name": "Magni og Móði",
     "coords": [-19.4400, 63.6300],
-    "info": "Gígir frá Fimmvörðuháls-gosinu 2010, nefndir eftir sonum Þórs.",
-    "huts": ["fmv", "tmk-hut"]
+    "info": "Gígir frá Fimmvörðuháls-gosinu 2010, nefndir eftir sonum Þórs."
   },
   {
     "id": "hagavatn-lake",
     "name": "Hagavatn",
     "coords": [-20.2939, 64.4627],
-    "info": "Hálendisvatn nálægt Langjökli.",
-    "huts": ["hgv"]
+    "info": "Hálendisvatn nálægt Langjökli."
   },
   {
     "id": "hlodufell",
     "name": "Hlöðufell",
     "coords": [-20.5500, 64.4100],
-    "info": "Stórbrotið stapafjall nálægt Langjökli.",
-    "huts": ["hld"]
+    "info": "Stórbrotið stapafjall nálægt Langjökli."
   },
   {
     "id": "tungnafellsjokull",
     "name": "Tungnafellsjökull",
     "coords": [-17.9200, 64.7350],
-    "info": "Litill jökull á Sprengisandi, nálægt Nýjadal.",
-    "huts": ["nyd"]
+    "info": "Litill jökull á Sprengisandi, nálægt Nýjadal."
   },
   {
     "id": "hornbjarg-cliffs",
     "name": "Hornbjarg",
     "coords": [-22.3800, 66.4200],
-    "info": "Ein af stórfenglegustu fuglabörgunum á Íslandi, á ysta norðurhorni Hornstrandna.",
-    "huts": ["hrn"]
+    "info": "Ein af stórfenglegustu fuglabörgunum á Íslandi, á ysta norðurhorni Hornstrandna."
   },
   {
     "id": "arctic-fox",
     "name": "Tófuáhorf á Hornströndum",
     "coords": null,
     "info": "Hornstrandir eru besta svæðið á Íslandi til að sjá tófur í villtri náttúru.",
-    "huts": ["hrn"],
     "_note": "Area feature across the reserve"
   },
   {
     "id": "krossneslaug",
     "name": "Krossneslaug",
     "coords": [-21.5100, 66.0830],
-    "info": "Heit útisundlaug á ströndinni í Norðurfirði, með útsýni yfir Grænlandshafið.",
-    "huts": ["nfj"]
+    "info": "Heit útisundlaug á ströndinni í Norðurfirði, með útsýni yfir Grænlandshafið."
   }
 ]
