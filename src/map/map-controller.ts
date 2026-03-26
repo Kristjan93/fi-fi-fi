@@ -156,26 +156,24 @@ export class MapController {
   private async zoomToOverview() {
     this.animating = true;
 
-    // 1. Fade out current content
+    // 1. Fade out current content (keep current classes intact)
     this.map.classList.add("map--hiding");
-    await this.waitMs(250);
 
-    // 2. Keep everything hidden during zoom-out
-    this.state = { type: "overview" };
-    this.map.className = "map map--hiding";
-    this.map.removeAttribute("data-active-cluster");
-
+    // Uncheck hut radio so detail panel fades via :has()
     const allRadio = this.map.querySelector<HTMLInputElement>("#map-all");
     if (allRadio) allRadio.checked = true;
 
-    // 3. Zoom out
-    this.image.style.transform = "scale(1)";
+    await this.waitMs(250);
 
-    // 4. Wait for zoom to complete
+    // 2. Zoom out (classes unchanged — no CSS disruption during animation)
+    this.image.style.transform = "scale(1)";
     await this.waitMs(900);
 
-    // 5. NOW reveal markers
-    this.map.classList.remove("map--hiding");
+    // 3. Zoom done — NOW switch to overview state
+    this.state = { type: "overview" };
+    this.map.className = "map";
+    this.map.removeAttribute("data-active-cluster");
+
     this.animating = false;
   }
 
