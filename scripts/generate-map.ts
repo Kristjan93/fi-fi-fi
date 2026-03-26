@@ -79,81 +79,11 @@ const ROUTES: { id: string; name: string; file: string }[] = [
   { id: "laugavegur", name: "Laugavegurinn", file: "data/laugavegur.geojson" },
 ];
 
-// ── Simplification ──────────────────────────────────────
-// Douglas-Peucker: remove points that deviate less than `tolerance`
-// from the line between their neighbors. Higher = smoother/simpler.
-
-function simplifyRing(
-  ring: [number, number][],
-  tolerance: number,
-): [number, number][] {
-  if (ring.length <= 2) return ring;
-
-  let maxDist = 0;
-  let maxIdx = 0;
-  const [sx, sy] = ring[0]!;
-  const [ex, ey] = ring[ring.length - 1]!;
-
-  for (let i = 1; i < ring.length - 1; i++) {
-    const [px, py] = ring[i]!;
-    // Perpendicular distance from point to line segment
-    const dx = ex - sx;
-    const dy = ey - sy;
-    const len2 = dx * dx + dy * dy;
-    const dist =
-      len2 === 0
-        ? Math.hypot(px - sx, py - sy)
-        : Math.abs(dy * px - dx * py + ex * sy - ey * sx) / Math.sqrt(len2);
-    if (dist > maxDist) {
-      maxDist = dist;
-      maxIdx = i;
-    }
-  }
-
-  if (maxDist > tolerance) {
-    const left = simplifyRing(ring.slice(0, maxIdx + 1), tolerance);
-    const right = simplifyRing(ring.slice(maxIdx), tolerance);
-    return [...left.slice(0, -1), ...right];
-  }
-  return [ring[0]!, ring[ring.length - 1]!];
-}
-
-function simplifyGeoJSON(
-  geojson: FeatureCollection,
-  tolerance: number,
-): FeatureCollection {
-  return {
-    ...geojson,
-    features: geojson.features.map((f) => {
-      if (f.geometry.type !== "MultiPolygon") return f;
-      return {
-        ...f,
-        geometry: {
-          ...f.geometry,
-          coordinates: f.geometry.coordinates
-            .map((polygon) =>
-              polygon.map((ring) =>
-                simplifyRing(ring as [number, number][], tolerance),
-              ),
-            )
-            .filter((polygon) => polygon[0]!.length >= 4), // drop tiny islands
-        },
-      };
-    }),
-  };
-}
-
 // ── Load GeoJSON ────────────────────────────────────────
 
-const rawGeoJSON: FeatureCollection = await Bun.file(
+const geojson: FeatureCollection = await Bun.file(
   "data/iceland.geojson",
 ).json();
-
-// Optional simplification — set to 0 to disable, 0.02 for smooth hero (~600 pts)
-const SIMPLIFY_TOLERANCE = 0;
-const geojson = SIMPLIFY_TOLERANCE > 0
-  ? simplifyGeoJSON(rawGeoJSON, SIMPLIFY_TOLERANCE)
-  : rawGeoJSON;
 
 // ── Project ─────────────────────────────────────────────
 
@@ -204,22 +134,20 @@ const bboxParams =
 const hillshadeUrl =
   `https://server.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/export` +
   bboxParams;
-const reliefUrl =
-  `https://server.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer/export` +
-  bboxParams;
 
-// Fetch both terrain layers in parallel
-console.log("Fetching ESRI terrain (hillshade + shaded relief)...");
-const [hillshadeRes, reliefRes] = await Promise.all([
-  fetch(hillshadeUrl),
-  fetch(reliefUrl),
-]);
-const hillshadeBuffer = Buffer.from(await hillshadeRes.arrayBuffer());
-const reliefBuffer = Buffer.from(await reliefRes.arrayBuffer());
-console.log(
-  `Hillshade: ${(hillshadeBuffer.byteLength / 1024 / 1024).toFixed(1)} MB, ` +
-  `Relief: ${(reliefBuffer.byteLength / 1024 / 1024).toFixed(1)} MB`,
-);
+// Only fetch if cache doesn't exist (terrain is deterministic for fixed config)
+const cacheExists = await Bun.file("public/assets/raw-hillshade.png").exists();
+
+let hillshadeBuffer: Buffer;
+if (cacheExists && !process.argv.includes("--force")) {
+  console.log("Using cached terrain (pass --force to re-fetch)");
+  hillshadeBuffer = Buffer.from(await Bun.file("public/assets/raw-hillshade.png").arrayBuffer());
+} else {
+  console.log("Fetching ESRI hillshade terrain...");
+  const hillshadeRes = await fetch(hillshadeUrl);
+  hillshadeBuffer = Buffer.from(await hillshadeRes.arrayBuffer());
+  console.log(`Hillshade: ${(hillshadeBuffer.byteLength / 1024 / 1024).toFixed(1)} MB`);
+}
 
 // Coastline mask — white land, transparent ocean
 const maskSvg = Buffer.from(
@@ -227,8 +155,6 @@ const maskSvg = Buffer.from(
   `<path d="${coastlineD}" fill="white"/>` +
   `</svg>`,
 );
-const maskBuffer = await sharp(maskSvg).resize(terrainW, terrainH).toBuffer();
-
 // Generate glacier mask from GeoJSON using same projection
 const glacierFile = Bun.file("data/glaciers.geojson");
 let glacierMaskSvg = "";
@@ -243,15 +169,13 @@ if (await glacierFile.exists()) {
   }
 }
 
-// Save raw layers + masks for Python processing script
-await sharp(hillshadeBuffer).resize(terrainW, terrainH).png().toFile("public/assets/raw-hillshade.png");
-await sharp(reliefBuffer).resize(terrainW, terrainH).png().toFile("public/assets/raw-relief.png");
-await sharp(maskSvg).resize(terrainW, terrainH).png().toFile("public/assets/raw-mask.png");
+// Save raw layers to .build-cache/ (NOT public/ — avoids shipping to prod)
+await sharp(hillshadeBuffer).resize(terrainW, terrainH).png().toFile(".build-cache/raw-hillshade.png");
+await sharp(maskSvg).resize(terrainW, terrainH).png().toFile(".build-cache/raw-mask.png");
 if (glacierMaskSvg) {
-  await sharp(Buffer.from(glacierMaskSvg)).resize(terrainW, terrainH).png().toFile("public/assets/raw-glaciers.png");
-  console.log("Glacier mask saved → public/assets/raw-glaciers.png");
+  await sharp(Buffer.from(glacierMaskSvg)).resize(terrainW, terrainH).png().toFile(".build-cache/raw-glaciers.png");
 }
-console.log("Raw terrain layers saved → public/assets/raw-*.png");
+console.log("Raw layers saved → .build-cache/");
 console.log("Run: uv run scripts/process-terrain.py");
 
 // ── Generate SVG ────────────────────────────────────────
@@ -262,22 +186,27 @@ const smoothLine = line<[number, number]>()
   .y((d) => d[1])
   .curve(curveCatmullRom.alpha(0.5));
 
-const routesSvg = (
-  await Promise.all(
-    ROUTES.map(async (route) => {
-      const routeGeoJSON = await Bun.file(route.file).json();
-      const coords: [number, number][] = routeGeoJSON.geometry.coordinates;
-      const pixels = coords
-        .map((c) => projection(c))
-        .filter(Boolean) as [number, number][];
-      const d = smoothLine(pixels);
-      if (!d) return "";
-      return `  <path d="${d}" class="route" data-route="${route.id}"
+// Project + smooth each route once — reused for SVG preview AND route image rendering
+const routePaths = await Promise.all(
+  ROUTES.map(async (route) => {
+    const routeGeoJSON = await Bun.file(route.file).json();
+    const coords: [number, number][] = routeGeoJSON.geometry.coordinates;
+    const pixels = coords
+      .map((c) => projection(c))
+      .filter(Boolean) as [number, number][];
+    const d = smoothLine(pixels);
+    return { ...route, d };
+  }),
+);
+
+const routesSvg = routePaths
+  .filter((r) => r.d)
+  .map(
+    (r) => `  <path d="${r.d}" class="route" data-route="${r.id}"
         fill="none" stroke="currentColor" stroke-width="2"
-        opacity="0.5" />`;
-    }),
+        opacity="0.5" />`,
   )
-).join("\n");
+  .join("\n");
 
 // Build marker circles for the SVG preview
 const markersSvg = MARKERS.map((m) => {
@@ -334,25 +263,17 @@ const locationsJson = locations.map(({ coords, ...rest }) => rest);
 await Bun.write("src/map/locations.json", JSON.stringify(locationsJson, null, 2));
 
 // ── Render route overlay images ─────────────────────────
-// Each route → transparent WebP, rendered by sharp from SVG (no manual parsing)
+// Reuses pre-computed paths from above. Sharp renders SVG → WebP.
 
-for (const route of ROUTES) {
-  const routeGeoJSON = await Bun.file(route.file).json();
-  const coords: [number, number][] = routeGeoJSON.geometry.coordinates;
-  const pixels = coords
-    .map((c: [number, number]) => projection(c))
-    .filter(Boolean) as [number, number][];
-  const d = smoothLine(pixels);
-  if (!d) continue;
+for (const route of routePaths) {
+  if (!route.d) continue;
 
-  // Create a minimal SVG with just this route on a transparent background
   const routeSvg = Buffer.from(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${terrainW}" height="${terrainH}">` +
-    `<path d="${d}" fill="none" stroke="#1a1a5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>` +
+    `<path d="${route.d}" fill="none" stroke="#1a1a5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>` +
     `</svg>`,
   );
 
-  // sharp renders the SVG properly — handles all bezier curves correctly
   await sharp(routeSvg)
     .resize(terrainW, terrainH)
     .webp({ quality: 90 })

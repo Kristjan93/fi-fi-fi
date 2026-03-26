@@ -17,8 +17,8 @@ import pillow_avif  # noqa: F401
 
 # ── Load ─────────────────────────────────────────────────
 
-hillshade = Image.open("public/assets/raw-hillshade.png").convert("L")
-mask = Image.open("public/assets/raw-mask.png").convert("L")
+hillshade = Image.open(".build-cache/raw-hillshade.png").convert("L")
+mask = Image.open(".build-cache/raw-mask.png").convert("L")
 
 w, h = hillshade.size
 print(f"Loaded: {w}x{h}")
