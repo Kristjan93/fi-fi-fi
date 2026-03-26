@@ -1,14 +1,15 @@
 # fi-website
 
-Static landing page / experimental concept site. Vanilla TypeScript + GSAP animations. No framework.
+Static landing page / experimental concept site. Vanilla TypeScript, CSS-first interactions. No framework.
 
 ## Stack
 
 - **Bundler/Dev server:** Vite 8 (NOT Bun.serve — this is a static site, not a server app)
 - **Runtime:** Bun 1.x (use `bun` for all package/script commands)
 - **Language:** TypeScript (strict mode, ESNext target)
-- **Animation:** GSAP 3.x
+- **Animation:** GSAP 3.x (hero only). Prefer CSS transitions for stateful UI.
 - **Styling:** Plain CSS with custom properties. No preprocessor, no Tailwind.
+- **Fonts:** `--font-sans` and `--font-serif` custom properties in `:root`.
 
 ## Commands
 
@@ -25,17 +26,21 @@ bun install        # Install dependencies
 ```
 index.html         # Entry point — Vite uses this as root
 src/
-  main.ts          # JS entry — GSAP animation setup
-  style.css        # All styles — CSS custom properties in :root
-docs/              # Reference materials for upcoming features
+  main.ts          # JS entry — hero animation
+  style.css        # Global styles + utilities (.sr-only)
+  map/
+    map.css        # Map zoom component — pure CSS, no JS dependency
+docs/              # Reference material + decision records
 ```
 
 ## Rules
 
-- Keep it vanilla. No React, no UI framework. DOM + CSS + GSAP.
+- Keep it vanilla. No React, no UI framework. DOM + CSS.
+- Prefer pure CSS for interactive state changes when possible and sensible.
 - CSS: use custom properties for theming (`--color-bg`, `--color-text`, `--color-accent`).
-- Animations: use GSAP timelines. Keep animation logic in dedicated modules, not inline.
 - Performance first: no layout thrashing, prefer `transform`/`opacity` for animations.
 - Browser support: all modern evergreen browsers. Use `dvh` units, `clamp()`, etc.
+- Accessibility is structural, not polish. Follow WCAG 2.2 AA. Every interactive component ships with: `prefers-reduced-motion`, keyboard `focus-visible` styles, appropriate ARIA. This is part of the definition of done.
+- Test visual behavior in the browser before claiming it works. Use browser automation tools to verify.
 - Write Icelandic for any user-facing text unless otherwise specified.
-- `docs/` contains reverse-engineered reference material — read before implementing related features.
+- `docs/` contains both reference material and decision records — read before implementing related features.

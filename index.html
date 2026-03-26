@@ -14,38 +14,45 @@
         <p class="hero-subtitle">fancy things, incoming</p>
       </section>
 
-      <!-- Map zoom PoC — uses Kettmeir assets for prototyping.
-           Replace image src and location data for production. -->
-      <section class="map" id="map">
+      <!-- Map zoom — pure CSS, no JavaScript needed.
+           Text is Kettmeir reference data — replace with Icelandic for production. -->
+      <section class="map" id="map" aria-label="Interactive map of wine regions">
 
         <!-- Layer 1: Map image — ONLY layer that transforms -->
         <div class="map__image">
           <img
             src="/images/map.webp"
             alt="Map of Alto Adige wine region"
+            draggable="false"
             loading="lazy"
             decoding="async"
           />
         </div>
 
         <!-- Layer 2: Markers — positioned at scale(1), hidden when zoomed -->
-        <div class="map__markers">
-          <div class="marker" data-location="pochi" style="left: 68%; top: 54%">
-            <span class="marker__dot"></span>
-            <span class="marker__label">Pochi di Salorno</span>
+        <div class="map__markers" aria-hidden="true">
+          <div class="marker" style="left: 68%; top: 54%">
+            <label for="map-pochi">
+              <span class="marker__dot"></span>
+              <span class="marker__label">Pochi di Salorno</span>
+            </label>
           </div>
-          <div class="marker" data-location="caldaro" style="left: 55%; top: 35%">
-            <span class="marker__dot"></span>
-            <span class="marker__label">Castelvecchio</span>
+          <div class="marker" style="left: 55%; top: 35%">
+            <label for="map-caldaro">
+              <span class="marker__dot"></span>
+              <span class="marker__label">Castelvecchio</span>
+            </label>
           </div>
-          <div class="marker" data-location="soprabolzano" style="left: 60%; top: 25%">
-            <span class="marker__dot"></span>
-            <span class="marker__label">Soprabolzano</span>
+          <div class="marker" style="left: 60%; top: 25%">
+            <label for="map-soprabolzano">
+              <span class="marker__dot"></span>
+              <span class="marker__label">Soprabolzano</span>
+            </label>
           </div>
         </div>
 
-        <!-- Layer 3: Detail panels — one per location, toggled via .active -->
-        <div class="map__details">
+        <!-- Layer 3: Detail panels — one per location, toggled via :has() -->
+        <div class="map__details" aria-live="polite">
           <div class="map__detail" data-location="pochi">
             <span class="map__detail-label">Bassa Atesina</span>
             <h3 class="map__detail-name">Pochi di Salorno</h3>
@@ -69,11 +76,16 @@
             <h2 class="map__title">Explore<br />the territory</h2>
             <p class="map__subtitle">Discover where our story unfolds.</p>
           </div>
-          <div class="map__nav">
-            <button class="map__nav-btn active" data-location="all">All locations</button>
-            <button class="map__nav-btn" data-location="pochi">Pochi di Salorno</button>
-            <button class="map__nav-btn" data-location="caldaro">Castelvecchio</button>
-            <button class="map__nav-btn" data-location="soprabolzano">Soprabolzano</button>
+          <!-- Radio inputs inside nav so focus-scroll stays in viewport -->
+          <div class="map__nav" role="radiogroup" aria-label="Select a location">
+            <input type="radio" name="map-loc" id="map-all" checked class="sr-only" />
+            <label for="map-all" class="map__nav-btn">All locations</label>
+            <input type="radio" name="map-loc" id="map-pochi" class="sr-only" />
+            <label for="map-pochi" class="map__nav-btn">Pochi di Salorno</label>
+            <input type="radio" name="map-loc" id="map-caldaro" class="sr-only" />
+            <label for="map-caldaro" class="map__nav-btn">Castelvecchio</label>
+            <input type="radio" name="map-loc" id="map-soprabolzano" class="sr-only" />
+            <label for="map-soprabolzano" class="map__nav-btn">Soprabolzano</label>
           </div>
         </div>
 

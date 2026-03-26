@@ -1,32 +1,28 @@
 import gsap from "gsap";
-import { MapZoomCSS } from "./map/map-zoom-css";
-import { locations } from "./map/locations";
 
 // ── Hero animation ─────────────────────────────────────
 
-const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const tl = gsap.timeline({
+  defaults: {
+    ease: "power3.out",
+    duration: prefersReducedMotion ? 0 : undefined,
+  },
+});
 
 tl.to(".hero-title", {
   opacity: 1,
   y: 0,
-  duration: 1.2,
-  delay: 0.3,
+  duration: prefersReducedMotion ? 0 : 1.2,
+  delay: prefersReducedMotion ? 0 : 0.3,
 })
-  .from(".hero-title", { y: 40, duration: 1.2 }, "<")
+  .from(".hero-title", { y: 40 }, "<")
   .to(
     ".hero-subtitle",
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-    },
-    "-=0.6",
+    { opacity: 1, y: 0 },
+    prefersReducedMotion ? "<" : "-=0.6",
   )
-  .from(".hero-subtitle", { y: 20, duration: 0.8 }, "<");
+  .from(".hero-subtitle", { y: 20 }, "<");
 
-// ── Map zoom (CSS transitions — no GSAP) ──────────────
-
-const mapEl = document.querySelector<HTMLElement>("#map");
-if (mapEl) {
-  new MapZoomCSS(mapEl, locations);
-}
+// ── Map zoom is pure CSS — no JS needed ────────────────
