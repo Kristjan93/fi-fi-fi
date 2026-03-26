@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iceland Map Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: #ddd8cf;
+      color: #1a1a5c;
+      overflow: hidden;
+    }
+    .map {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .map__image {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      mix-blend-mode: multiply;
+    }
+    .map__image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .map__image svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <section class="map">
+    <div class="map__image">
+      <img src="/assets/iceland-map.webp" alt="Iceland terrain" />
+      <div id="svg-overlay"></div>
+    </div>
+  </section>
+  <script type="module">
+    const res = await fetch('/src/map/iceland.svg');
+    const text = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'image/svg+xml');
+    const svg = doc.documentElement;
+    document.getElementById('svg-overlay').replaceWith(svg);
+  </script>
+</body>
+</html>
