@@ -309,24 +309,37 @@ function clusterSvg(cluster: typeof clusters[0]): string {
   const cyPx = (cluster.cy / 100) * H;
   const rPx = (cluster.radius / 100) * Math.min(W, H);
 
-  // Ring spacing: outer ring at 88% of boundary, each ring ~18px closer to center
-  const ringSpacing = 18;
-  const outerStart = rPx * 0.88;
-  const minRadius = 20; // don't go smaller than this
+  // Pair names on shared rings (2 per ring, last ring gets 1 if odd count)
+  const pairs: typeof cluster.labels[] = [];
+  for (let i = 0; i < cluster.labels.length; i += 2) {
+    pairs.push(cluster.labels.slice(i, i + 2));
+  }
 
-  const rings = cluster.labels.map((label, i) => {
+  // Ring spacing: outer ring at 85% of boundary
+  const ringSpacing = 24;
+  const outerStart = rPx * 0.85;
+  const minRadius = 22;
+
+  const rings = pairs.map((pair, i) => {
     const r = Math.max(minRadius, outerStart - i * ringSpacing);
     const pathId = `${cluster.id}-r${i}`;
     const d = `M ${(cxPx - r).toFixed(1)},${cyPx.toFixed(1)} a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(r * 2).toFixed(1)},0 a ${r.toFixed(1)},${r.toFixed(1)} 0 1,1 ${(-r * 2).toFixed(1)},0`;
 
-    const displayName = label.name.split(" / ")[0].toUpperCase();
-
-    // Alternating direction
     const dir = i % 2 === 0 ? "cw" : "ccw";
 
+    // Each name in the pair gets its own <text> with startOffset to space them
+    const texts = pair.map((label, j) => {
+      const name = label.name.split(" / ")[0].toUpperCase();
+      const offset = pair.length === 2 ? (j === 0 ? "5%" : "55%") : "5%";
+      return `      <text class="cluster__ring-text" data-hut="${label.hutId}"><textPath href="#${pathId}" startOffset="${offset}">${name}</textPath></text>`;
+    });
+
+    // data-hut on the ring group uses first hut (for single highlight, JS handles both)
+    const hutIds = pair.map((l) => l.hutId).join(",");
+
     return `    <path id="${pathId}" d="${d}" fill="none" stroke="none" />
-    <g class="cluster__ring cluster__ring--${dir}" data-hut="${label.hutId}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
-      <text class="cluster__ring-text"><textPath href="#${pathId}">${displayName}</textPath></text>
+    <g class="cluster__ring cluster__ring--${dir}" data-huts="${hutIds}" style="transform-origin: ${cxPx.toFixed(1)}px ${cyPx.toFixed(1)}px">
+${texts.join("\n")}
     </g>`;
   });
 

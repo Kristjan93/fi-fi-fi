@@ -77,27 +77,24 @@
 .cluster__circle {
   fill: transparent;
   stroke: var(--map-text);
-  stroke-width: 1.8;
-  stroke-dasharray: 8 5;
+  stroke-width: 2.5;
+  stroke-dasharray: 12 6;
   opacity: 0.3;
-  transition: opacity 0.4s ease, stroke 0.4s ease;
+  transition: opacity 0.4s ease;
   pointer-events: fill;
 }
 
 .cluster-group:hover .cluster__circle {
-  opacity: 0.55;
-  stroke: #5a3e2b;
+  opacity: 0.5;
 }
 
-/* Text rings — contrast halo via paint-order stroke behind fill */
+/* Text rings — solid color background behind white text via paint-order */
 .cluster__ring-text {
-  fill: var(--map-text);
-  font-size: 11px;
+  fill: #f0ece8;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  opacity: 0.5;
-  stroke: var(--map-bg);
-  stroke-width: 4px;
+  letter-spacing: 0.12em;
+  stroke-width: 7px;
   paint-order: stroke;
   transition: opacity 0.3s ease;
 }
@@ -128,29 +125,29 @@
   opacity: 0.8;
 }
 
-/* ── Per-hut colors — Icelandic landscape palette ────── */
-/* All pass WCAG AA (4.5:1+) against --map-bg: #c5bdb9 */
-.cluster__ring[data-hut="lml-hut"] .cluster__ring-text { fill: #5a2d1e; } /* rhyolite rust */
-.cluster__ring[data-hut="hrf"] .cluster__ring-text     { fill: #2d1e3a; } /* obsidian purple */
-.cluster__ring[data-hut="alf"] .cluster__ring-text     { fill: #1e2d4a; } /* lake blue */
-.cluster__ring[data-hut="hvg"] .cluster__ring-text     { fill: #3a2d1e; } /* dark earth */
-.cluster__ring[data-hut="ems"] .cluster__ring-text     { fill: #4a3520; } /* canyon amber */
-.cluster__ring[data-hut="tmk-hut"] .cluster__ring-text { fill: #1e3a2d; } /* birch forest */
-.cluster__ring[data-hut="fmv"] .cluster__ring-text     { fill: #2d3a4a; } /* glacier slate */
-.cluster__ring[data-hut="hvt"] .cluster__ring-text     { fill: #1e3a4a; } /* highland teal */
-.cluster__ring[data-hut="tvb"] .cluster__ring-text     { fill: #3a3520; } /* highland ochre */
-.cluster__ring[data-hut="tjd"] .cluster__ring-text     { fill: #2d1e2d; } /* dark violet */
-.cluster__ring[data-hut="hgv"] .cluster__ring-text     { fill: #1e2d3a; } /* deep water */
-.cluster__ring[data-hut="hld"] .cluster__ring-text     { fill: #3a2d20; } /* basalt brown */
-.cluster__ring[data-hut="hrn"] .cluster__ring-text     { fill: #1e3a3a; } /* sea cliff teal */
-.cluster__ring[data-hut="nfj"] .cluster__ring-text     { fill: #2d3a2d; } /* coastal green */
+/* ── Per-hut colors — stroke = solid background band ─── */
+/* Light fill text on colored background band. WCAG AA compliant. */
+.cluster__ring-text[data-hut="lml-hut"] { stroke: #6b3a28; } /* rhyolite rust */
+.cluster__ring-text[data-hut="hrf"]     { stroke: #3d2848; } /* obsidian purple */
+.cluster__ring-text[data-hut="alf"]     { stroke: #283d5a; } /* lake blue */
+.cluster__ring-text[data-hut="hvg"]     { stroke: #4a3828; } /* dark earth */
+.cluster__ring-text[data-hut="ems"]     { stroke: #5a4530; } /* canyon amber */
+.cluster__ring-text[data-hut="tmk-hut"] { stroke: #284a38; } /* birch forest */
+.cluster__ring-text[data-hut="fmv"]     { stroke: #384a5a; } /* glacier slate */
+.cluster__ring-text[data-hut="hvt"]     { stroke: #284a5a; } /* highland teal */
+.cluster__ring-text[data-hut="tvb"]     { stroke: #4a4530; } /* highland ochre */
+.cluster__ring-text[data-hut="tjd"]     { stroke: #3d2838; } /* dark violet */
+.cluster__ring-text[data-hut="hgv"]     { stroke: #283d4a; } /* deep water */
+.cluster__ring-text[data-hut="hld"]     { stroke: #4a3828; } /* basalt brown */
+.cluster__ring-text[data-hut="hrn"]     { stroke: #284a4a; } /* sea cliff teal */
+.cluster__ring-text[data-hut="nfj"]     { stroke: #384a38; } /* coastal green */
 
-/* JS adds this class to highlight a single ring when its dot is hovered */
-.cluster__ring--highlight .cluster__ring-text {
+/* JS adds these classes when a dot is hovered — doubled selector for specificity */
+.cluster-group .cluster__ring-text.cluster__ring-text--highlight {
   opacity: 1;
 }
 
-.cluster__ring--dim .cluster__ring-text {
+.cluster-group .cluster__ring-text.cluster__ring-text--dim {
   opacity: 0.15;
 }
 
