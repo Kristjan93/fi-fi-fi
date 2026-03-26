@@ -181,24 +181,18 @@
 
 .marker {
   position: absolute;
+  width: 10px;
+  height: 10px;
   transform: translate(-5px, -5px);
 }
 
 .marker label {
   display: block;
-  position: relative;
+  width: 10px;
+  height: 10px;
   cursor: pointer;
   pointer-events: auto;
-  /* 44px hit area centered on the dot via pseudo-element */
-}
-
-.marker label::before {
-  content: '';
-  position: absolute;
-  top: -17px;
-  left: -17px;
-  width: 44px;
-  height: 44px;
+  position: relative;
 }
 
 .marker__dot {
@@ -207,7 +201,23 @@
   height: 10px;
   border-radius: 50%;
   background: currentColor;
+  flex-shrink: 0;
   transition: transform 0.2s ease;
+}
+
+/* Cluster dots: hide label text entirely (not just opacity), small hit area */
+.marker[data-in-cluster] .marker__label {
+  display: none;
+}
+
+/* Standalone dots: show label, full 44px touch target */
+.marker--standalone label::before {
+  content: '';
+  position: absolute;
+  top: -17px;
+  left: -17px;
+  width: 44px;
+  height: 44px;
 }
 
 /* Labels: hidden in overview (cluster rings handle naming), visible at cluster zoom */
