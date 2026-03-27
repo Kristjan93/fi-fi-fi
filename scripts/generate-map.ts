@@ -318,7 +318,7 @@ function clusterSvg(cluster: typeof clusters[0]): string {
   }
 
   // Baseline at rPx-20. Letters extend ~14px outward → tops at rPx-6 (inside boundary).
-  const outerStart = rPx - 20;
+  const outerStart = rPx - 22;
   const ringSpacing = 24; // consistent px between each ring
   const minRadius = 20;
 
