@@ -90,6 +90,7 @@
 
 /* Text rings — colored text with warm paper halo for readability */
 .cluster__ring-text {
+  font-family: var(--font-sans);
   fill: var(--map-text);
   font-size: 18px;
   font-weight: 700;
