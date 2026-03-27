@@ -127,7 +127,7 @@ export class MapController {
             text.classList.remove("cluster__ring-text--highlight", "cluster__ring-text--dim");
           }
           dotLeaveTimer = null;
-        }, 200);
+        }, 100);
       });
     }
 
@@ -165,7 +165,7 @@ export class MapController {
             m.classList.remove("marker--highlight", "marker--dim");
           }
           wordLeaveTimer = null;
-        }, 200);
+        }, 100);
       });
     }
 
