@@ -125,22 +125,6 @@
   opacity: 0.8;
 }
 
-/* ── Per-hut text colors — Icelandic landscape palette ── */
-/* Subtle colored text, warm paper halo. All WCAG AA against #c5bdb9. */
-.cluster__ring-text[data-hut="lml-hut"] { fill: #5a2d1e; } /* rhyolite rust */
-.cluster__ring-text[data-hut="hrf"]     { fill: #2d1e3a; } /* obsidian purple */
-.cluster__ring-text[data-hut="alf"]     { fill: #1e2d4a; } /* lake blue */
-.cluster__ring-text[data-hut="hvg"]     { fill: #3a2d1e; } /* dark earth */
-.cluster__ring-text[data-hut="ems"]     { fill: #4a3520; } /* canyon amber */
-.cluster__ring-text[data-hut="tmk-hut"] { fill: #1e3a2d; } /* birch forest */
-.cluster__ring-text[data-hut="fmv"]     { fill: #2d3a4a; } /* glacier slate */
-.cluster__ring-text[data-hut="hvt"]     { fill: #1e3a4a; } /* highland teal */
-.cluster__ring-text[data-hut="tvb"]     { fill: #3a3520; } /* highland ochre */
-.cluster__ring-text[data-hut="tjd"]     { fill: #2d1e2d; } /* dark violet */
-.cluster__ring-text[data-hut="hgv"]     { fill: #1e2d3a; } /* deep water */
-.cluster__ring-text[data-hut="hld"]     { fill: #3a2d20; } /* basalt brown */
-.cluster__ring-text[data-hut="hrn"]     { fill: #1e3a3a; } /* sea cliff teal */
-.cluster__ring-text[data-hut="nfj"]     { fill: #2d3a2d; } /* coastal green */
 
 /* JS adds these classes when a dot is hovered — doubled selector for specificity */
 .cluster-group .cluster__ring-text.cluster__ring-text--highlight {
@@ -254,11 +238,11 @@
   opacity: 0.7;
 }
 
-/* Mosfellsheiði: label below-left to avoid cluster overlap */
+/* Mosfellsheiði: label below dot, aligned to dot's left edge */
 .marker--label-below .marker__label {
-  left: -4px;
+  left: 0;
   top: auto;
-  bottom: -28px;
+  bottom: -20px;
   transform: none;
 }
 
