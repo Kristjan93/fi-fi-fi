@@ -317,9 +317,8 @@ function clusterSvg(cluster: typeof clusters[0]): string {
     groups.push(labels.splice(0, take));
   }
 
-  // Outer ring hugs the dashed circle (small gap), each deeper ring spaced evenly inward
-  const gap = 8; // px gap between dashed circle and outermost text ring
-  const outerStart = rPx - gap;
+  // Baseline at rPx-20. Letters extend ~14px outward → tops at rPx-6 (inside boundary).
+  const outerStart = rPx - 20;
   const ringSpacing = 24; // consistent px between each ring
   const minRadius = 20;
 
