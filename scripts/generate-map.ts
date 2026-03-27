@@ -334,12 +334,23 @@ function clusterSvg(cluster: typeof clusters[0]): string {
 
     const dir = i % 2 === 0 ? "cw" : "ccw";
 
-    // Distribute names evenly around the circle
+    // Distribute names around the circle, accounting for word length
+    const names = group.map((l) => l.name.split(" / ")[0].toUpperCase());
+    const totalChars = names.reduce((s, n) => s + n.length, 0);
+    const circumference = 2 * Math.PI * r;
+    const charWidth = 10; // approximate px per char at 18px font
+    const textPortion = (totalChars * charWidth) / circumference; // fraction of circle used by text
+    const gapPortion = 1 - textPortion; // fraction left for gaps
+    const gapEach = gapPortion / group.length; // equal gap between each name
+
+    let offset = 2; // start offset in %
     const texts = group.map((label, j) => {
-      const name = label.name.split(" / ")[0].toUpperCase();
-      const step = Math.floor(100 / group.length);
-      const offset = `${3 + j * step}%`;
-      return `      <text class="cluster__ring-text" data-hut="${label.hutId}"><textPath href="#${pathId}" startOffset="${offset}">${name}</textPath></text>`;
+      const name = names[j];
+      const thisOffset = `${Math.round(offset)}%`;
+      // Advance by this name's portion + one gap
+      const namePortion = (name.length * charWidth) / circumference;
+      offset += (namePortion + gapEach) * 100;
+      return `      <text class="cluster__ring-text" data-hut="${label.hutId}"><textPath href="#${pathId}" startOffset="${thisOffset}">${name}</textPath></text>`;
     });
 
     const hutIds = group.map((l) => l.hutId).join(",");
