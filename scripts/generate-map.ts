@@ -269,7 +269,7 @@ const clusters = CLUSTER_DEFS.map((def) => {
 
   // Bounding circle: centroid + radius
   const cx = members.reduce((s, m) => s + m.x, 0) / members.length;
-  const cy = members.reduce((s, m) => s + m.y, 0) / members.length;
+  let cy = members.reduce((s, m) => s + m.y, 0) / members.length;
   const maxDist = Math.max(...members.map((m) => Math.sqrt((m.x - cx) ** 2 + (m.y - cy) ** 2)));
   const radius = maxDist + 7; // padding in % units — room for bigger text rings
 
@@ -285,8 +285,12 @@ const clusters = CLUSTER_DEFS.map((def) => {
     return { hutId: m.id, name: m.name, x: m.x, y: m.y, lx, ly, angle: +(angle * 180 / Math.PI).toFixed(1), anchor };
   });
 
-  // Zoom for cluster view: use transform-origin at centroid, scale 2.5
-  const clusterScale = 2.5;
+  // Zoom for cluster view
+  const clusterScale = 3.5;
+  // Shift camera slightly toward the center of the hut spread for better framing
+  const ySpread = Math.max(...members.map(m => m.y)) - Math.min(...members.map(m => m.y));
+  // Nudge centroid down by 20% of the spread so top huts aren't clipped
+  cy = +(cy + ySpread * 0.15).toFixed(2);
 
   return {
     id: def.id,

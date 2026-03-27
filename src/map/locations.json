@@ -566,9 +566,9 @@
       "id": "laugavegur",
       "name": "Laugavegurinn",
       "cx": 47.63,
-      "cy": 82.85,
+      "cy": 84.37,
       "radius": 12.45,
-      "scale": 2.5,
+      "scale": 3.5,
       "labels": [
         {
           "hutId": "lml-hut",
@@ -655,9 +655,9 @@
       "id": "kjolur",
       "name": "Kjölur",
       "cx": 44.06,
-      "cy": 58.53,
+      "cy": 59.34,
       "radius": 9.79,
-      "scale": 2.5,
+      "scale": 3.5,
       "labels": [
         {
           "hutId": "hvt",
@@ -700,9 +700,9 @@
       "id": "langjokull",
       "name": "Langjökull",
       "cx": 37.66,
-      "cy": 66.31,
+      "cy": 66.56,
       "radius": 8.44,
-      "scale": 2.5,
+      "scale": 3.5,
       "labels": [
         {
           "hutId": "hgv",
@@ -734,9 +734,9 @@
       "id": "hornstrandir",
       "name": "Hornstrandir",
       "cx": 24.13,
-      "cy": 15.96,
+      "cy": 17.52,
       "radius": 13.29,
-      "scale": 2.5,
+      "scale": 3.5,
       "labels": [
         {
           "hutId": "hrn",
