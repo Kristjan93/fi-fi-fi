@@ -397,7 +397,7 @@
 }
 
 .map__header {
-  pointer-events: auto;
+  pointer-events: none;
   transition:
     opacity 0.4s ease,
     transform 0.4s ease;
@@ -413,6 +413,7 @@
 }
 
 .map__title {
+  display: inline-block;
   font-family: var(--font-serif);
   font-weight: 300;
   font-size: clamp(28px, 3.5vw, 48px);
