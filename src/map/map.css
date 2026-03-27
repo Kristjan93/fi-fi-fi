@@ -112,6 +112,11 @@
   pointer-events: none;
 }
 
+.cluster__ring-text {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
 .cluster__ring--cw {
   animation: spin-cw 90s linear infinite;
 }
@@ -205,6 +210,15 @@
 /* Cluster dots: hide label text entirely (not just opacity), small hit area */
 .marker[data-in-cluster] .marker__label {
   display: none;
+}
+
+/* Word hover → only its dot visible, others dimmed */
+.marker[data-in-cluster].marker--dim {
+  opacity: 0.15;
+}
+
+.marker[data-in-cluster].marker--highlight .marker__dot {
+  transform: scale(1.4);
 }
 
 /* Standalone dots: show label, full 44px touch target */
