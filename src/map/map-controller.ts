@@ -137,7 +137,6 @@ export class MapController {
       if (!clusterId) continue;
 
       text.addEventListener("mouseenter", () => {
-        // Dim all dots in this cluster, highlight the matching one
         for (const m of markerEls) {
           if (m.dataset.inCluster !== clusterId) continue;
           const mHutId = m.querySelector("label")?.getAttribute("for")?.replace("map-", "");
@@ -149,30 +148,12 @@ export class MapController {
             m.classList.remove("marker--highlight");
           }
         }
-        // Also highlight this text, dim others
-        const group = container.querySelector(`[data-cluster="${clusterId}"]`);
-        if (!group) return;
-        for (const t of group.querySelectorAll<HTMLElement>(".cluster__ring-text")) {
-          if (t.dataset.hut === hutId) {
-            t.classList.add("cluster__ring-text--highlight");
-            t.classList.remove("cluster__ring-text--dim");
-          } else {
-            t.classList.add("cluster__ring-text--dim");
-            t.classList.remove("cluster__ring-text--highlight");
-          }
-        }
       });
 
       text.addEventListener("mouseleave", () => {
-        // Reset all dots and texts
         for (const m of markerEls) {
           if (m.dataset.inCluster !== clusterId) continue;
           m.classList.remove("marker--highlight", "marker--dim");
-        }
-        const group = container.querySelector(`[data-cluster="${clusterId}"]`);
-        if (!group) return;
-        for (const t of group.querySelectorAll<HTMLElement>(".cluster__ring-text")) {
-          t.classList.remove("cluster__ring-text--highlight", "cluster__ring-text--dim");
         }
       });
     }
