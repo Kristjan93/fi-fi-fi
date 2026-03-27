@@ -230,7 +230,7 @@ export class MapController {
 
     // 3. Set transform-origin at cluster center, then zoom
     this.image.style.transformOrigin = `${cluster.cx}% ${cluster.cy}%`;
-    // Force reflow so origin is applied before transform changes
+    this.image.style.setProperty("--zoom", String(cluster.scale));
     void this.image.offsetHeight;
     this.image.style.transform = `scale(${cluster.scale})`;
 
@@ -255,6 +255,7 @@ export class MapController {
 
     // 3. Zoom to hut
     this.image.style.transformOrigin = `${hut.x}% ${hut.y}%`;
+    this.image.style.setProperty("--zoom", String(hut.scale));
     void this.image.offsetHeight;
     this.image.style.transform = `scale(${hut.scale})`;
 
@@ -276,6 +277,7 @@ export class MapController {
     await this.waitMs(250);
 
     // 2. Zoom out (classes unchanged — no CSS disruption during animation)
+    this.image.style.setProperty("--zoom", "1");
     this.image.style.transform = "scale(1)";
     await this.waitMs(900);
 

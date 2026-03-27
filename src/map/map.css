@@ -56,7 +56,61 @@
 .map__image .route-overlay {
   position: absolute;
   inset: 0;
-  display: none; /* Hidden until Phase 2 — route visibility tied to selected hut */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Show route at cluster zoom */
+.map--cluster .map__image .route-overlay {
+  opacity: 0.6;
+}
+
+/* ── Hut markers inside image layer — counter-scaled ─── */
+
+.map__hut-markers {
+  position: absolute;
+  inset: 0;
+  isolation: isolate; /* prevent mix-blend-mode: multiply from affecting markers */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Visible at cluster zoom */
+.map--cluster .map__hut-markers {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hut-marker {
+  position: absolute;
+  transform: translate(-5px, -5px) scale(calc(1 / var(--zoom, 1)));
+  transform-origin: 5px 5px; /* scale from the dot center */
+}
+
+.hut-marker label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hut-marker__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--map-text);
+  flex-shrink: 0;
+}
+
+.hut-marker__name {
+  margin-left: 10px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--map-text);
 }
 
 /* ── Layer 2: Cluster rings — rotating SVG text paths ─── */
