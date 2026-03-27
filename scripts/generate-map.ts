@@ -317,11 +317,11 @@ function clusterSvg(cluster: typeof clusters[0]): string {
     groups.push(labels.splice(0, take));
   }
 
-  // Ring spacing: evenly distributed between outer start and minimum radius
-  const outerStart = rPx * 0.80;
-  const minRadius = 30;
-  const usableSpace = outerStart - minRadius;
-  const ringSpacing = groups.length > 1 ? usableSpace / (groups.length - 1) : 0;
+  // Outer ring hugs the dashed circle (small gap), each deeper ring spaced evenly inward
+  const gap = 8; // px gap between dashed circle and outermost text ring
+  const outerStart = rPx - gap;
+  const ringSpacing = 24; // consistent px between each ring
+  const minRadius = 20;
 
   const rings = groups.map((group, i) => {
     const r = Math.max(minRadius, outerStart - i * ringSpacing);
