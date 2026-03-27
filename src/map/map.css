@@ -84,6 +84,16 @@
   pointer-events: fill;
 }
 
+.cluster__name {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  fill: var(--map-text);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .cluster-group:hover .cluster__circle {
   opacity: 0.5;
 }

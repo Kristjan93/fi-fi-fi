@@ -358,6 +358,7 @@ ${texts.join("\n")}
 
   return `  <g class="cluster-group" data-cluster="${cluster.id}">
     <circle cx="${cxPx.toFixed(1)}" cy="${cyPx.toFixed(1)}" r="${rPx.toFixed(1)}" class="cluster__circle" />
+    <text x="${cxPx.toFixed(1)}" y="${(cyPx + 5).toFixed(1)}" class="cluster__name" text-anchor="middle">${cluster.name}</text>
 ${rings.join("\n")}
   </g>`;
 }
