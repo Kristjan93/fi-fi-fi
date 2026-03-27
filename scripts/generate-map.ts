@@ -309,23 +309,19 @@ function clusterSvg(cluster: typeof clusters[0]): string {
   const cyPx = (cluster.cy / 100) * H;
   const rPx = (cluster.radius / 100) * Math.min(W, H);
 
-  // Group names onto rings — outer ring gets 3 for big clusters, then 4 on next, rest get 2
+  // Group names onto rings — 3 per ring for big clusters, last ring gets remainder
   const groups: typeof cluster.labels[] = [];
   const labels = [...cluster.labels];
-  if (labels.length >= 7) {
-    groups.push(labels.splice(0, 3)); // 3 on outer ring
-    groups.push(labels.splice(0, 4)); // 4 on second ring
-  } else if (labels.length >= 5) {
-    groups.push(labels.splice(0, 3));
-  }
   while (labels.length > 0) {
-    groups.push(labels.splice(0, 2));
+    const take = labels.length >= 4 ? 3 : labels.length;
+    groups.push(labels.splice(0, take));
   }
 
-  // Ring spacing: text well inside the boundary (78% start), generous spacing
-  const ringSpacing = 30;
-  const outerStart = rPx * 0.78;
-  const minRadius = 35;
+  // Ring spacing: evenly distributed between outer start and minimum radius
+  const outerStart = rPx * 0.80;
+  const minRadius = 30;
+  const usableSpace = outerStart - minRadius;
+  const ringSpacing = groups.length > 1 ? usableSpace / (groups.length - 1) : 0;
 
   const rings = groups.map((group, i) => {
     const r = Math.max(minRadius, outerStart - i * ringSpacing);
