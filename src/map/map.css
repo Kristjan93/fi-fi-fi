@@ -212,7 +212,11 @@
   display: none;
 }
 
-/* Word hover → only its dot visible, others dimmed */
+/* Dot dim/highlight with transition */
+.marker[data-in-cluster] {
+  transition: opacity 0.3s ease;
+}
+
 .marker[data-in-cluster].marker--dim {
   opacity: 0.15;
 }

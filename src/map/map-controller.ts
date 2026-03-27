@@ -95,14 +95,17 @@ export class MapController {
       }
     });
 
-    // Dot hover → highlight its name text, dim all others in that cluster
+    // Dot hover → highlight its name text, dim others. 200ms debounce on leave.
     const markerEls = container.querySelectorAll<HTMLElement>(".marker[data-in-cluster]");
+    let dotLeaveTimer: ReturnType<typeof setTimeout> | null = null;
+
     for (const marker of markerEls) {
       const clusterId = marker.dataset.inCluster!;
       const hutId = marker.querySelector("label")?.getAttribute("for")?.replace("map-", "");
       if (!hutId) continue;
 
       marker.addEventListener("mouseenter", () => {
+        if (dotLeaveTimer) { clearTimeout(dotLeaveTimer); dotLeaveTimer = null; }
         const group = container.querySelector(`[data-cluster="${clusterId}"]`);
         if (!group) return;
         for (const text of group.querySelectorAll<HTMLElement>(".cluster__ring-text")) {
@@ -117,26 +120,31 @@ export class MapController {
       });
 
       marker.addEventListener("mouseleave", () => {
-        const group = container.querySelector(`[data-cluster="${clusterId}"]`);
-        if (!group) return;
-        for (const text of group.querySelectorAll<HTMLElement>(".cluster__ring-text")) {
-          text.classList.remove("cluster__ring-text--highlight", "cluster__ring-text--dim");
-        }
+        dotLeaveTimer = setTimeout(() => {
+          const group = container.querySelector(`[data-cluster="${clusterId}"]`);
+          if (!group) return;
+          for (const text of group.querySelectorAll<HTMLElement>(".cluster__ring-text")) {
+            text.classList.remove("cluster__ring-text--highlight", "cluster__ring-text--dim");
+          }
+          dotLeaveTimer = null;
+        }, 200);
       });
     }
 
-    // Word hover → highlight its dot, dim all other dots in that cluster
+    // Word hover → highlight its dot, dim others. 200ms debounce on leave.
     const ringTexts = container.querySelectorAll<HTMLElement>(".cluster__ring-text");
+    let wordLeaveTimer: ReturnType<typeof setTimeout> | null = null;
+
     for (const text of ringTexts) {
       const hutId = text.dataset.hut;
       if (!hutId) continue;
 
-      // Find which cluster this text belongs to
       const clusterGroup = text.closest<HTMLElement>("[data-cluster]");
       const clusterId = clusterGroup?.dataset.cluster;
       if (!clusterId) continue;
 
       text.addEventListener("mouseenter", () => {
+        if (wordLeaveTimer) { clearTimeout(wordLeaveTimer); wordLeaveTimer = null; }
         for (const m of markerEls) {
           if (m.dataset.inCluster !== clusterId) continue;
           const mHutId = m.querySelector("label")?.getAttribute("for")?.replace("map-", "");
@@ -151,10 +159,13 @@ export class MapController {
       });
 
       text.addEventListener("mouseleave", () => {
-        for (const m of markerEls) {
-          if (m.dataset.inCluster !== clusterId) continue;
-          m.classList.remove("marker--highlight", "marker--dim");
-        }
+        wordLeaveTimer = setTimeout(() => {
+          for (const m of markerEls) {
+            if (m.dataset.inCluster !== clusterId) continue;
+            m.classList.remove("marker--highlight", "marker--dim");
+          }
+          wordLeaveTimer = null;
+        }, 200);
       });
     }
 
