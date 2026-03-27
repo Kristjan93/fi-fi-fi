@@ -53,6 +53,9 @@ export class MapController {
     this.huts = (data as any).huts;
     this.clusters = (data as any).clusters;
 
+    // Fix text spacing at runtime using actual rendered widths
+    this.fixRingSpacing();
+
     // Cluster clicks
     this.clustersEl.addEventListener("click", (e) => {
       const el = (e.target as HTMLElement).closest<HTMLElement>("[data-cluster]");
@@ -170,6 +173,37 @@ export class MapController {
     }
 
     this.map.style.touchAction = "manipulation";
+  }
+
+  // ── Fix ring text spacing using actual rendered widths ──
+
+  private fixRingSpacing() {
+    const rings = this.map.querySelectorAll<SVGGElement>(".cluster__ring");
+    for (const ring of rings) {
+      const texts = Array.from(ring.querySelectorAll<SVGTextElement>(".cluster__ring-text"));
+      if (texts.length < 2) continue;
+
+      // Get the path radius to compute circumference
+      const pathId = texts[0].querySelector("textPath")?.getAttribute("href");
+      if (!pathId) continue;
+      const pathD = this.map.querySelector(pathId)?.getAttribute("d") || "";
+      const rMatch = pathD.match(/a\s+([\d.]+)/);
+      if (!rMatch) continue;
+      const circumference = 2 * Math.PI * parseFloat(rMatch[1]);
+
+      // Measure actual text lengths as % of circumference
+      const measured = texts.map((t) => (t.getComputedTextLength() / circumference) * 100);
+      const totalText = measured.reduce((s, v) => s + v, 0);
+      const gapEach = (100 - totalText) / texts.length;
+
+      // Set equal-gap offsets
+      let offset = gapEach / 2; // center the distribution
+      for (let i = 0; i < texts.length; i++) {
+        const tp = texts[i].querySelector("textPath");
+        if (tp) tp.setAttribute("startOffset", `${offset.toFixed(1)}%`);
+        offset += measured[i] + gapEach;
+      }
+    }
   }
 
   // ── Transitions ──────────────────────────────────────

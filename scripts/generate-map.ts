@@ -333,7 +333,7 @@ function clusterSvg(cluster: typeof clusters[0]): string {
     const names = group.map((l) => l.name.split(" / ")[0].toUpperCase());
     const totalChars = names.reduce((s, n) => s + n.length, 0);
     const circumference = 2 * Math.PI * r;
-    const charWidth = 10; // approximate px per char at 18px font
+    const charWidth = 15; // measured average px per char at 18px font-weight:700 uppercase
     const textPortion = (totalChars * charWidth) / circumference; // fraction of circle used by text
     const gapPortion = 1 - textPortion; // fraction left for gaps
     const gapEach = gapPortion / group.length; // equal gap between each name
