@@ -41,8 +41,7 @@
   mix-blend-mode: multiply;
   transform-origin: 50% 50%; /* Set by JS per location */
   transform: scale(1);
-  /* Kettmeir technique: only transition transform, NEVER transform-origin */
-  transition: transform 900ms cubic-bezier(0.45, 0, 0.55, 1);
+  /* GSAP handles all transform animations — no CSS transition */
 }
 
 .map__image img {
