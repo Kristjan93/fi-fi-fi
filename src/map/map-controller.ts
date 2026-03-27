@@ -86,6 +86,18 @@ export class MapController {
       }
     });
 
+    // Hut marker clicks (inside image layer at cluster zoom)
+    const hutMarkers = container.querySelectorAll<HTMLElement>(".hut-marker label");
+    for (const label of hutMarkers) {
+      label.addEventListener("click", (e) => {
+        e.preventDefault();
+        const hutId = label.getAttribute("for")?.replace("map-", "");
+        if (hutId && this.state.type === "cluster") {
+          this.zoomToHut(hutId);
+        }
+      });
+    }
+
     // Keyboard
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
