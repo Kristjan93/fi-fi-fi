@@ -54,7 +54,8 @@ export class MapController {
     this.clusters = (data as any).clusters;
 
     // Fix text spacing at runtime using actual rendered widths
-    this.fixRingSpacing();
+    // Defer to ensure SVG is fully rendered
+    requestAnimationFrame(() => this.fixRingSpacing());
 
     // Cluster clicks
     this.clustersEl.addEventListener("click", (e) => {
@@ -183,21 +184,22 @@ export class MapController {
       const texts = Array.from(ring.querySelectorAll<SVGTextElement>(".cluster__ring-text"));
       if (texts.length < 2) continue;
 
-      // Get the path radius to compute circumference
       const pathId = texts[0].querySelector("textPath")?.getAttribute("href");
       if (!pathId) continue;
       const pathD = this.map.querySelector(pathId)?.getAttribute("d") || "";
       const rMatch = pathD.match(/a\s+([\d.]+)/);
       if (!rMatch) continue;
       const circumference = 2 * Math.PI * parseFloat(rMatch[1]);
+      if (circumference <= 0) continue;
 
-      // Measure actual text lengths as % of circumference
       const measured = texts.map((t) => (t.getComputedTextLength() / circumference) * 100);
+      // Guard: if any measurement is 0 or total exceeds 100%, skip — SVG not rendered yet
+      if (measured.some((m) => m <= 0) || measured.reduce((s, v) => s + v, 0) >= 100) continue;
+
       const totalText = measured.reduce((s, v) => s + v, 0);
       const gapEach = (100 - totalText) / texts.length;
 
-      // Set equal-gap offsets
-      let offset = gapEach / 2; // center the distribution
+      let offset = gapEach / 2;
       for (let i = 0; i < texts.length; i++) {
         const tp = texts[i].querySelector("textPath");
         if (tp) tp.setAttribute("startOffset", `${offset.toFixed(1)}%`);
