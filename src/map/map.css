@@ -88,7 +88,7 @@
   opacity: 0.5;
 }
 
-/* Text rings — colored text with warm paper halo for readability */
+/* Text rings — colored text, no outline */
 .cluster__ring-text {
   font-family: var(--font-sans);
   fill: var(--map-text);
@@ -96,9 +96,6 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   opacity: 0.7;
-  stroke: var(--map-bg);
-  stroke-width: 5px;
-  paint-order: stroke;
   transition: opacity 0.3s ease;
 }
 
@@ -242,9 +239,9 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: clamp(11px, 1dvw, 15px);
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-size: clamp(14px, 1.2dvw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0;
@@ -255,6 +252,14 @@
 /* Standalone huts always show their label */
 .marker--standalone .marker__label {
   opacity: 0.7;
+}
+
+/* Mosfellsheiði: label below-left to avoid cluster overlap */
+.marker--label-below .marker__label {
+  left: -4px;
+  top: auto;
+  bottom: -28px;
+  transform: none;
 }
 
 /* At cluster zoom, show labels for huts in the active cluster */
